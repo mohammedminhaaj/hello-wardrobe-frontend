@@ -1,7 +1,13 @@
+import { Fragment } from "react";
 import "./App.css";
+import Navigation from "./components/ui/Navigation";
 
 function App() {
-    return <h1>Hello World</h1>;
+    return (
+        <Fragment>
+            <Navigation/>
+        </Fragment>
+    );
 }
 
 export default App;
