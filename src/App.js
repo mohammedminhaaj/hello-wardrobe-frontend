@@ -1,11 +1,13 @@
 import { Fragment } from "react";
 import "./App.css";
-import Navigation from "./components/ui/Navigation";
+import NavigationBar from "./layouts/header/NavigationBar";
+import Shop from "./pages/Shop";
 
 function App() {
     return (
         <Fragment>
-            <Navigation/>
+            <NavigationBar/>
+            <Shop/>
         </Fragment>
     );
 }
