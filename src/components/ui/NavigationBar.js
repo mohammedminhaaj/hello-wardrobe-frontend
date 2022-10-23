@@ -4,7 +4,7 @@ import {User, ShoppingBag, Search} from 'react-feather'
 const NavigationBar = () => {
 	const [showMenu, setShowMenu] = useState(false);
 	const clickHandler = () => {
-		setShowMenu(!showMenu);
+		setShowMenu(previous => !previous);
 	};
 
 	return (
@@ -18,13 +18,13 @@ const NavigationBar = () => {
 					</a>
 					<div className='flex md:order-2 items-center'>
 						<a>
-							<Search className='mr-3 cursor-pointer focus:outline-none hover:border-b-2'/>
+							<Search className='mr-5 cursor-pointer hover:text-blue-500'/>
 						</a>
 						<a>
-							<ShoppingBag className='cursor-pointer focus:outline-none hover:border-b-2'/>
+							<ShoppingBag className='cursor-pointer hover:text-blue-500'/>
 						</a>
 						<a>
-							<User className='mx-3 cursor-pointer focus:outline-none hover:border-b-2'/>
+							<User className='ml-5 cursor-pointer hover:text-blue-500'/>
 						</a>
 						{/* <button
 							type='button'
@@ -34,8 +34,8 @@ const NavigationBar = () => {
 						<button
 							onClick={clickHandler}
 							type='button'
-							className='inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200'>
-							<span className='sr-only'>Open main menu</span>
+							className='inline-flex items-center p-2 ml-5 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200'>
+							<h2 className='sr-only'>Open main menu</h2>
 							<svg
 								className='w-6 h-6'
 								aria-hidden='true'

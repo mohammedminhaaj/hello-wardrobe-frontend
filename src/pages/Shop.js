@@ -1,3 +1,4 @@
+import Breadcrumb from '../components/ui/Breadcrumb';
 import Card from '../components/ui/Card';
 const shopArray = [
 	{
@@ -32,29 +33,36 @@ const shopArray = [
 	},
 ];
 
+const breadcrumbs = [
+	{
+		id: Math.random(),
+		name: 'Shop'
+	}
+]
+
+const RenderShop = () => {
+	return shopArray.map((item) => {
+		return (
+			<Card
+				key = {item.id}
+				title={item.title}
+				linkTo={item.linkTo}
+				price={item.price}
+				imageMeta={{
+					src: item.img_src,
+					alt: item.img_alt,
+				}}
+			/>
+		);
+	});
+};
+
 const Shop = () => {
-	const RenderShop = () => {
-		return shopArray.map((item) => {
-			return (
-				<Card
-					key = {item.id}
-					title={item.title}
-					linkTo={item.linkTo}
-					price={item.price}
-					imageMeta={{
-						src: item.img_src,
-						alt: item.img_alt,
-					}}
-				/>
-			);
-		});
-	};
-
 	return (
-		<div className='mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
+		<div className='mx-auto py-20 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
 			<h2 className='sr-only'>Shop</h2>
-
-			<div className='grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8'>
+			<Breadcrumb breadcrumbs={breadcrumbs}/>
+			<div className='grid grid-cols-1 mt-5 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8'>
 				<RenderShop />
 			</div>
 		</div>

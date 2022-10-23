@@ -1,7 +1,7 @@
 const Footer = () => {
 	return (
 		<footer className='w-full bg-slate-200 p-16'>
-			<span className='sr-only'>Footer section</span>
+			<h2 className='sr-only'>Footer section</h2>
 			<div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 mb-10'>
 				<ul>
 					<li className='font-bold p-1'>Shop</li>

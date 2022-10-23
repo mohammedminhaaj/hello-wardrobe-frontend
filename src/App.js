@@ -2,12 +2,12 @@ import { Fragment } from 'react';
 import './App.css';
 import Footer from './layouts/Footer';
 import Main from './layouts/Main';
-import NavigationBar from './layouts/NavigationBar';
+import Header from './layouts/Header';
 
 function App() {
 	return (
 		<Fragment>
-			<NavigationBar />
+			<Header />
 			<Main />
 			<Footer />
 		</Fragment>
