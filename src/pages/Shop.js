@@ -1,39 +1,43 @@
 import Card from '../components/ui/Card';
-const Shop = () => {
-	const shopArray = [
-		{
-			title: 'Nomad Tumblr',
-			linkTo: '#',
-			price: 34.99,
-			img_src:
-				'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
-			img_alt:
-				'Olive drab green insulated bottle with flared screw lid and flat top.',
-		},
-		{
-			title: 'Focus Paper Refill',
-			linkTo: '#',
-			price: 88.99,
-			img_src:
-				'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
-			img_alt:
-				'Person using a pen to cross a task off a productivity paper card.',
-		},
-		{
-			title: 'Machined Mechanical Pencil',
-			linkTo: '#',
-			price: 34.99,
-			img_src:
-				'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-			img_alt:
-				'Hand holding black machined steel mechanical pencil with brass tip and top.',
-		},
-	];
+const shopArray = [
+	{
+		id: Math.random(),
+		title: 'Nomad Tumblr',
+		linkTo: '#',
+		price: 34.99,
+		img_src:
+			'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
+		img_alt:
+			'Olive drab green insulated bottle with flared screw lid and flat top.',
+	},
+	{
+		id: Math.random(),
+		title: 'Focus Paper Refill',
+		linkTo: '#',
+		price: 88.99,
+		img_src:
+			'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
+		img_alt:
+			'Person using a pen to cross a task off a productivity paper card.',
+	},
+	{
+		id: Math.random(),
+		title: 'Machined Mechanical Pencil',
+		linkTo: '#',
+		price: 34.99,
+		img_src:
+			'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
+		img_alt:
+			'Hand holding black machined steel mechanical pencil with brass tip and top.',
+	},
+];
 
+const Shop = () => {
 	const RenderShop = () => {
 		return shopArray.map((item) => {
 			return (
 				<Card
+					key = {item.id}
 					title={item.title}
 					linkTo={item.linkTo}
 					price={item.price}
