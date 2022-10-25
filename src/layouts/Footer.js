@@ -34,7 +34,7 @@ const Footer = () => {
 			<div className='bg-slate-300 p-5 rounded md:text-center'>
 				<p className='font-bold'>Sign up for our newsletter</p>
 				<label className='font-thin'>
-					The latest deals and savings, sent to your inbox directly
+					Latest deals and savings, sent to your inbox directly
 				</label>
 				<div className='mt-5'>
 					<input

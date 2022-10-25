@@ -117,7 +117,12 @@ const Overview = () => {
 				</div>
 				<div className='flex flex-col md:flex-row'>
 					<div className='md:order-3 basis-1/3'>
-						<p className='text-3xl tracking-tight'>₹192</p>
+						<div className='flex'>
+							<p className='text-3xl tracking-tight mr-3'>₹192</p>
+							<p className='line-through font-thin my-auto'>
+								₹200
+							</p>
+						</div>
 						<div className='mt-5 flex'>
 							<Eye />
 							<p className='ml-3'>
@@ -127,15 +132,131 @@ const Overview = () => {
 						<div className='mt-3 flex'>
 							<Heart />
 							<p className='ml-3'>
-								23 people have added this to their wishlist.
+								23 people have added this to their wishlist
 							</p>
 						</div>
 						<div className='mt-5 flex justify-between'>
 							<p>Size</p>
 							<p className='text-blue-500'>Size guide</p>
 						</div>
-						<div className='mt-3 rounded-xl border-2 text-center'>
-							<p>Available sizes</p>
+						<div className='mt-3 rounded-xl bg-stone-100 p-2 md:px-6 md:py-2'>
+							<ul className='grid grid-cols-4 gap-4 text-center'>
+								<li>
+									<input
+										id='size-xxs'
+										type='radio'
+										name='size'
+										defaultValue='XXS'
+										className='sr-only peer'
+									/>
+									<label
+										htmlFor='size-xxs'
+										className='hover:bg-stone-300 focus:ring-stone-500 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										XXS
+									</label>
+								</li>
+								<li>
+									<input
+										id='size-xs'
+										type='radio'
+										name='size'
+										defaultValue='XS'
+										className='sr-only peer'
+									/>
+									<label
+										htmlFor='size-xs'
+										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer  peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										XS
+									</label>
+								</li>
+								<li>
+									<input
+										id='size-s'
+										type='radio'
+										name='size'
+										defaultValue='S'
+										className='sr-only peer'
+									/>
+									<label
+										htmlFor='size-s'
+										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										S
+									</label>
+								</li>
+								<li>
+									<input
+										id='size-m'
+										type='radio'
+										name='size'
+										defaultValue='M'
+										className='sr-only peer'
+									/>
+									<label
+										htmlFor='size-m'
+										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										M
+									</label>
+								</li>
+								<li>
+									<input
+										id='size-l'
+										type='radio'
+										name='size'
+										defaultValue='L'
+										className='sr-only peer'
+									/>
+									<label
+										htmlFor='size-l'
+										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										L
+									</label>
+								</li>
+								<li>
+									<input
+										id='size-xl'
+										type='radio'
+										name='size'
+										defaultValue='XL'
+										className='sr-only peer'
+									/>
+									<label
+										htmlFor='size-xl'
+										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										XL
+									</label>
+								</li>
+								<li>
+									<input
+										id='size-2xl'
+										type='radio'
+										name='size'
+										defaultValue='2XL'
+										className='sr-only peer'
+									/>
+									<label
+										htmlFor='size-2xl'
+										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										2XL
+									</label>
+								</li>
+								<li>
+									<input
+										id='size-3xl'
+										type='radio'
+										name='size'
+										defaultValue='3XL'
+										className='sr-only peer'
+									/>
+									<label
+										htmlFor='size-3xl'
+										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										3XL
+									</label>
+								</li>
+							</ul>
+						</div>
+						<div className='mt-5'>
+							<h2 className='text-blue-500'>Select Date</h2>
 						</div>
 						<div className='mt-5 flex flex-col md:flex-row gap-2'>
 							<button className='bg-stone-200 hover:bg-stone-300 active:ring-2 active:ring-stone-400 rounded-lg py-2 px-4 basis-1/2 flex justify-center'>
@@ -143,7 +264,10 @@ const Overview = () => {
 								Add to Wishlist
 							</button>
 							<button className='bg-stone-500 hover:bg-stone-600 active:ring-2 active:ring-stone-700 text-white rounded-lg py-2 px-4 basis-1/2 flex justify-center'>
-								<ShoppingBag className='my-auto mr-1' size={16} />
+								<ShoppingBag
+									className='my-auto mr-1'
+									size={16}
+								/>
 								Add to Bag
 							</button>
 						</div>
@@ -176,7 +300,7 @@ const Overview = () => {
 							</ul>
 						</div>
 						<div className='mt-5'>
-							<h3>Highlights</h3>
+							<h3>Details</h3>
 							<p className='font-thin'>
 								The 6-Pack includes two black, two white, and
 								two heather gray Basic Tees. Sign up for our

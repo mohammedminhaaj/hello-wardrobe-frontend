@@ -6,7 +6,7 @@ const Main = () => {
 	return (
 		<Fragment>
 			<h2 className='sr-only'>Body section</h2>
-			<Overview />
+			<Shop />
 		</Fragment>
 	);
 };

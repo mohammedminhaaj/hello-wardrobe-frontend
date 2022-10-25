@@ -1,10 +1,10 @@
 import { Fragment, useState } from 'react';
-import {User, ShoppingBag, Search} from 'react-feather'
+import { User, ShoppingBag, Search, Menu } from 'react-feather';
 
 const NavigationBar = () => {
 	const [showMenu, setShowMenu] = useState(false);
 	const clickHandler = () => {
-		setShowMenu(previous => !previous);
+		setShowMenu((previous) => !previous);
 	};
 
 	return (
@@ -18,34 +18,20 @@ const NavigationBar = () => {
 					</a>
 					<div className='flex md:order-2 items-center'>
 						<a>
-							<Search className='mr-5 cursor-pointer hover:text-blue-500'/>
+							<Search className='mr-5 cursor-pointer hover:stroke-blue-500' />
 						</a>
 						<a>
-							<ShoppingBag className='cursor-pointer hover:text-blue-500'/>
+							<User className='cursor-pointer hover:stroke-blue-500' />
 						</a>
 						<a>
-							<User className='ml-5 cursor-pointer hover:text-blue-500'/>
+							<ShoppingBag className='ml-5 cursor-pointer hover:stroke-blue-500' />
 						</a>
-						{/* <button
-							type='button'
-							className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0'>
-							Get started
-						</button> */}
 						<button
 							onClick={clickHandler}
 							type='button'
-							className='inline-flex items-center p-2 ml-5 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200'>
+							className='group inline-flex items-center p-2 ml-5 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200'>
 							<h2 className='sr-only'>Open main menu</h2>
-							<svg
-								className='w-6 h-6'
-								aria-hidden='true'
-								viewBox='0 0 20 20'
-								xmlns='http://www.w3.org/2000/svg'>
-								<path
-									fillRule='evenodd'
-									d='M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z'
-									clipRule='evenodd'></path>
-							</svg>
+							<Menu color={showMenu ? '#3b82f6':'black'}/>
 						</button>
 					</div>
 					<div
