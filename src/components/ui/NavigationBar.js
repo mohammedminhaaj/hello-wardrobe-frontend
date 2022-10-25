@@ -29,7 +29,7 @@ const NavigationBar = () => {
 						<button
 							onClick={clickHandler}
 							type='button'
-							className='group inline-flex items-center p-2 ml-5 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200'>
+							className='group inline-flex items-center p-2 ml-5 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-200'>
 							<h2 className='sr-only'>Open main menu</h2>
 							<Menu color={showMenu ? '#3b82f6':'black'}/>
 						</button>

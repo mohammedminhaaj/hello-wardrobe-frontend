@@ -1,6 +1,6 @@
 const Footer = () => {
 	return (
-		<footer className='w-full bg-slate-200 p-16'>
+		<footer className='w-full bg-slate-200 px-16 py-8'>
 			<h2 className='sr-only'>Footer section</h2>
 			<div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 mb-10'>
 				<ul>
@@ -42,7 +42,7 @@ const Footer = () => {
 						placeholder='someone@example.com'
 						type='email'
 					/>
-					<button className='bg-slate-400 rounded px-3 py-1 hover:bg-slate-500 cursor-pointer active:ring-2 ring-slate-700'>
+					<button className='bg-slate-400 rounded px-3 py-1 hover:bg-slate-500 cursor-pointer active:ring-1 ring-slate-700'>
 						Sign up
 					</button>
 				</div>

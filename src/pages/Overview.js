@@ -37,62 +37,23 @@ const Overview = () => {
 							onClick={imageClickHandler}
 							src='https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg'
 							alt='Model wearing plain white basic tee.'
-							className='h-full w-full object-cover object-center rounded-2xl active:ring-2 active:ring-slate-700'
+							className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
 						/>
 						<img
 							onClick={imageClickHandler}
 							src='https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg'
 							alt='Two each of gray, white, and black shirts laying flat.'
-							className='h-full w-full object-cover object-center rounded-2xl active:ring-2 active:ring-slate-700'
+							className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
 						/>
 						<img
 							onClick={imageClickHandler}
 							src='https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg'
 							alt='Model wearing plain black basic tee.'
-							className='h-full w-full object-cover object-center rounded-2xl active:ring-2 active:ring-slate-700'
+							className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
 						/>
 					</div>
 				</div>
-				{/* <div className='hidden md:block lg:block xl:block mt-5'>
-					<div className='grid grid-cols-3 gap-6'>
-						<div className='grid grid-rows-2 h-screen'>
-							<div className='h-full w-full'>
-								<h2 className='font-bold text-2xl'>
-									Basic Tee 6-Pack
-								</h2>
-								<p className='font-thin overflow-auto'>
-									The Basic Tee 6-Pack allows you to fully
-									express your vibrant personality with three
-									grayscale options. Feeling adventurous? Put
-									on a heather gray tee. Want to be a
-									trendsetter? Try our exclusive colorway:
-									"Black". Need to add an extra pop of color
-									to your outfit? Our white tee has you
-									covered.
-								</p>
-							</div>
-							<img
-								src='https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg'
-								alt='Two each of gray, white, and black shirts laying flat.'
-								className='h-full w-full object-cover object-center rounded-2xl hover:opacity-90'
-							/>
-						</div>
-						<div className='grid grid-rows-2 h-screen'>
-							<img
-								src='https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg'
-								alt='Model wearing plain white basic tee.'
-								className='row-span-2 h-full w-full object-cover object-center rounded-2xl hover:opacity-90'
-							/>
-						</div>
-						<div className='grid grid-rows-2 h-screen'>
-							<img
-								src='https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg'
-								alt='Model wearing plain black basic tee.'
-								className='h-full w-full object-cover object-center rounded-2xl hover:opacity-90'
-							/>
-						</div>
-					</div>
-				</div> */}
+				
 				<div className='hidden md:block lg:block xl:block mt-5 h-3/4'>
 					<div className='grid grid-cols-3 gap-6'>
 						<img
@@ -151,7 +112,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-xxs'
-										className='hover:bg-stone-300 focus:ring-stone-500 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-stone-300 focus:ring-stone-500 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
 										XXS
 									</label>
 								</li>
@@ -165,7 +126,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-xs'
-										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer  peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer  peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
 										XS
 									</label>
 								</li>
@@ -179,7 +140,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-s'
-										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
 										S
 									</label>
 								</li>
@@ -193,7 +154,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-m'
-										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
 										M
 									</label>
 								</li>
@@ -207,7 +168,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-l'
-										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
 										L
 									</label>
 								</li>
@@ -221,7 +182,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-xl'
-										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
 										XL
 									</label>
 								</li>
@@ -235,7 +196,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-2xl'
-										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
 										2XL
 									</label>
 								</li>
@@ -249,7 +210,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-3xl'
-										className='hover:bg-stone-300 active:ring-2 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
 										3XL
 									</label>
 								</li>
@@ -259,11 +220,11 @@ const Overview = () => {
 							<h2 className='text-blue-500'>Select Date</h2>
 						</div>
 						<div className='mt-5 flex flex-col md:flex-row gap-2'>
-							<button className='bg-stone-200 hover:bg-stone-300 active:ring-2 active:ring-stone-400 rounded-lg py-2 px-4 basis-1/2 flex justify-center'>
+							<button className='bg-stone-200 hover:bg-stone-300 active:ring-1 active:ring-stone-400 rounded-lg py-2 px-4 basis-1/2 flex justify-center'>
 								<Heart className='my-auto mr-1' size={16} />
 								Add to Wishlist
 							</button>
-							<button className='bg-stone-500 hover:bg-stone-600 active:ring-2 active:ring-stone-700 text-white rounded-lg py-2 px-4 basis-1/2 flex justify-center'>
+							<button className='bg-stone-500 hover:bg-stone-600 active:ring-1 active:ring-stone-700 text-white rounded-lg py-2 px-4 basis-1/2 flex justify-center'>
 								<ShoppingBag
 									className='my-auto mr-1'
 									size={16}
@@ -310,7 +271,7 @@ const Overview = () => {
 							</p>
 						</div>
 					</div>
-					<span className='hidden md:order-2 md:mr-5 md:block lg-block xl-block h-auto border-r-2'></span>
+					<span className='hidden md:order-2 md:mr-5 md:block lg:block xl:block h-auto border-r-2'></span>
 				</div>
 			</div>
 		</Fragment>

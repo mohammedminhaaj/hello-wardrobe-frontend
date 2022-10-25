@@ -1,7 +1,7 @@
 import { Plus } from 'react-feather';
 const FilterSection = () => {
 	return (
-		<ul class='space-y-3'>
+		<ul className='space-y-3'>
 			<li>
 				<p>Women</p>
 			</li>
