@@ -1,42 +1,50 @@
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import { ChevronDown, ChevronUp } from 'react-feather';
 import CartSummary from '../components/checkout-form/CartSummary';
 import ContactDetailsForm from '../components/checkout-form/ContactDetailsForm';
 import PaymentForm from '../components/checkout-form/PaymentForm';
 import ShippingInformationForm from '../components/checkout-form/ShippingInformationForm';
 
-const RenderCheckoutForm = (currentForm) => {
-	switch (currentForm) {
-		case 'contact_details':
-			return <ContactDetailsForm />;
-		case 'shipping_details':
-			return <ShippingInformationForm />;
-		case 'payment':
-			return <PaymentForm />;
-		default:
-			return <p>No form to render!</p>;
-	}
-};
-
 const CheckoutForm = () => {
 	const [showSummary, setShowSummary] = useState(false);
-	const [checkoutForm, setCheckoutForm] = useState('contact_details');
+	const [state, dispatch] = useReducer(checkoutFormReducer, {
+		checkoutForm: 'contact_details',
+	});
+
+	function checkoutFormReducer(state, action) {
+		switch (action.type) {
+			case 'next':
+				if (state.checkoutForm === 'contact_details')
+					return { checkoutForm: 'shipping_details' };
+				else if (state.checkoutForm === 'shipping_details')
+					return { checkoutForm: 'payment' };
+				break;
+			case 'previous':
+				if (state.checkoutForm === 'payment')
+					return { checkoutForm: 'shipping_details' };
+				else if (state.checkoutForm === 'shipping_details')
+					return { checkoutForm: 'contact_details' };
+				break;
+			default:
+				throw new Error('No reducer action types matched!');
+		}
+	}
 
 	const summaryClickHandler = () => {
 		setShowSummary((previous) => !previous);
 	};
 
-	const nextClickHandler = () => {
-		if (checkoutForm === 'contact_details')
-			setCheckoutForm('shipping_details');
-		else if (checkoutForm === 'shipping_details')
-			setCheckoutForm('payment');
-	};
-
-	const previousClickHandler = () => {
-		if (checkoutForm === 'payment') setCheckoutForm('shipping_details');
-		else if (checkoutForm === 'shipping_details')
-			setCheckoutForm('contact_details');
+	const RenderCheckoutForm = (currentForm) => {
+		switch (currentForm) {
+			case 'contact_details':
+				return <ContactDetailsForm dispatchMethod={dispatch} />;
+			case 'shipping_details':
+				return <ShippingInformationForm />;
+			case 'payment':
+				return <PaymentForm />;
+			default:
+				return <p>No form to render!</p>;
+		}
 	};
 
 	return (
@@ -62,16 +70,20 @@ const CheckoutForm = () => {
 				</div>
 				<div className='col-span-2 md:order-1 md:border-r-2'>
 					<h1 className='text-lg font-bold'>Checkout</h1>
-					<div className='grid grid-cols-3 gap-3 py-4 px-2 md:pr-5'>
+					<div className='flex gap-3 py-4 px-2 md:pr-5'>
 						<div
-							className={`border-t-4 ${
+							className={`md:basis-1/3 border-t-4 ${
 								[
 									'contact_details',
 									'shipping_details',
 									'payment',
-								].includes(checkoutForm)
+								].includes(state.checkoutForm)
 									? 'border-stone-600'
 									: ''
+							} ${
+								state.checkoutForm === 'contact_details'
+									? 'basis-3/5'
+									: 'basis-1/5'
 							}`}>
 							<p
 								className={`${
@@ -79,77 +91,78 @@ const CheckoutForm = () => {
 										'contact_details',
 										'shipping_details',
 										'payment',
-									].includes(checkoutForm)
+									].includes(state.checkoutForm)
 										? 'border-stone-600'
 										: 'text-gray-500'
 								}`}>
 								Step 1
 							</p>
-							<p className='font-thin'>Contact Information</p>
+							<p
+								className={`${
+									state.checkoutForm === 'contact_details'
+										? ''
+										: 'hidden'
+								} md:block lg:block xl:block font-thin`}>
+								Contact Information
+							</p>
 						</div>
 						<div
-							className={`border-t-4 ${
+							className={`md:basis-1/3 border-t-4 ${
 								['shipping_details', 'payment'].includes(
-									checkoutForm
+									state.checkoutForm
 								)
 									? 'border-stone-600'
 									: ''
+							} ${
+								state.checkoutForm === 'shipping_details'
+									? 'basis-3/5'
+									: 'basis-1/5'
 							}`}>
 							<p
 								className={`${
 									['shipping_details', 'payment'].includes(
-										checkoutForm
+										state.checkoutForm
 									)
 										? 'border-stone-600'
 										: 'text-gray-500'
 								}`}>
 								Step 2
 							</p>
-							<p className='font-thin'>Shipping Information</p>
+							<p
+								className={`${
+									state.checkoutForm === 'shipping_details'
+										? ''
+										: 'hidden'
+								} md:block lg:block xl:block font-thin`}>
+								Shipping Information
+							</p>
 						</div>
 						<div
-							className={`border-t-4 ${
-								checkoutForm === 'payment'
-									? 'border-stone-600'
-									: ''
+							className={`md:basis-1/3 border-t-4 ${
+								state.checkoutForm === 'payment'
+									? 'border-stone-600 basis-3/5'
+									: 'basis-1/5'
 							}`}>
 							<p
 								className={`${
-									checkoutForm === 'payment'
+									state.checkoutForm === 'payment'
 										? 'border-stone-600'
 										: 'text-gray-500'
 								}`}>
 								Step 3
 							</p>
-							<p className='font-thin'>Payment</p>
+							<p
+								className={`${
+									state.checkoutForm === 'payment'
+										? ''
+										: 'hidden'
+								} md:block lg:block xl:block font-thin`}>
+								Payment
+							</p>
 						</div>
 					</div>
 					<div className='px-2 py-4 md:pr-5'>
-						{RenderCheckoutForm(checkoutForm)}
-						<div className='flex flex-row-reverse mt-5 gap-3'>
-							{checkoutForm !== 'payment' ? (
-								<button
-									onClick={nextClickHandler}
-									type='button'
-									className='bg-stone-400 hover:bg-stone-500 focus:outline-none active:ring-1 active:ring-stone-500 rounded px-3 py-1'>
-									Next
-								</button>
-							) : (
-								<button
-									type='button'
-									className='bg-stone-400 hover:text-white hover:bg-stone-500 focus:outline-none active:ring-1 active:ring-stone-500 rounded px-3 py-1'>
-									Confirm Payment
-								</button>
-							)}
-							{checkoutForm !== 'contact_details' && (
-								<button
-									onClick={previousClickHandler}
-									type='button'
-									className='bg-stone-100 hover:bg-stone-200 focus:outline-none active:ring-1 active:ring-stone-300 rounded px-3 py-1'>
-									Previous
-								</button>
-							)}
-						</div>
+						{RenderCheckoutForm(state.checkoutForm)}
 					</div>
 				</div>
 			</div>
