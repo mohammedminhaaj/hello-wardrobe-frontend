@@ -8,7 +8,7 @@ const ContactDetailsForm = (props) => {
 	} = useForm();
 
 	const submitHandler = () => {
-		props.dispatchMethod({type: 'next'});
+		props.setCheckoutFormHandler('delivery_location');
 	};
 
 	const validationContext = {
@@ -38,7 +38,7 @@ const ContactDetailsForm = (props) => {
 			<input
 				id='mobile-number'
 				type='text'
-				className='bg-stone-100 px1 py-2 focus:outline-none rounded w-full md:w-1/2'
+				className='bg-stone-100 px-1 py-2 focus:outline-none rounded w-full md:w-1/2'
 				name='mobileNumber'
 				{...register('mobileNumber', validationContext)}
 			/>
@@ -56,7 +56,7 @@ const ContactDetailsForm = (props) => {
 			<input
 				id='email'
 				type='email'
-				className='bg-stone-100 px1 py-2 focus:outline-none rounded w-full md:w-1/2'
+				className='bg-stone-100 px-1 py-2 focus:outline-none rounded w-full md:w-1/2'
 				name='email'
 				{...register('email')}
 			/>

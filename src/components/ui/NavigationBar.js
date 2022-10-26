@@ -9,29 +9,29 @@ const NavigationBar = () => {
 
 	return (
 		<Fragment>
-			<nav className='bg-slate-100 px-2 sm:px-4 py-2.5 fixed w-full z-20'>
+			<nav className='bg-h-gray text-space-cadet px-2 sm:px-4 py-2.5 fixed w-full z-20'>
 				<div className='container flex flex-wrap justify-between items-center mx-auto'>
 					<a href='/' className='flex items-center'>
-						<span className='self-center text-xl font-semibold whitespace-nowrap'>
+						<span className='self-center text-xl hover:text-isabelline font-semibold whitespace-nowrap'>
 							Hello Wardrobe
 						</span>
 					</a>
 					<div className='flex md:order-2 items-center'>
 						<a>
-							<Search className='mr-5 cursor-pointer hover:stroke-blue-500' />
+							<Search className='mr-5 cursor-pointer hover:stroke-isabelline' />
 						</a>
 						<a>
-							<User className='cursor-pointer hover:stroke-blue-500' />
+							<User className='cursor-pointer hover:stroke-isabelline' />
 						</a>
 						<a>
-							<ShoppingBag className='ml-5 cursor-pointer hover:stroke-blue-500' />
+							<ShoppingBag className='ml-5 cursor-pointer hover:stroke-isabelline' />
 						</a>
 						<button
 							onClick={clickHandler}
 							type='button'
-							className='group inline-flex items-center p-2 ml-5 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-200'>
+							className='group inline-flex items-center p-2 ml-5 text-sm text-gray-500 rounded-lg md:hidden hover:bg-isabelline focus:outline-none focus:ring-1 focus:ring-gray-200'>
 							<h2 className='sr-only'>Open main menu</h2>
-							<Menu color={showMenu ? '#3b82f6':'black'}/>
+							<Menu color={showMenu ? 'blue':'#22223b'}/>
 						</button>
 					</div>
 					<div
@@ -42,21 +42,21 @@ const NavigationBar = () => {
 							<li>
 								<a
 									href='#'
-									className='block py-2 pr-4 pl-3 text-gray-700 hover:text-blue-500 md:bg-transparent md:p-0'>
+									className='block py-2 pr-4 pl-3 hover:text-isabelline md:bg-transparent md:p-0'>
 									Shop
 								</a>
 							</li>
 							<li>
 								<a
 									href='#'
-									className='block py-2 pr-4 pl-3 text-gray-700 hover:text-blue-500 md:bg-transparent md:p-0'>
+									className='block py-2 pr-4 pl-3 hover:text-isabelline md:bg-transparent md:p-0'>
 									About
 								</a>
 							</li>
 							<li>
 								<a
 									href='#'
-									className='block py-2 pr-4 pl-3 text-gray-700 hover:text-blue-500 md:bg-transparent md:p-0'>
+									className='block py-2 pr-4 pl-3 hover:text-isabelline md:bg-transparent md:p-0'>
 									Contact
 								</a>
 							</li>

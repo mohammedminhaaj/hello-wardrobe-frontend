@@ -1,34 +1,13 @@
-import { useReducer, useState } from 'react';
+import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'react-feather';
 import CartSummary from '../components/checkout-form/CartSummary';
 import ContactDetailsForm from '../components/checkout-form/ContactDetailsForm';
 import PaymentForm from '../components/checkout-form/PaymentForm';
-import ShippingInformationForm from '../components/checkout-form/ShippingInformationForm';
+import DeliveryLocationForm from '../components/checkout-form/DeliveryLocationForm';
 
 const CheckoutForm = () => {
 	const [showSummary, setShowSummary] = useState(false);
-	const [state, dispatch] = useReducer(checkoutFormReducer, {
-		checkoutForm: 'contact_details',
-	});
-
-	function checkoutFormReducer(state, action) {
-		switch (action.type) {
-			case 'next':
-				if (state.checkoutForm === 'contact_details')
-					return { checkoutForm: 'shipping_details' };
-				else if (state.checkoutForm === 'shipping_details')
-					return { checkoutForm: 'payment' };
-				break;
-			case 'previous':
-				if (state.checkoutForm === 'payment')
-					return { checkoutForm: 'shipping_details' };
-				else if (state.checkoutForm === 'shipping_details')
-					return { checkoutForm: 'contact_details' };
-				break;
-			default:
-				throw new Error('No reducer action types matched!');
-		}
-	}
+	const [checkoutForm, setCheckoutForm] = useState('contact_details');
 
 	const summaryClickHandler = () => {
 		setShowSummary((previous) => !previous);
@@ -37,9 +16,17 @@ const CheckoutForm = () => {
 	const RenderCheckoutForm = (currentForm) => {
 		switch (currentForm) {
 			case 'contact_details':
-				return <ContactDetailsForm dispatchMethod={dispatch} />;
-			case 'shipping_details':
-				return <ShippingInformationForm />;
+				return (
+					<ContactDetailsForm
+						setCheckoutFormHandler={setCheckoutForm}
+					/>
+				);
+			case 'delivery_location':
+				return (
+					<DeliveryLocationForm
+						setCheckoutFormHandler={setCheckoutForm}
+					/>
+				);
 			case 'payment':
 				return <PaymentForm />;
 			default:
@@ -75,13 +62,13 @@ const CheckoutForm = () => {
 							className={`md:basis-1/3 border-t-4 ${
 								[
 									'contact_details',
-									'shipping_details',
+									'delivery_location',
 									'payment',
-								].includes(state.checkoutForm)
+								].includes(checkoutForm)
 									? 'border-stone-600'
 									: ''
 							} ${
-								state.checkoutForm === 'contact_details'
+								checkoutForm === 'contact_details'
 									? 'basis-3/5'
 									: 'basis-1/5'
 							}`}>
@@ -89,9 +76,9 @@ const CheckoutForm = () => {
 								className={`${
 									[
 										'contact_details',
-										'shipping_details',
+										'delivery_location',
 										'payment',
-									].includes(state.checkoutForm)
+									].includes(checkoutForm)
 										? 'border-stone-600'
 										: 'text-gray-500'
 								}`}>
@@ -99,7 +86,7 @@ const CheckoutForm = () => {
 							</p>
 							<p
 								className={`${
-									state.checkoutForm === 'contact_details'
+									checkoutForm === 'contact_details'
 										? ''
 										: 'hidden'
 								} md:block lg:block xl:block font-thin`}>
@@ -108,20 +95,20 @@ const CheckoutForm = () => {
 						</div>
 						<div
 							className={`md:basis-1/3 border-t-4 ${
-								['shipping_details', 'payment'].includes(
-									state.checkoutForm
+								['delivery_location', 'payment'].includes(
+									checkoutForm
 								)
 									? 'border-stone-600'
 									: ''
 							} ${
-								state.checkoutForm === 'shipping_details'
+								checkoutForm === 'delivery_location'
 									? 'basis-3/5'
 									: 'basis-1/5'
 							}`}>
 							<p
 								className={`${
-									['shipping_details', 'payment'].includes(
-										state.checkoutForm
+									['delivery_location', 'payment'].includes(
+										checkoutForm
 									)
 										? 'border-stone-600'
 										: 'text-gray-500'
@@ -130,22 +117,22 @@ const CheckoutForm = () => {
 							</p>
 							<p
 								className={`${
-									state.checkoutForm === 'shipping_details'
+									checkoutForm === 'delivery_location'
 										? ''
 										: 'hidden'
 								} md:block lg:block xl:block font-thin`}>
-								Shipping Information
+								Delivery Location
 							</p>
 						</div>
 						<div
 							className={`md:basis-1/3 border-t-4 ${
-								state.checkoutForm === 'payment'
+								checkoutForm === 'payment'
 									? 'border-stone-600 basis-3/5'
 									: 'basis-1/5'
 							}`}>
 							<p
 								className={`${
-									state.checkoutForm === 'payment'
+									checkoutForm === 'payment'
 										? 'border-stone-600'
 										: 'text-gray-500'
 								}`}>
@@ -153,16 +140,14 @@ const CheckoutForm = () => {
 							</p>
 							<p
 								className={`${
-									state.checkoutForm === 'payment'
-										? ''
-										: 'hidden'
+									checkoutForm === 'payment' ? '' : 'hidden'
 								} md:block lg:block xl:block font-thin`}>
 								Payment
 							</p>
 						</div>
 					</div>
 					<div className='px-2 py-4 md:pr-5'>
-						{RenderCheckoutForm(state.checkoutForm)}
+						{RenderCheckoutForm(checkoutForm)}
 					</div>
 				</div>
 			</div>
