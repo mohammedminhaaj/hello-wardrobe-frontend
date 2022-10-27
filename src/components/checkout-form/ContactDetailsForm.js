@@ -38,7 +38,7 @@ const ContactDetailsForm = (props) => {
 			<input
 				id='mobile-number'
 				type='text'
-				className='bg-stone-100 px-1 py-2 focus:outline-none rounded w-full md:w-1/2'
+				className='bg-isabelline-100 focus:outline-isabelline-300 px-1 py-2 rounded w-full md:w-1/2'
 				name='mobileNumber'
 				{...register('mobileNumber', validationContext)}
 			/>
@@ -56,7 +56,7 @@ const ContactDetailsForm = (props) => {
 			<input
 				id='email'
 				type='email'
-				className='bg-stone-100 px-1 py-2 focus:outline-none rounded w-full md:w-1/2'
+				className='bg-isabelline-100 focus:outline-isabelline-300 px-1 py-2 rounded w-full md:w-1/2'
 				name='email'
 				{...register('email')}
 			/>
@@ -68,7 +68,7 @@ const ContactDetailsForm = (props) => {
 			<div className='mt-5 flex flex-row-reverse'>
 				<button
 					type='submit'
-					className='bg-stone-100 hover:bg-stone-200 active:ring-1 active:ring-stone-300 px-3 py-1 rounded'>
+					className='bg-independence-100 hover:bg-independence-200 active:ring-1 active:ring-independence-300 px-3 py-1 rounded'>
 					Next
 				</button>
 			</div>

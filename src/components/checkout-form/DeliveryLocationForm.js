@@ -12,7 +12,7 @@ const DeliveryLocationForm = (props) => {
 						props.setCheckoutFormHandler('payment');
 					}}
 					type='button'
-					className='bg-stone-100 hover:bg-stone-200 active:ring-1 active:ring-stone-300 px-3 py-1 rounded'>
+					className='bg-independence-100 hover:bg-independence-200 active:ring-1 active:ring-independence-300 px-3 py-1 rounded'>
 					Next
 				</button>
 				<button
@@ -20,7 +20,7 @@ const DeliveryLocationForm = (props) => {
 						props.setCheckoutFormHandler('contact_details');
 					}}
 					type='button'
-					className='bg-stone-100 hover:bg-stone-200 active:ring-1 active:ring-stone-300 px-3 py-1 rounded'>
+					className='bg-h-gray-100 hover:bg-h-gray-200 active:ring-1 active:ring-h-gray-300 px-3 py-1 rounded'>
 					Previous
 				</button>
 			</div>

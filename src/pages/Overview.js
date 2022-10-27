@@ -23,7 +23,7 @@ const Overview = () => {
 	};
 	return (
 		<Fragment>
-			<div className='mx-auto py-20 px-4 sm:py-24 sm:px-8 lg:max-w-7xl lg:px-8'>
+			<div className='text-space-cadet-300 mx-auto py-20 px-4 sm:py-24 sm:px-8 lg:max-w-7xl lg:px-8'>
 				<h2 className='sr-only'>Overview</h2>
 				<Breadcrumb breadcrumbs={breadcrumbs} />
 				<div className='md:hidden mt-5'>
@@ -53,7 +53,7 @@ const Overview = () => {
 						/>
 					</div>
 				</div>
-				
+
 				<div className='hidden md:block lg:block xl:block mt-5 h-3/4'>
 					<div className='grid grid-cols-3 gap-6'>
 						<img
@@ -98,9 +98,11 @@ const Overview = () => {
 						</div>
 						<div className='mt-5 flex justify-between'>
 							<p>Size</p>
-							<p className='text-blue-500'>Size guide</p>
+							<p className='text-h-gray-100 hover:text-h-gray-300'>
+								Size guide
+							</p>
 						</div>
-						<div className='mt-3 rounded-xl bg-stone-100 p-2 md:px-6 md:py-2'>
+						<div className='mt-3 rounded-xl bg-silver-pink-100 p-2 md:px-6 md:py-2'>
 							<ul className='grid grid-cols-4 gap-4 text-center'>
 								<li>
 									<input
@@ -112,7 +114,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-xxs'
-										className='hover:bg-stone-300 focus:ring-stone-500 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-silver-pink-200 focus:outline-silver-pink-300 active:ring-1 active:ring-silver-pink-300 rounded-full py-1 px-3 cursor-pointer peer-checked:text-isabelline-100 peer-checked:bg-silver-pink-300'>
 										XXS
 									</label>
 								</li>
@@ -126,7 +128,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-xs'
-										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer  peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-silver-pink-200 focus:outline-silver-pink-300 active:ring-1 active:ring-silver-pink-300 rounded-full py-1 px-3 cursor-pointer peer-checked:text-isabelline-100 peer-checked:bg-silver-pink-300'>
 										XS
 									</label>
 								</li>
@@ -140,7 +142,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-s'
-										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-silver-pink-200 focus:outline-silver-pink-300 active:ring-1 active:ring-silver-pink-300 rounded-full py-1 px-3 cursor-pointer peer-checked:text-isabelline-100 peer-checked:bg-silver-pink-300'>
 										S
 									</label>
 								</li>
@@ -154,7 +156,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-m'
-										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-silver-pink-200 focus:outline-silver-pink-300 active:ring-1 active:ring-silver-pink-300 rounded-full py-1 px-3 cursor-pointer peer-checked:text-isabelline-100 peer-checked:bg-silver-pink-300'>
 										M
 									</label>
 								</li>
@@ -168,7 +170,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-l'
-										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-silver-pink-200 focus:outline-silver-pink-300 active:ring-1 active:ring-silver-pink-300 rounded-full py-1 px-3 cursor-pointer peer-checked:text-isabelline-100 peer-checked:bg-silver-pink-300'>
 										L
 									</label>
 								</li>
@@ -182,7 +184,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-xl'
-										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-silver-pink-200 focus:outline-silver-pink-300 active:ring-1 active:ring-silver-pink-300 rounded-full py-1 px-3 cursor-pointer peer-checked:text-isabelline-100 peer-checked:bg-silver-pink-300'>
 										XL
 									</label>
 								</li>
@@ -196,7 +198,7 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-2xl'
-										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-silver-pink-200 focus:outline-silver-pink-300 active:ring-1 active:ring-silver-pink-300 rounded-full py-1 px-3 cursor-pointer peer-checked:text-isabelline-100 peer-checked:bg-silver-pink-300'>
 										2XL
 									</label>
 								</li>
@@ -210,21 +212,23 @@ const Overview = () => {
 									/>
 									<label
 										htmlFor='size-3xl'
-										className='hover:bg-stone-300 active:ring-1 active:ring-stone-500 rounded-full py-1 px-3 cursor-pointer peer-checked:ring-stone-500 peer-checked:bg-stone-300'>
+										className='hover:bg-silver-pink-200 focus:outline-silver-pink-300 active:ring-1 active:ring-silver-pink-300 rounded-full py-1 px-3 cursor-pointer peer-checked:text-isabelline-100 peer-checked:bg-silver-pink-300'>
 										3XL
 									</label>
 								</li>
 							</ul>
 						</div>
 						<div className='mt-5'>
-							<h2 className='text-blue-500'>Select Date</h2>
+							<h2 className='text-h-gray-100 hover:text-h-gray-300'>
+								Select Date
+							</h2>
 						</div>
 						<div className='mt-5 flex flex-col md:flex-row gap-2'>
-							<button className='bg-stone-200 hover:bg-stone-300 active:ring-1 active:ring-stone-400 rounded-lg py-2 px-4 basis-1/2 flex justify-center'>
+							<button className='bg-h-gray-100 hover:bg-h-gray-200 active:ring-1 active:ring-h-gray-300 text-isabelline-100 rounded-lg py-2 px-4 basis-1/2 flex justify-center'>
 								<Heart className='my-auto mr-1' size={16} />
 								Add to Wishlist
 							</button>
-							<button className='bg-stone-500 hover:bg-stone-600 active:ring-1 active:ring-stone-700 text-white rounded-lg py-2 px-4 basis-1/2 flex justify-center'>
+							<button className='bg-independence-100 hover:bg-independence-200 active:ring-1 active:ring-independence-300 text-isabelline-100 rounded-lg py-2 px-4 basis-1/2 flex justify-center'>
 								<ShoppingBag
 									className='my-auto mr-1'
 									size={16}
@@ -233,7 +237,7 @@ const Overview = () => {
 							</button>
 						</div>
 					</div>
-					<hr className='mt-5 md:hidden' />
+					<hr className='mt-5 md:hidden  fill-isabelline-300' />
 					<div className='mt-5 md:mt-0 md:order-1 basis-2/3 md:mr-5'>
 						<p className='font-thin'>
 							The Basic Tee 6-Pack allows you to fully express
@@ -271,7 +275,7 @@ const Overview = () => {
 							</p>
 						</div>
 					</div>
-					<span className='hidden md:order-2 md:mr-5 md:block lg:block xl:block h-auto border-r-2'></span>
+					<span className='hidden md:order-2 md:mr-5 md:block lg:block xl:block h-auto border-r border-isabelline-300'></span>
 				</div>
 			</div>
 		</Fragment>

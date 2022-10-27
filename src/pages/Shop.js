@@ -71,7 +71,7 @@ const Shop = () => {
 
 	return (
 		<Fragment>
-			<div className='mx-auto py-20 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
+			<div className='text-space-cadet-300 mx-auto py-20 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
 				<h2 className='sr-only'>Shop</h2>
 				<Breadcrumb breadcrumbs={breadcrumbs} />
 				<div className='flex justify-between mt-5 mb-5'>

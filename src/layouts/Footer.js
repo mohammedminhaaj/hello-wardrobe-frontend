@@ -1,53 +1,149 @@
+import { ArrowRight } from 'react-feather';
+
 const Footer = () => {
 	return (
-		<footer className='w-full bg-isabelline px-16 py-8'>
+		<footer className='w-full bg-h-gray-200 text-isabelline-100 px-16 py-8'>
 			<h2 className='sr-only'>Footer section</h2>
 			<div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 mb-10'>
 				<ul>
 					<li className='font-bold p-1'>Shop</li>
-					<li className='font-thin p-1'>Women</li>
-					<li className='font-thin p-1'>Men</li>
-					<li className='font-thin p-1'>Category 1000</li>
-					<li className='font-thin p-1'>Category 2000</li>
-					<li className='font-thin p-1'>Category 3000</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Women
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Men
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Category 1000
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Category 2000
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Category 3000
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
 				</ul>
 				<ul>
 					<li className='font-bold p-1'>Company</li>
-					<li className='font-thin p-1'>Who we are</li>
-					<li className='font-thin p-1'>Careers</li>
-					<li className='font-thin p-1'>Terms and Conditions</li>
-					<li className='font-thin p-1'>Privacy</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Who we are
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Careers
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Terms and Conditions
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Privacy
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
 				</ul>
 				<ul>
 					<li className='font-bold p-1'>Account</li>
-					<li className='font-thin p-1'>Manage Account</li>
-					<li className='font-thin p-1'>Returns and Exchanges</li>
-					<li className='font-thin p-1'>Redeem a Gift Card</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Manage Account
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Returns and Exchanges
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Redeem a Gift Card
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
 				</ul>
 				<ul>
 					<li className='font-bold p-1'>Connect</li>
-					<li className='font-thin p-1'>Contact Us</li>
-					<li className='font-thin p-1'>Facebook</li>
-					<li className='font-thin p-1'>Instagram</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Contact Us
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Facebook
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
+					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+						Instagram
+						<ArrowRight
+							size={13}
+							className='hidden group-hover:block mt-2'
+						/>
+					</li>
 				</ul>
 			</div>
-			<div className='bg-silver-pink p-5 rounded md:text-center'>
+			<div className='bg-silver-pink-100 text-space-cadet-300 p-5 rounded md:text-center'>
 				<p className='font-bold'>Sign up for our newsletter</p>
 				<label className='font-thin'>
 					Latest deals and savings, sent to your inbox directly
 				</label>
 				<div className='mt-5'>
 					<input
-						className='bg-isabelline mr-5 mb-5 px-3 py-1 rounded'
+						className='bg-isabelline-100 active:ring-1 active:ring-isabelline-200 focus:outline-isabelline-300 mr-5 mb-5 px-3 py-1 rounded'
 						placeholder='someone@example.com'
 						type='email'
 					/>
-					<button className='bg-independence text-white rounded px-3 py-1 hover:bg-slate-500 cursor-pointer active:ring-1 ring-slate-700'>
+					<button
+						type='button'
+						className='bg-independence-100 text-isabelline-100 rounded px-3 py-1 hover:bg-independence-200 cursor-pointer active:ring-1 active:ring-independence-300'>
 						Sign up
 					</button>
 				</div>
 			</div>
-            <p className="mt-5 font-thin text-xs">Copyright &#169; 2023 Hello Wardrobe</p>
+			<p className='mt-5 font-thin text-xs'>
+				Copyright &#169; 2023 Hello Wardrobe
+			</p>
 		</footer>
 	);
 };

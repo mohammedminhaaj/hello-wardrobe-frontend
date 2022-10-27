@@ -35,7 +35,7 @@ const CheckoutForm = () => {
 	};
 
 	return (
-		<div className='mx-auto py-20 px-4 sm:py-24 sm:px-8 lg:max-w-7xl lg:px-8'>
+		<div className='text-space-cadet-300 mx-auto py-20 px-4 sm:py-24 sm:px-8 lg:max-w-7xl lg:px-8'>
 			<div className='grid grid-cols-1 md:grid-cols-3 gap-y-5 md:gap-x-6'>
 				<div className='md:order-2'>
 					<button

@@ -7,7 +7,7 @@ const Breadcrumb = (props) => {
 				<li className='inline-flex items-center'>
 					<a
 						href='/'
-						className='inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900'>
+						className='inline-flex items-center text-sm font-medium text-gray-400 hover:text-space-cadet-300'>
 						<Home size={16} className='mr-2' />
 						Home
 					</a>
@@ -19,16 +19,16 @@ const Breadcrumb = (props) => {
 								<div className='flex items-center'>
 									<ChevronRight
 										size={16}
-										className='text-gray-500'
+										className='stroke-space-cadet-300'
 									/>
 									{index === props.breadcrumbs.length - 1 ? (
-										<p className='ml-1 text-sm font-medium text-gray-900 md:ml-2'>
+										<p className='ml-1 text-sm font-medium text-space-cadet-300 md:ml-2'>
 											{item.name}
 										</p>
 									) : (
 										<a
 											href={item.linkTo}
-											className='ml-1 text-sm font-medium text-gray-500 hover:text-gray-900 md:ml-2'>
+											className='ml-1 text-sm font-medium text-gray-400 hover:text-space-cadet-300 md:ml-2'>
 											{item.name}
 										</a>
 									)}
