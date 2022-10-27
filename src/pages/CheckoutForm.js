@@ -40,7 +40,7 @@ const CheckoutForm = () => {
 				<div className='md:order-2'>
 					<button
 						onClick={summaryClickHandler}
-						className='md:hidden flex justify-between rounded w-full px-2 py-3 bg-stone-200 hover:bg-stone-300 active:ring-1 active:ring-stone-400'>
+						className='md:hidden flex justify-between text-isabelline-100 rounded w-full px-2 py-3 bg-silver-pink-100 hover:bg-silver-pink-200 active:ring-1 active:ring-silver-pink-300'>
 						<p>Order Summary</p>
 						{showSummary ? (
 							<ChevronUp size={16} className='my-auto' />
@@ -65,7 +65,7 @@ const CheckoutForm = () => {
 									'delivery_location',
 									'payment',
 								].includes(checkoutForm)
-									? 'border-stone-600'
+									? 'border-silver-pink-300'
 									: ''
 							} ${
 								checkoutForm === 'contact_details'
@@ -79,8 +79,8 @@ const CheckoutForm = () => {
 										'delivery_location',
 										'payment',
 									].includes(checkoutForm)
-										? 'border-stone-600'
-										: 'text-gray-500'
+										? 'text-silver-pink-300'
+										: ''
 								}`}>
 								Step 1
 							</p>
@@ -98,7 +98,7 @@ const CheckoutForm = () => {
 								['delivery_location', 'payment'].includes(
 									checkoutForm
 								)
-									? 'border-stone-600'
+									? 'border-silver-pink-300'
 									: ''
 							} ${
 								checkoutForm === 'delivery_location'
@@ -110,8 +110,8 @@ const CheckoutForm = () => {
 									['delivery_location', 'payment'].includes(
 										checkoutForm
 									)
-										? 'border-stone-600'
-										: 'text-gray-500'
+										? 'text-silver-pink-300'
+										: ''
 								}`}>
 								Step 2
 							</p>
@@ -127,14 +127,14 @@ const CheckoutForm = () => {
 						<div
 							className={`md:basis-1/3 border-t-4 ${
 								checkoutForm === 'payment'
-									? 'border-stone-600 basis-3/5'
+									? 'border-silver-pink-300 basis-3/5'
 									: 'basis-1/5'
 							}`}>
 							<p
 								className={`${
 									checkoutForm === 'payment'
-										? 'border-stone-600'
-										: 'text-gray-500'
+										? 'text-silver-pink-300'
+										: ''
 								}`}>
 								Step 3
 							</p>
