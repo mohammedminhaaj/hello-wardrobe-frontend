@@ -4,7 +4,7 @@ import { Filter } from 'react-feather';
 import FilterSection from '../components/shop/FilterSection';
 import FilterSidebar from '../components/shop/FilterSidebar';
 import Breadcrumb from '../components/ui/Breadcrumb';
-import Card from '../components/ui/Card';
+import Card from '../components/shop/Card';
 const shopArray = [
 	{
 		id: Math.random(),

@@ -1,7 +1,7 @@
 import { ReactComponent as OrderPlaced } from '../assets/images/order-placed.svg';
 const OrderSummary = () => {
 	return (
-		<div className='grid grid-cols-1 md:grid-cols-2 p-5 gap-5'>
+		<div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
 			<OrderPlaced className='w-64 h-64 m-auto' />
 			<div className='p-5 space-y-3'>
 				<p className='text-h-gray-300'>Payment successful</p>
