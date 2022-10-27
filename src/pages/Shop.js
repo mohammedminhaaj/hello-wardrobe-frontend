@@ -71,35 +71,33 @@ const Shop = () => {
 
 	return (
 		<Fragment>
-			<div className='text-space-cadet-300 mx-auto py-20 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8'>
-				<h2 className='sr-only'>Shop</h2>
-				<Breadcrumb breadcrumbs={breadcrumbs} />
-				<div className='flex justify-between mt-5 mb-5'>
-					<h1 className='text-2xl font-bold'>Shop</h1>
-					<div className='flex gap-5'>
-						<p className='font-medium my-auto'>Sort</p>
-						<Filter
-							color={showFilter ? '#3b82f6' : 'black'}
-							onClick={filterClickHandler}
-							className='md:hidden my-auto cursor-pointer hover:stroke-blue-400'
-						/>
-						{showFilter &&
-							createPortal(
-								<FilterSidebar
-									cancelHandler={filterClickHandler}
-								/>,
-								document.getElementById('overlays')
-							)}
-					</div>
+			<h2 className='sr-only'>Shop</h2>
+			<Breadcrumb breadcrumbs={breadcrumbs} />
+			<div className='flex justify-between mt-5 mb-5'>
+				<h1 className='text-2xl font-bold'>Shop</h1>
+				<div className='flex gap-5'>
+					<p className='font-medium my-auto'>Sort</p>
+					<Filter
+						color={showFilter ? '#5f6487' : '#22223b'}
+						onClick={filterClickHandler}
+						className='md:hidden my-auto cursor-pointer hover:stroke-independence-300'
+					/>
+					{showFilter &&
+						createPortal(
+							<FilterSidebar
+								cancelHandler={filterClickHandler}
+							/>,
+							document.getElementById('overlays')
+						)}
 				</div>
-				<hr />
-				<div className='mt-5 grid grid-flow-col md:grid-cols-5 md:gap-10'>
-					<div className='col-span-1 hidden md:block lg:block xl:block font-normal'>
-						<FilterSection />
-					</div>
-					<div className='col-span-4 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8'>
-						<RenderShop />
-					</div>
+			</div>
+			<hr />
+			<div className='mt-5 grid grid-flow-col md:grid-cols-5 md:gap-10'>
+				<div className='col-span-1 hidden md:block lg:block xl:block font-normal'>
+					<FilterSection />
+				</div>
+				<div className='col-span-4 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8'>
+					<RenderShop />
 				</div>
 			</div>
 		</Fragment>

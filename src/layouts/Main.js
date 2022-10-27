@@ -8,7 +8,9 @@ const Main = () => {
 	return (
 		<Fragment>
 			<h2 className='sr-only'>Body section</h2>
-			<Shop />
+			<div className='main-container'>
+				<OrderSummary />
+			</div>
 		</Fragment>
 	);
 };

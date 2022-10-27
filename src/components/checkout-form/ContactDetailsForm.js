@@ -47,8 +47,8 @@ const ContactDetailsForm = (props) => {
 					{errors.mobileNumber.message}
 				</div>
 			)}
-			<br/>
-			<br/>
+			<br />
+			<br />
 			<label htmlFor='email' className='mt-2'>
 				Email (Optional)
 			</label>
@@ -66,9 +66,7 @@ const ContactDetailsForm = (props) => {
 				</div>
 			)}
 			<div className='mt-5 flex flex-row-reverse'>
-				<button
-					type='submit'
-					className='bg-independence-100 hover:bg-independence-200 active:ring-1 active:ring-independence-300 text-isabelline-100 px-3 py-1 rounded'>
+				<button type='submit' className='primary-button'>
 					Next
 				</button>
 			</div>

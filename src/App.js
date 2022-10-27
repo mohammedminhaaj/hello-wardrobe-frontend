@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { createPortal } from 'react-dom';
-import './App.css';
 import Footer from './layouts/Footer';
 import Main from './layouts/Main';
 import Header from './layouts/Header';

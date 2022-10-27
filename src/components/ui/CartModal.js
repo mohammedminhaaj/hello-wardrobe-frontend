@@ -1,4 +1,4 @@
-import { ArrowRight, X } from "react-feather";
+import { ArrowRight, X } from 'react-feather';
 
 const CartModal = () => {
 	return (
@@ -10,18 +10,16 @@ const CartModal = () => {
 							Shopping bag
 						</h3>
 						<button>
-                            <X/>
+							<X />
 						</button>
 					</div>
 					<div className='p-6 overflow-y-auto max-h-[65vh] text-center font-thin'>
 						Cart Data goes here
 					</div>
 					<div className='flex flex-row-reverse p-6 space-x-2 rounded'>
-						<button
-							type='button'
-							className='flex text-isabelline-100 bg-independence-100 hover:bg-independence-200 active:ring-2 focus:outline-none focus:ring-independence-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center'>
+						<button type='button' className='flex primary-button'>
 							Continue to payment
-                            <ArrowRight/>
+							<ArrowRight />
 						</button>
 					</div>
 				</div>

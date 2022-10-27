@@ -17,22 +17,30 @@ const FilterSection = () => {
 			<li>
 				<p>Category 3000</p>
 			</li>
-			<hr />
+			<li>
+				<hr />
+			</li>
 			<li className='flex justify-between'>
 				<p>Occasion</p>
 				<Plus size={16} className='my-auto' />
 			</li>
-			<hr />
+			<li>
+				<hr />
+			</li>
 			<li className='flex justify-between'>
 				<p>Color</p>
 				<Plus size={16} className='my-auto' />
 			</li>
-			<hr />
+			<li>
+				<hr />
+			</li>
 			<li className='flex justify-between'>
 				<p>Category</p>
 				<Plus size={16} className='my-auto' />
 			</li>
-			<hr />
+			<li>
+				<hr />
+			</li>
 			<li className='flex justify-between'>
 				<p>Size</p>
 				<Plus size={16} className='my-auto' />
