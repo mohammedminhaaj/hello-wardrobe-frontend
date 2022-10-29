@@ -25,58 +25,64 @@ const Overview = () => {
 		<Fragment>
 			<h2 className='sr-only'>Overview</h2>
 			<Breadcrumb breadcrumbs={breadcrumbs} />
-			<div className='md:hidden mt-5'>
-				<img
-					src={image}
-					alt='Model wearing plain white basic tee.'
-					className='h-full w-full object-cover object-center rounded-2xl'
-				/>
-				<div className='grid grid-cols-3 gap-3 py-3'>
+			<section className='md:hidden mt-5'>
+				<figure>
 					<img
-						onClick={imageClickHandler}
-						src='https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg'
+						src={image}
 						alt='Model wearing plain white basic tee.'
-						className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
+						className='h-full w-full object-cover object-center rounded-2xl'
 					/>
-					<img
-						onClick={imageClickHandler}
-						src='https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg'
-						alt='Two each of gray, white, and black shirts laying flat.'
-						className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
-					/>
-					<img
-						onClick={imageClickHandler}
-						src='https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg'
-						alt='Model wearing plain black basic tee.'
-						className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
-					/>
+				</figure>
+				<div className='grid grid-cols-3 gap-3 py-3'>
+					<figure>
+						<img
+							onClick={imageClickHandler}
+							src='https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg'
+							alt='Model wearing plain white basic tee.'
+							className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
+						/>
+						<img
+							onClick={imageClickHandler}
+							src='https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg'
+							alt='Two each of gray, white, and black shirts laying flat.'
+							className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
+						/>
+						<img
+							onClick={imageClickHandler}
+							src='https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg'
+							alt='Model wearing plain black basic tee.'
+							className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
+						/>
+					</figure>
 				</div>
-			</div>
+			</section>
 
 			<div className='hidden md:block lg:block xl:block mt-5 h-3/4'>
-				<div className='grid grid-cols-3 gap-6'>
-					<img
-						src='https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg'
-						alt='Two each of gray, white, and black shirts laying flat.'
-						className='h-full w-full object-cover object-center rounded-2xl hover:opacity-90 mt-10'
-					/>
-					<img
-						src='https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg'
-						alt='Model wearing plain white basic tee.'
-						className='h-full w-full object-cover object-center rounded-2xl hover:opacity-90'
-					/>
-					<img
-						src='https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg'
-						alt='Model wearing plain black basic tee.'
-						className='h-full w-full object-cover object-center rounded-2xl hover:opacity-90 mt-20'
-					/>
-				</div>
+				<section className='grid grid-cols-3 gap-6'>
+					<figure>
+						<img
+							src='https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg'
+							alt='Two each of gray, white, and black shirts laying flat.'
+							className='h-full w-full object-cover object-center rounded-2xl hover:opacity-90 mt-10'
+						/>
+						<img
+							src='https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg'
+							alt='Model wearing plain white basic tee.'
+							className='h-full w-full object-cover object-center rounded-2xl hover:opacity-90'
+						/>
+						<img
+							src='https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg'
+							alt='Model wearing plain black basic tee.'
+							className='h-full w-full object-cover object-center rounded-2xl hover:opacity-90 mt-20'
+						/>
+					</figure>
+				</section>
 			</div>
 			<div className='mt-5 md:mt-20'>
-				<h2 className='font-bold text-2xl'>Basic Tee 6-Pack</h2>
+				<h1 className='font-bold text-2xl'>Basic Tee 6-Pack</h1>
 			</div>
 			<div className='flex flex-col md:flex-row'>
-				<div className='md:order-3 basis-1/3'>
+				<section className='md:order-3 basis-1/3'>
 					<div className='flex'>
 						<p className='text-3xl tracking-tight mr-3'>₹192</p>
 						<p className='line-through font-thin my-auto'>₹200</p>
@@ -99,7 +105,7 @@ const Overview = () => {
 							Size guide
 						</p>
 					</div>
-					<div className='mt-3 rounded-xl bg-silver-pink-100 p-2 md:px-6 md:py-2'>
+					<section className='mt-3 rounded-xl bg-silver-pink-100 p-2 md:px-6 md:py-2'>
 						<ul className='grid grid-cols-4 gap-4 text-center'>
 							<li>
 								<input
@@ -214,13 +220,13 @@ const Overview = () => {
 								</label>
 							</li>
 						</ul>
-					</div>
+					</section>
 					<div className='mt-5'>
 						<h2 className='text-h-gray-100 hover:text-h-gray-300'>
 							Select Date
 						</h2>
 					</div>
-					<div className='mt-5 flex flex-col md:flex-row gap-2'>
+					<section className='mt-5 flex flex-col md:flex-row gap-2'>
 						<button className='flex justify-center basis-1/2 secondary-button'>
 							<Heart className='my-auto mr-1' size={16} />
 							Add to Wishlist
@@ -229,10 +235,10 @@ const Overview = () => {
 							<ShoppingBag className='my-auto mr-1' size={16} />
 							Add to Bag
 						</button>
-					</div>
-				</div>
+					</section>
+				</section>
 				<hr className='mt-5 md:hidden  fill-isabelline-300' />
-				<div className='mt-5 md:mt-0 md:order-1 basis-2/3 md:mr-5'>
+				<section className='mt-5 md:mt-0 md:order-1 basis-2/3 md:mr-5'>
 					<p className='font-thin'>
 						The Basic Tee 6-Pack allows you to fully express your
 						vibrant personality with three grayscale options.
@@ -268,7 +274,7 @@ const Overview = () => {
 							limited release.
 						</p>
 					</div>
-				</div>
+				</section>
 				<span className='hidden md:order-2 md:mr-5 md:block lg:block xl:block h-auto border-r border-isabelline-300'></span>
 			</div>
 		</Fragment>

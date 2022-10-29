@@ -2,7 +2,7 @@ import OrderHistoryItem from './OrderHistoryItem';
 
 const OrderHistoryCard = () => {
 	return (
-		<div className='border rounded p-5'>
+		<section className='border rounded p-5'>
 			<div className='flex justify-between'>
 				<div className='flex gap-5'>
 					<div className='hidden md:block lg:block xl:block'>
@@ -24,7 +24,7 @@ const OrderHistoryCard = () => {
 			<OrderHistoryItem />
 			<hr className='my-5' />
 			<OrderHistoryItem />
-		</div>
+		</section>
 	);
 };
 

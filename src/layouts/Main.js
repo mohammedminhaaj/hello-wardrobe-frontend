@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import CheckoutForm from '../pages/CheckoutForm';
 import OrderHistory from '../pages/OrderHistory';
 import OrderSummary from '../pages/OrderSummary';
@@ -7,12 +6,12 @@ import Shop from '../pages/Shop';
 
 const Main = () => {
 	return (
-		<Fragment>
+		<main>
 			<h2 className='sr-only'>Body section</h2>
 			<div className='main-container'>
-				<OrderHistory />
+				<Shop />
 			</div>
-		</Fragment>
+		</main>
 	);
 };
 

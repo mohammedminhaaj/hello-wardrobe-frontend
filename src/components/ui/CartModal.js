@@ -2,7 +2,7 @@ import { ArrowRight, X } from 'react-feather';
 
 const CartModal = () => {
 	return (
-		<div className='fixed top-0 left-0 right-0 bottom-0 z-30 w-full h-auto backdrop-blur-sm'>
+		<section className='fixed top-0 left-0 right-0 bottom-0 z-30 w-full h-auto backdrop-blur-sm'>
 			<div className='p-4 w-full md:w-2/3 mx-auto h-auto'>
 				<div className='bg-isabelline-100 rounded-lg shadow-xl'>
 					<div className='flex justify-between items-center p-5 rounded-t'>
@@ -24,7 +24,7 @@ const CartModal = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 };
 

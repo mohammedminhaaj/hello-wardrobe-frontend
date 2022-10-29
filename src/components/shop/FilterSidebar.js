@@ -3,7 +3,7 @@ const FilterSidebar = (props) => {
 	return (
 		<div className='fixed top-0 left-0 right-0 bottom-0 z-30 w-full h-auto backdrop-blur-sm'>
 			<aside className='fixed right-0 w-64 h-full p-5 bg-isabelline-100 rounded'>
-				<h1 className='font-bold text-xl'>Filters</h1>
+				<h2 className='font-bold text-xl'>Filters</h2>
 				<hr className='my-5 border-t border-t-space-cadet-300' />
 				<div className='overflow-y-auto mb-5'>
 					<FilterSection />

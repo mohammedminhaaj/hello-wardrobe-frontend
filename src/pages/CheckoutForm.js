@@ -35,7 +35,7 @@ const CheckoutForm = () => {
 	};
 
 	return (
-		<div className='grid grid-cols-1 md:grid-cols-3 gap-y-5 md:gap-x-6'>
+		<section className='grid grid-cols-1 md:grid-cols-3 gap-y-5 md:gap-x-6'>
 			<div className='md:order-2'>
 				<button
 					onClick={summaryClickHandler}
@@ -145,11 +145,11 @@ const CheckoutForm = () => {
 						</p>
 					</div>
 				</div>
-				<div className='px-2 py-4 md:pr-5'>
+				<section className='px-2 py-4 md:pr-5'>
 					{RenderCheckoutForm(checkoutForm)}
-				</div>
+				</section>
 			</div>
-		</div>
+		</section>
 	);
 };
 
