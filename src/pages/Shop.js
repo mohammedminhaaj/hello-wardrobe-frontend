@@ -1,42 +1,13 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Filter } from 'react-feather';
 import FilterSection from '../components/shop/FilterSection';
 import FilterSidebar from '../components/shop/FilterSidebar';
 import Breadcrumb from '../components/ui/Breadcrumb';
-import Card from '../components/shop/Card';
-const shopArray = [
-	{
-		id: Math.random(),
-		title: 'Nomad Tumblr',
-		linkTo: '#',
-		price: 34.99,
-		img_src:
-			'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
-		img_alt:
-			'Olive drab green insulated bottle with flared screw lid and flat top.',
-	},
-	{
-		id: Math.random(),
-		title: 'Focus Paper Refill',
-		linkTo: '#',
-		price: 88.99,
-		img_src:
-			'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
-		img_alt:
-			'Person using a pen to cross a task off a productivity paper card.',
-	},
-	{
-		id: Math.random(),
-		title: 'Machined Mechanical Pencil',
-		linkTo: '#',
-		price: 34.99,
-		img_src:
-			'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-		img_alt:
-			'Hand holding black machined steel mechanical pencil with brass tip and top.',
-	},
-];
+import LoadingScreen from '../components/ui/LoadingScreen';
+import Card from '../components/shop/Card'
+
+import axios from 'axios';
 
 const breadcrumbs = [
 	{
@@ -45,17 +16,17 @@ const breadcrumbs = [
 	},
 ];
 
-const RenderShop = () => {
-	return shopArray.map((item) => {
+const RenderCards = (props) => {
+	return props.shopArray.map((item) => {
 		return (
 			<Card
 				key={item.id}
-				title={item.title}
-				linkTo={item.linkTo}
+				title={item.name}
+				linkTo='#'
 				price={item.price}
 				imageMeta={{
-					src: item.img_src,
-					alt: item.img_alt,
+					src: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
+					alt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
 				}}
 			/>
 		);
@@ -64,6 +35,20 @@ const RenderShop = () => {
 
 const Shop = () => {
 	const [showFilter, setShowFilter] = useState(false);
+	const [renderShop, setRenderShop] = useState(
+		<div className='col-span-3'>
+			<LoadingScreen />
+		</div>
+	);
+
+	useEffect(() => {
+		axios
+			.get('/api/product/all-products/')
+			.then((response) =>
+				setRenderShop(<RenderCards shopArray={response.data} />)
+			)
+			.catch((error) => setRenderShop(<h3>{error}</h3>));
+	}, []);
 
 	const filterClickHandler = () => {
 		setShowFilter((previous) => !previous);
@@ -97,7 +82,7 @@ const Shop = () => {
 					<FilterSection />
 				</section>
 				<section className='col-span-4 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8'>
-					<RenderShop />
+					{renderShop}
 				</section>
 			</div>
 		</Fragment>

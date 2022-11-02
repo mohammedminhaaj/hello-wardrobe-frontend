@@ -41,12 +41,16 @@ const Overview = () => {
 							alt='Model wearing plain white basic tee.'
 							className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
 						/>
+					</figure>
+					<figure>
 						<img
 							onClick={imageClickHandler}
 							src='https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg'
 							alt='Two each of gray, white, and black shirts laying flat.'
 							className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
 						/>
+					</figure>
+					<figure>
 						<img
 							onClick={imageClickHandler}
 							src='https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg'
@@ -65,11 +69,15 @@ const Overview = () => {
 							alt='Two each of gray, white, and black shirts laying flat.'
 							className='h-full w-full object-cover object-center rounded-2xl hover:opacity-90 mt-10'
 						/>
+					</figure>
+					<figure>
 						<img
 							src='https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg'
 							alt='Model wearing plain white basic tee.'
 							className='h-full w-full object-cover object-center rounded-2xl hover:opacity-90'
 						/>
+					</figure>
+					<figure>
 						<img
 							src='https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg'
 							alt='Model wearing plain black basic tee.'
@@ -238,43 +246,43 @@ const Overview = () => {
 					</section>
 				</section>
 				<hr className='mt-5 md:hidden  fill-isabelline-300' />
-				<section className='mt-5 md:mt-0 md:order-1 basis-2/3 md:mr-5'>
-					<p className='font-thin'>
-						The Basic Tee 6-Pack allows you to fully express your
-						vibrant personality with three grayscale options.
-						Feeling adventurous? Put on a heather gray tee. Want to
-						be a trendsetter? Try our exclusive colorway: "Black".
-						Need to add an extra pop of color to your outfit? Our
-						white tee has you covered.
-					</p>
-					<div className='mt-5'>
-						<h3>Highlights</h3>
-						<ul className='list-disc'>
-							<li className='font-thin ml-5'>
-								Hand cut and sewn locally
-							</li>
-							<li className='font-thin ml-5'>
-								Dyed with our proprietary colors
-							</li>
-							<li className='font-thin ml-5'>
-								Pre-washed & pre-shrunk
-							</li>
-							<li className='font-thin ml-5'>
-								Ultra-soft 100% cotton
-							</li>
-						</ul>
-					</div>
-					<div className='mt-5'>
-						<h3>Details</h3>
+				<article className='mt-5 md:mt-0 md:order-1 basis-2/3 md:mr-5'>
 						<p className='font-thin'>
-							The 6-Pack includes two black, two white, and two
-							heather gray Basic Tees. Sign up for our
-							subscription service and be the first to get new,
-							exciting colors, like our upcoming "Charcoal Gray"
-							limited release.
+							The Basic Tee 6-Pack allows you to fully express
+							your vibrant personality with three grayscale
+							options. Feeling adventurous? Put on a heather gray
+							tee. Want to be a trendsetter? Try our exclusive
+							colorway: "Black". Need to add an extra pop of color
+							to your outfit? Our white tee has you covered.
 						</p>
-					</div>
-				</section>
+						<div className='mt-5'>
+							<h3>Highlights</h3>
+							<ul className='list-disc'>
+								<li className='font-thin ml-5'>
+									Hand cut and sewn locally
+								</li>
+								<li className='font-thin ml-5'>
+									Dyed with our proprietary colors
+								</li>
+								<li className='font-thin ml-5'>
+									Pre-washed & pre-shrunk
+								</li>
+								<li className='font-thin ml-5'>
+									Ultra-soft 100% cotton
+								</li>
+							</ul>
+						</div>
+						<div className='mt-5'>
+							<h3>Details</h3>
+							<p className='font-thin'>
+								The 6-Pack includes two black, two white, and
+								two heather gray Basic Tees. Sign up for our
+								subscription service and be the first to get
+								new, exciting colors, like our upcoming
+								"Charcoal Gray" limited release.
+							</p>
+						</div>
+				</article>
 				<span className='hidden md:order-2 md:mr-5 md:block lg:block xl:block h-auto border-r border-isabelline-300'></span>
 			</div>
 		</Fragment>

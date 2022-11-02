@@ -1,7 +1,8 @@
-import CheckoutForm from '../pages/CheckoutForm';
-import OrderHistory from '../pages/OrderHistory';
-import OrderSummary from '../pages/OrderSummary';
-import Overview from '../pages/Overview';
+// import CheckoutForm from '../pages/CheckoutForm';
+// import OrderHistory from '../pages/OrderHistory';
+// import OrderSummary from '../pages/OrderSummary';
+// import Overview from '../pages/Overview';
+import LoadingScreen from '../components/ui/LoadingScreen';
 import Shop from '../pages/Shop';
 
 const Main = () => {
