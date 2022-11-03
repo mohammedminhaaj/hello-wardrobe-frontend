@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
 const Card = (props) => {
 	return (
-		<a href={props.linkTo} className='group'>
+		<Link to={props.linkTo} className='group'>
 			<div className='aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-isabelline-100 xl:aspect-w-7 xl:aspect-h-8'>
 				<figure>
 					<img
@@ -14,7 +16,7 @@ const Card = (props) => {
 			<p className='mt-1 text-lg font-medium text-independence-300'>
 				₹{props.price}
 			</p>
-		</a>
+		</Link>
 	);
 };
 

@@ -1,16 +1,17 @@
 import { ChevronRight, Home } from 'react-feather';
+import { Link } from 'react-router-dom';
 
 const Breadcrumb = (props) => {
 	return (
 		<nav className='flex'>
 			<ol className='inline-flex items-center space-x-1 md:space-x-3'>
 				<li className='inline-flex items-center'>
-					<a
-						href='/'
+					<Link
+						to='/'
 						className='inline-flex items-center text-sm font-medium text-gray-400 hover:text-space-cadet-300'>
 						<Home size={16} className='mr-2' />
 						Home
-					</a>
+					</Link>
 				</li>
 				{props.breadcrumbs &&
 					props.breadcrumbs.map((item, index) => {
@@ -26,11 +27,11 @@ const Breadcrumb = (props) => {
 											{item.name}
 										</p>
 									) : (
-										<a
-											href={item.linkTo}
+										<Link
+											to={item.linkTo}
 											className='ml-1 text-sm font-medium text-gray-400 hover:text-space-cadet-300 md:ml-2'>
 											{item.name}
-										</a>
+										</Link>
 									)}
 								</div>
 							</li>

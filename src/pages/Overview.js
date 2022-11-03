@@ -6,7 +6,7 @@ const breadcrumbs = [
 	{
 		id: Math.random(),
 		name: 'Shop',
-		linkTo: '#',
+		linkTo: '/shop',
 	},
 	{
 		id: Math.random(),

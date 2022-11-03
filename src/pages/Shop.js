@@ -4,10 +4,11 @@ import { Filter } from 'react-feather';
 import FilterSection from '../components/shop/FilterSection';
 import FilterSidebar from '../components/shop/FilterSidebar';
 import Breadcrumb from '../components/ui/Breadcrumb';
-import LoadingScreen from '../components/ui/LoadingScreen';
-import Card from '../components/shop/Card'
+import Loading from '../components/ui/Loading';
+import Card from '../components/shop/Card';
 
 import axios from 'axios';
+import ServerError from '../components/ui/ServerError';
 
 const breadcrumbs = [
 	{
@@ -37,7 +38,7 @@ const Shop = () => {
 	const [showFilter, setShowFilter] = useState(false);
 	const [renderShop, setRenderShop] = useState(
 		<div className='col-span-3'>
-			<LoadingScreen />
+			<Loading />
 		</div>
 	);
 
@@ -47,7 +48,13 @@ const Shop = () => {
 			.then((response) =>
 				setRenderShop(<RenderCards shopArray={response.data} />)
 			)
-			.catch((error) => setRenderShop(<h3>{error}</h3>));
+			.catch((error) =>
+				setRenderShop(
+					<div className='col-span-3'>
+						<ServerError error={error.message} />
+					</div>
+				)
+			);
 	}, []);
 
 	const filterClickHandler = () => {
