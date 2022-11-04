@@ -10,15 +10,13 @@ const FilterSidebar = (props) => {
 				</div>
 				<div className='fixed bottom-0 w-[216px] mb-5'>
 					<div className='flex flex-row-reverse gap-3'>
-						<button
-							className='primary-button'
-							style={{ color: '#fff' }}>
+						<button type='button' className='primary-button'>
 							Filter
 						</button>
 						<button
+							type='button'
 							onClick={props.cancelHandler}
-							className='secondary-button'
-							style={{ color: '#fff' }}>
+							className='secondary-button'>
 							Cancel
 						</button>
 					</div>

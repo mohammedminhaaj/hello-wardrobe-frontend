@@ -235,11 +235,15 @@ const Overview = () => {
 						</h2>
 					</div>
 					<section className='mt-5 flex flex-col md:flex-row gap-2'>
-						<button className='flex justify-center basis-1/2 secondary-button'>
+						<button
+							type='button'
+							className='flex justify-center basis-1/2 secondary-button'>
 							<Heart className='my-auto mr-1' size={16} />
 							Add to Wishlist
 						</button>
-						<button className='flex justify-center basis-1/2 primary-button'>
+						<button
+							type='button'
+							className='flex justify-center basis-1/2 primary-button'>
 							<ShoppingBag className='my-auto mr-1' size={16} />
 							Add to Bag
 						</button>
@@ -247,41 +251,41 @@ const Overview = () => {
 				</section>
 				<hr className='mt-5 md:hidden  fill-isabelline-300' />
 				<article className='mt-5 md:mt-0 md:order-1 basis-2/3 md:mr-5'>
+					<p className='font-thin'>
+						The Basic Tee 6-Pack allows you to fully express your
+						vibrant personality with three grayscale options.
+						Feeling adventurous? Put on a heather gray tee. Want to
+						be a trendsetter? Try our exclusive colorway: "Black".
+						Need to add an extra pop of color to your outfit? Our
+						white tee has you covered.
+					</p>
+					<div className='mt-5'>
+						<h3>Highlights</h3>
+						<ul className='list-disc'>
+							<li className='font-thin ml-5'>
+								Hand cut and sewn locally
+							</li>
+							<li className='font-thin ml-5'>
+								Dyed with our proprietary colors
+							</li>
+							<li className='font-thin ml-5'>
+								Pre-washed & pre-shrunk
+							</li>
+							<li className='font-thin ml-5'>
+								Ultra-soft 100% cotton
+							</li>
+						</ul>
+					</div>
+					<div className='mt-5'>
+						<h3>Details</h3>
 						<p className='font-thin'>
-							The Basic Tee 6-Pack allows you to fully express
-							your vibrant personality with three grayscale
-							options. Feeling adventurous? Put on a heather gray
-							tee. Want to be a trendsetter? Try our exclusive
-							colorway: "Black". Need to add an extra pop of color
-							to your outfit? Our white tee has you covered.
+							The 6-Pack includes two black, two white, and two
+							heather gray Basic Tees. Sign up for our
+							subscription service and be the first to get new,
+							exciting colors, like our upcoming "Charcoal Gray"
+							limited release.
 						</p>
-						<div className='mt-5'>
-							<h3>Highlights</h3>
-							<ul className='list-disc'>
-								<li className='font-thin ml-5'>
-									Hand cut and sewn locally
-								</li>
-								<li className='font-thin ml-5'>
-									Dyed with our proprietary colors
-								</li>
-								<li className='font-thin ml-5'>
-									Pre-washed & pre-shrunk
-								</li>
-								<li className='font-thin ml-5'>
-									Ultra-soft 100% cotton
-								</li>
-							</ul>
-						</div>
-						<div className='mt-5'>
-							<h3>Details</h3>
-							<p className='font-thin'>
-								The 6-Pack includes two black, two white, and
-								two heather gray Basic Tees. Sign up for our
-								subscription service and be the first to get
-								new, exciting colors, like our upcoming
-								"Charcoal Gray" limited release.
-							</p>
-						</div>
+					</div>
 				</article>
 				<span className='hidden md:order-2 md:mr-5 md:block lg:block xl:block h-auto border-r border-isabelline-300'></span>
 			</div>

@@ -38,6 +38,7 @@ const CheckoutForm = () => {
 		<section className='grid grid-cols-1 md:grid-cols-3 gap-y-5 md:gap-x-6'>
 			<div className='md:order-2'>
 				<button
+					type='button'
 					onClick={summaryClickHandler}
 					className='md:hidden flex justify-between text-isabelline-100 rounded w-full px-2 py-3 bg-silver-pink-100 hover:bg-silver-pink-200 active:ring-1 active:ring-silver-pink-300'>
 					<p>Order Summary</p>

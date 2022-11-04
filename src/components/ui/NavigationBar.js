@@ -1,11 +1,19 @@
 import { Fragment, useState } from 'react';
 import { User, ShoppingBag, Search, Menu } from 'react-feather';
+import { useDispatch } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
+import { cartActions } from '../../store/cart-slice';
 
 const NavigationBar = () => {
 	const [showMenu, setShowMenu] = useState(false);
-	const clickHandler = () => {
+	const dispatch = useDispatch();
+
+	const menuClickHandler = () => {
 		setShowMenu((previous) => !previous);
+	};
+
+	const shoppingbagClickHandler = () => {
+		dispatch(cartActions.toggleCart());
 	};
 
 	return (
@@ -22,10 +30,13 @@ const NavigationBar = () => {
 
 						<User className='cursor-pointer hover:stroke-space-cadet-300' />
 
-						<ShoppingBag className='ml-5 cursor-pointer hover:stroke-space-cadet-300' />
+						<ShoppingBag
+							onClick={shoppingbagClickHandler}
+							className='ml-5 cursor-pointer hover:stroke-space-cadet-300'
+						/>
 
 						<button
-							onClick={clickHandler}
+							onClick={menuClickHandler}
 							type='button'
 							className='group inline-flex items-center p-2 ml-5 text-sm rounded-lg md:hidden hover:bg-isabelline focus:outline-none focus:ring-1 focus:ring-'>
 							<h2 className='sr-only'>Open main menu</h2>
@@ -40,7 +51,7 @@ const NavigationBar = () => {
 							<li>
 								<NavLink
 									to='/shop'
-									onClick={clickHandler}
+									onClick={menuClickHandler}
 									className={(navData) => {
 										return navData.isActive
 											? 'block py-2 pr-4 pl-3 md:p-0 text-space-cadet-300'
@@ -52,7 +63,7 @@ const NavigationBar = () => {
 							<li>
 								<NavLink
 									to='/about-us'
-									onClick={clickHandler}
+									onClick={menuClickHandler}
 									className={(navData) => {
 										return navData.isActive
 											? 'block py-2 pr-4 pl-3 md:p-0 text-space-cadet-300'
@@ -64,7 +75,7 @@ const NavigationBar = () => {
 							<li>
 								<NavLink
 									to='/contact'
-									onClick={clickHandler}
+									onClick={menuClickHandler}
 									className={(navData) => {
 										return navData.isActive
 											? 'block py-2 pr-4 pl-3 md:p-0 text-space-cadet-300'

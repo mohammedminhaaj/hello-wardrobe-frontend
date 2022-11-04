@@ -18,7 +18,7 @@ const Loading = () => {
 			<div className='text-center'>
 				<LoadingImage className='w-64 h-64 m-auto' />
 			</div>
-			<div className='flex text-space-cadet-300 font-semibold justify-center align-middle gap-2'>
+			<div className='flex text-space-cadet-300 font-medium justify-center align-middle gap-2'>
 				<h2>
 					{
 						loadingTextList[
