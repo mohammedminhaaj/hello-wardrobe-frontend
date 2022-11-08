@@ -61,7 +61,7 @@ const Overview = () => {
 				</div>
 			</section>
 
-			<div className='hidden md:block lg:block xl:block mt-5 h-3/4'>
+			<div className='hidden md:block mt-5 h-3/4'>
 				<section className='grid grid-cols-3 gap-6'>
 					<figure>
 						<img
@@ -237,13 +237,13 @@ const Overview = () => {
 					<section className='mt-5 flex flex-col md:flex-row gap-2'>
 						<button
 							type='button'
-							className='flex justify-center basis-1/2 secondary-button'>
+							className='basis-1/2 secondary-button'>
 							<Heart className='my-auto mr-1' size={16} />
 							Add to Wishlist
 						</button>
 						<button
 							type='button'
-							className='flex justify-center basis-1/2 primary-button'>
+							className='basis-1/2 primary-button'>
 							<ShoppingBag className='my-auto mr-1' size={16} />
 							Add to Bag
 						</button>
@@ -287,7 +287,7 @@ const Overview = () => {
 						</p>
 					</div>
 				</article>
-				<span className='hidden md:order-2 md:mr-5 md:block lg:block xl:block h-auto border-r border-isabelline-300'></span>
+				<span className='hidden md:order-2 md:mr-5 md:block h-auto border-r border-isabelline-300'></span>
 			</div>
 		</Fragment>
 	);

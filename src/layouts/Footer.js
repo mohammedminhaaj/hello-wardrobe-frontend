@@ -136,7 +136,7 @@ const Footer = () => {
 					/>
 					<button
 						type='button'
-						className='bg-independence-100 text-isabelline-100 rounded px-3 py-1 hover:bg-independence-200 cursor-pointer active:ring-1 active:ring-independence-300'>
+						className='primary-button'>
 						Sign up
 					</button>
 				</div>

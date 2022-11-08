@@ -5,7 +5,7 @@ const OrderHistoryCard = () => {
 		<section className='border rounded p-5'>
 			<div className='flex justify-between'>
 				<div className='flex gap-5'>
-					<div className='hidden md:block lg:block xl:block'>
+					<div className='hidden md:block'>
 						<p className='font-medium'>Order Number</p>
 						<p className='font-thin'>267135678321</p>
 					</div>

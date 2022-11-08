@@ -30,7 +30,7 @@ const CartModal = () => {
 						<Link
 							onClick={closeCartHandler}
 							to='/checkout'
-							className='flex primary-button'>
+							className='primary-button'>
 							Continue to payment
 							<ArrowRight />
 						</Link>

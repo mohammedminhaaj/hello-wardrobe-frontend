@@ -1,3 +1,4 @@
+import { CheckCircle, XCircle } from 'react-feather';
 import FilterSection from './FilterSection';
 const FilterSidebar = (props) => {
 	return (
@@ -13,14 +14,21 @@ const FilterSidebar = (props) => {
 				</div>
 				<div className='fixed bottom-0 w-[216px] mb-5'>
 					<div className='flex flex-row-reverse gap-3'>
-						<button type='button' className='primary-button'>
-							Filter
-						</button>
 						<button
 							type='button'
 							onClick={props.cancelHandler}
+							className='primary-button'>
+							<CheckCircle size={16} className='my-auto' />
+							Done
+						</button>
+						<button
+							type='button'
+							onClick={() => {
+								props.setActiveFilters({ type: 'clear' });
+							}}
 							className='secondary-button'>
-							Cancel
+							<XCircle size={16} className='my-auto' />
+							Clear
 						</button>
 					</div>
 				</div>

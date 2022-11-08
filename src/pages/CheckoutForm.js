@@ -51,7 +51,7 @@ const CheckoutForm = () => {
 				<div
 					className={` ${
 						showSummary ? '' : 'hidden'
-					} md:block lg:block xl:block`}>
+					} md:block`}>
 					<CartSummary />
 				</div>
 			</div>
@@ -89,7 +89,7 @@ const CheckoutForm = () => {
 								checkoutForm === 'contact_details'
 									? ''
 									: 'hidden'
-							} md:block lg:block xl:block font-thin`}>
+							} md:block font-thin`}>
 							Contact Information
 						</p>
 					</div>
@@ -120,7 +120,7 @@ const CheckoutForm = () => {
 								checkoutForm === 'delivery_location'
 									? ''
 									: 'hidden'
-							} md:block lg:block xl:block font-thin`}>
+							} md:block font-thin`}>
 							Delivery Location
 						</p>
 					</div>
@@ -141,7 +141,7 @@ const CheckoutForm = () => {
 						<p
 							className={`${
 								checkoutForm === 'payment' ? '' : 'hidden'
-							} md:block lg:block xl:block font-thin`}>
+							} md:block font-thin`}>
 							Payment
 						</p>
 					</div>

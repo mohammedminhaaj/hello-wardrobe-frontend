@@ -1,4 +1,20 @@
+import { useRef } from 'react';
+
 const FilterItem = (props) => {
+	const filterCheckbox = useRef();
+
+	if (filterCheckbox.current) {
+		if (
+			props.activeFilters.find(
+				(item) =>
+					item[0] === props.filterItem.category &&
+					item[1] === props.filterItem.name
+			)
+		)
+			filterCheckbox.current.checked = true;
+		else filterCheckbox.current.checked = false;
+	}
+
 	const changeHandler = (event) => {
 		const queryObj = [props.filterItem.category, props.filterItem.name];
 		if (event.target.checked) {
@@ -15,6 +31,7 @@ const FilterItem = (props) => {
 				id={`${props.filterItem.name}_${props.filterItem.id}`}
 				type='checkbox'
 				className='accent-h-gray-100'
+				ref={filterCheckbox}
 			/>
 			<label
 				htmlFor={`${props.filterItem.name}_${props.filterItem.id}`}

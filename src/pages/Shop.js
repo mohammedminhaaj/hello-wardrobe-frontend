@@ -9,7 +9,8 @@ import Card from '../components/shop/Card';
 
 import axios from 'axios';
 import ServerError from '../components/ui/ServerError';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import NoData from '../components/ui/NoData';
 
 const breadcrumbs = [
 	{
@@ -45,6 +46,8 @@ const filterReducer = (state, action) => {
 					value[0] !== action.payload[0] ||
 					value[1] !== action.payload[1]
 			);
+		case 'clear':
+			return [];
 		default:
 			throw new Error('No reducer function defined for this action!');
 	}
@@ -59,28 +62,39 @@ const Shop = () => {
 	);
 
 	const [searchParams, setSearchParams] = useSearchParams();
-
+	const location = useLocation();
 	const [activeFilters, setActiveFilters] = useReducer(filterReducer, [
 		...searchParams,
 	]);
 
 	useEffect(() => {
 		setSearchParams(activeFilters);
-		if (!activeFilters.length) {
-			axios
-				.get('/api/product/all-products/')
-				.then((response) =>
-					setRenderShop(<RenderCards shopArray={response.data} />)
-				)
-				.catch((error) =>
+	}, [activeFilters, setSearchParams]);
+
+	useEffect(() => {
+		axios
+			.get(
+				`/api/product/all-products/filter${
+					location.search.length ? location.search : ''
+				}`
+			)
+			.then((response) => {
+				if (!response.data.length)
 					setRenderShop(
 						<div className='col-span-3'>
-							<ServerError error={error.message} />
+							<NoData />
 						</div>
-					)
-				);
-		}
-	}, [activeFilters, setSearchParams]);
+					);
+				else setRenderShop(<RenderCards shopArray={response.data} />);
+			})
+			.catch((error) =>
+				setRenderShop(
+					<div className='col-span-3'>
+						<ServerError error={error.message} />
+					</div>
+				)
+			);
+	}, [searchParams, location.search]);
 
 	const filterClickHandler = () => {
 		setShowFilter((previous) => !previous);
@@ -112,7 +126,7 @@ const Shop = () => {
 			</div>
 			<hr />
 			<div className='mt-5 grid grid-flow-col md:grid-cols-5 md:gap-10'>
-				<section className='col-span-1 hidden md:block lg:block xl:block font-normal'>
+				<section className='col-span-1 hidden md:block font-normal'>
 					<FilterSection
 						activeFilters={activeFilters}
 						setActiveFilters={setActiveFilters}

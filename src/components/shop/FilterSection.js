@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import AvailableFilters from './AvailableFilters';
 import FilterComponent from './FilterComponent';
+import { XCircle } from 'react-feather';
 
 const FilterSection = (props) => {
 	const [filterData, setFilterData] = useState({
@@ -22,6 +23,10 @@ const FilterSection = (props) => {
 				})
 			);
 	}, []);
+
+	const clearClickHandler = () => {
+		props.setActiveFilters({ type: 'clear' });
+	};
 
 	return (
 		<ul className='space-y-3'>
@@ -62,6 +67,15 @@ const FilterSection = (props) => {
 						setActiveFilters={props.setActiveFilters}
 						availableFilters={filterData.filter_details}
 					/>
+					<li className='hidden md:block'>
+						<button
+							onClick={clearClickHandler}
+							type='button'
+							className='primary-button w-full'>
+							<XCircle size={16} className='my-auto' />
+							Clear Filters
+						</button>
+					</li>
 				</Fragment>
 			)}
 		</ul>
