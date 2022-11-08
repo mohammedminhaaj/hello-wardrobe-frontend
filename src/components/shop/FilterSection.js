@@ -1,5 +1,28 @@
-import { Plus } from 'react-feather';
-const FilterSection = () => {
+import { Fragment, useEffect, useState } from 'react';
+import axios from 'axios';
+import AvailableFilters from './AvailableFilters';
+import FilterComponent from './FilterComponent';
+
+const FilterSection = (props) => {
+	const [filterData, setFilterData] = useState({
+		filter_details: [],
+		size_details: [],
+		message: 'Loading, please wait...',
+	});
+
+	useEffect(() => {
+		axios
+			.get('/api/product/filter-details/')
+			.then((response) => setFilterData(response.data))
+			.catch(() =>
+				setFilterData({
+					filter_details: [],
+					size_details: [],
+					message: 'Failed to load filter details',
+				})
+			);
+	}, []);
+
 	return (
 		<ul className='space-y-3'>
 			<li>
@@ -20,31 +43,27 @@ const FilterSection = () => {
 			<li>
 				<hr />
 			</li>
-			<li className='flex justify-between'>
-				<p>Occasion</p>
-				<Plus size={16} className='my-auto' />
-			</li>
-			<li>
-				<hr />
-			</li>
-			<li className='flex justify-between'>
-				<p>Color</p>
-				<Plus size={16} className='my-auto' />
-			</li>
-			<li>
-				<hr />
-			</li>
-			<li className='flex justify-between'>
-				<p>Category</p>
-				<Plus size={16} className='my-auto' />
-			</li>
-			<li>
-				<hr />
-			</li>
-			<li className='flex justify-between'>
-				<p>Size</p>
-				<Plus size={16} className='my-auto' />
-			</li>
+			{!filterData.filter_details.length ||
+			!filterData.size_details.length ? (
+				<p>{filterData.message}</p>
+			) : (
+				<Fragment>
+					<FilterComponent
+						activeFilters={props.activeFilters}
+						setActiveFilters={props.setActiveFilters}
+						currentLabel='size'
+						filterData={filterData.size_details}
+					/>
+					<li>
+						<hr />
+					</li>
+					<AvailableFilters
+						activeFilters={props.activeFilters}
+						setActiveFilters={props.setActiveFilters}
+						availableFilters={filterData.filter_details}
+					/>
+				</Fragment>
+			)}
 		</ul>
 	);
 };

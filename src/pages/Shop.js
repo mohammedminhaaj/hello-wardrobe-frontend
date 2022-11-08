@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useReducer, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Filter } from 'react-feather';
 import FilterSection from '../components/shop/FilterSection';
@@ -9,6 +9,7 @@ import Card from '../components/shop/Card';
 
 import axios from 'axios';
 import ServerError from '../components/ui/ServerError';
+import { useSearchParams } from 'react-router-dom';
 
 const breadcrumbs = [
 	{
@@ -34,6 +35,21 @@ const RenderCards = (props) => {
 	});
 };
 
+const filterReducer = (state, action) => {
+	switch (action.type) {
+		case 'add':
+			return [...state, action.payload];
+		case 'remove':
+			return state.filter(
+				(value) =>
+					value[0] !== action.payload[0] ||
+					value[1] !== action.payload[1]
+			);
+		default:
+			throw new Error('No reducer function defined for this action!');
+	}
+};
+
 const Shop = () => {
 	const [showFilter, setShowFilter] = useState(false);
 	const [renderShop, setRenderShop] = useState(
@@ -42,20 +58,29 @@ const Shop = () => {
 		</div>
 	);
 
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const [activeFilters, setActiveFilters] = useReducer(filterReducer, [
+		...searchParams,
+	]);
+
 	useEffect(() => {
-		axios
-			.get('/api/product/all-products/')
-			.then((response) =>
-				setRenderShop(<RenderCards shopArray={response.data} />)
-			)
-			.catch((error) =>
-				setRenderShop(
-					<div className='col-span-3'>
-						<ServerError error={error.message} />
-					</div>
+		setSearchParams(activeFilters);
+		if (!activeFilters.length) {
+			axios
+				.get('/api/product/all-products/')
+				.then((response) =>
+					setRenderShop(<RenderCards shopArray={response.data} />)
 				)
-			);
-	}, []);
+				.catch((error) =>
+					setRenderShop(
+						<div className='col-span-3'>
+							<ServerError error={error.message} />
+						</div>
+					)
+				);
+		}
+	}, [activeFilters, setSearchParams]);
 
 	const filterClickHandler = () => {
 		setShowFilter((previous) => !previous);
@@ -77,6 +102,8 @@ const Shop = () => {
 					{showFilter &&
 						createPortal(
 							<FilterSidebar
+								activeFilters={activeFilters}
+								setActiveFilters={setActiveFilters}
 								cancelHandler={filterClickHandler}
 							/>,
 							document.getElementById('overlays')
@@ -86,7 +113,10 @@ const Shop = () => {
 			<hr />
 			<div className='mt-5 grid grid-flow-col md:grid-cols-5 md:gap-10'>
 				<section className='col-span-1 hidden md:block lg:block xl:block font-normal'>
-					<FilterSection />
+					<FilterSection
+						activeFilters={activeFilters}
+						setActiveFilters={setActiveFilters}
+					/>
 				</section>
 				<section className='col-span-4 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8'>
 					{renderShop}

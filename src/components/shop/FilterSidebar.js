@@ -5,8 +5,11 @@ const FilterSidebar = (props) => {
 			<aside className='fixed right-0 w-64 h-full p-5 bg-isabelline-100 rounded'>
 				<h2 className='font-bold text-xl'>Filters</h2>
 				<hr className='my-5 border-t border-t-space-cadet-300' />
-				<div className='overflow-y-auto mb-5'>
-					<FilterSection />
+				<div className='overflow-y-auto max-h-[65vh]'>
+					<FilterSection
+						activeFilters={props.activeFilters}
+						setActiveFilters={props.setActiveFilters}
+					/>
 				</div>
 				<div className='fixed bottom-0 w-[216px] mb-5'>
 					<div className='flex flex-row-reverse gap-3'>
