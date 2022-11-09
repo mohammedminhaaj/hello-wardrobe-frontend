@@ -19,10 +19,13 @@ const FilterComponent = (props) => {
 					</Fragment>
 				) : (
 					<Fragment>
-						<p className='font-semibold capitalize'>
+						<p className='font-semibold capitalize text-h-gray-200'>
 							{props.currentLabel}
 						</p>
-						<ChevronUp size={16} className='my-auto' />
+						<ChevronUp
+							size={16}
+							className='my-auto text-h-gray-200'
+						/>
 					</Fragment>
 				)}
 			</li>

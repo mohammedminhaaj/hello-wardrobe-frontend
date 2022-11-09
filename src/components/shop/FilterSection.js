@@ -1,11 +1,14 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import AvailableFilters from './AvailableFilters';
 import FilterComponent from './FilterComponent';
 import { XCircle } from 'react-feather';
+import CategoryComponent from './CategoryComponent';
 
 const FilterSection = (props) => {
 	const [filterData, setFilterData] = useState({
+		primary_category_details: [],
+		secondary_category_details: [],
 		filter_details: [],
 		size_details: [],
 		message: 'Loading, please wait...',
@@ -17,6 +20,8 @@ const FilterSection = (props) => {
 			.then((response) => setFilterData(response.data))
 			.catch(() =>
 				setFilterData({
+					primary_category_details: [],
+					secondary_category_details: [],
 					filter_details: [],
 					size_details: [],
 					message: 'Failed to load filter details',
@@ -28,56 +33,49 @@ const FilterSection = (props) => {
 		props.setActiveFilters({ type: 'clear' });
 	};
 
-	return (
+	return !filterData.filter_details.length ||
+		!filterData.size_details.length ||
+		!filterData.primary_category_details.length ||
+		!filterData.secondary_category_details.length ? (
+		<p>{filterData.message}</p>
+	) : (
 		<ul className='space-y-3'>
-			<li>
-				<p>Women</p>
-			</li>
-			<li>
-				<p>Men</p>
-			</li>
-			<li>
-				<p>Category 1000</p>
-			</li>
-			<li>
-				<p>Category 2000</p>
-			</li>
-			<li>
-				<p>Category 3000</p>
-			</li>
+			<CategoryComponent
+				activeFilters={props.activeFilters}
+				setActiveFilters={props.setActiveFilters}
+				categoryData={filterData.secondary_category_details}
+			/>
+			<CategoryComponent
+				activeFilters={props.activeFilters}
+				setActiveFilters={props.setActiveFilters}
+				categoryData={filterData.primary_category_details}
+			/>
 			<li>
 				<hr />
 			</li>
-			{!filterData.filter_details.length ||
-			!filterData.size_details.length ? (
-				<p>{filterData.message}</p>
-			) : (
-				<Fragment>
-					<FilterComponent
-						activeFilters={props.activeFilters}
-						setActiveFilters={props.setActiveFilters}
-						currentLabel='size'
-						filterData={filterData.size_details}
-					/>
-					<li>
-						<hr />
-					</li>
-					<AvailableFilters
-						activeFilters={props.activeFilters}
-						setActiveFilters={props.setActiveFilters}
-						availableFilters={filterData.filter_details}
-					/>
-					<li className='hidden md:block'>
-						<button
-							onClick={clearClickHandler}
-							type='button'
-							className='primary-button w-full'>
-							<XCircle size={16} className='my-auto' />
-							Clear Filters
-						</button>
-					</li>
-				</Fragment>
-			)}
+			<FilterComponent
+				activeFilters={props.activeFilters}
+				setActiveFilters={props.setActiveFilters}
+				currentLabel='size'
+				filterData={filterData.size_details}
+			/>
+			<li>
+				<hr />
+			</li>
+			<AvailableFilters
+				activeFilters={props.activeFilters}
+				setActiveFilters={props.setActiveFilters}
+				availableFilters={filterData.filter_details}
+			/>
+			<li className='hidden md:block'>
+				<button
+					onClick={clearClickHandler}
+					type='button'
+					className='primary-button w-full'>
+					<XCircle size={16} className='my-auto' />
+					Clear Filters
+				</button>
+			</li>
 		</ul>
 	);
 };

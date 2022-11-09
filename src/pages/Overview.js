@@ -4,12 +4,12 @@ import Breadcrumb from '../components/ui/Breadcrumb';
 
 const breadcrumbs = [
 	{
-		id: Math.random(),
+		id: 1,
 		name: 'Shop',
 		linkTo: '/shop',
 	},
 	{
-		id: Math.random(),
+		id: 2,
 		name: 'Product Overview',
 	},
 ];

@@ -1,4 +1,5 @@
 import { ArrowRight } from 'react-feather';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
 	return (
@@ -7,41 +8,51 @@ const Footer = () => {
 			<div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10 mb-10'>
 				<ul>
 					<li className='font-bold p-1'>Shop</li>
-					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+					<Link
+						to='/shop?secondary=women'
+						className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
 						Women
 						<ArrowRight
 							size={13}
 							className='hidden group-hover:block mt-2'
 						/>
-					</li>
-					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+					</Link>
+					<Link
+						to='/shop?secondary=men'
+						className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
 						Men
 						<ArrowRight
 							size={13}
 							className='hidden group-hover:block mt-2'
 						/>
-					</li>
-					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+					</Link>
+					<Link
+						to='/shop?primary=category+1000'
+						className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
 						Category 1000
 						<ArrowRight
 							size={13}
 							className='hidden group-hover:block mt-2'
 						/>
-					</li>
-					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+					</Link>
+					<Link
+						to='/shop?primary=category+2000'
+						className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
 						Category 2000
 						<ArrowRight
 							size={13}
 							className='hidden group-hover:block mt-2'
 						/>
-					</li>
-					<li className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
+					</Link>
+					<Link
+						to='/shop?primary=category+3000'
+						className='font-thin p-1 hover:text-space-cadet-300 flex group gap-2'>
 						Category 3000
 						<ArrowRight
 							size={13}
 							className='hidden group-hover:block mt-2'
 						/>
-					</li>
+					</Link>
 				</ul>
 				<ul>
 					<li className='font-bold p-1'>Company</li>
@@ -136,7 +147,7 @@ const Footer = () => {
 					/>
 					<button
 						type='button'
-						className='primary-button'>
+						className='text-white bg-independence-100 py-1 px-2 rounded hover:bg-independence-200 active:ring-1 active:ring-independence-300'>
 						Sign up
 					</button>
 				</div>

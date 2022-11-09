@@ -30,12 +30,12 @@ const FilterItem = (props) => {
 				onChange={changeHandler}
 				id={`${props.filterItem.name}_${props.filterItem.id}`}
 				type='checkbox'
-				className='accent-h-gray-100'
+				className='accent-h-gray-100 cursor-pointer'
 				ref={filterCheckbox}
 			/>
 			<label
 				htmlFor={`${props.filterItem.name}_${props.filterItem.id}`}
-				className='ml-2 capitalize'>
+				className='ml-2 capitalize cursor-pointer'>
 				{props.filterItem.name}
 			</label>
 		</div>
