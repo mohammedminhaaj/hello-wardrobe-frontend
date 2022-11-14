@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useReducer, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowDown, Filter } from 'react-feather';
+import { ArrowDown, ArrowRight, ArrowLeft, Filter } from 'react-feather';
 import FilterSection from '../components/shop/FilterSection';
 import FilterSidebar from '../components/shop/FilterSidebar';
 import Breadcrumb from '../components/ui/Breadcrumb';
@@ -38,26 +38,30 @@ const RenderCards = (props) => {
 };
 
 const filterReducer = (state, action) => {
+	const filterArray = state.filter((item) => item[0] !== 'page');
 	switch (action.type) {
 		case 'add':
 			if (
-				state.find(
+				!action.payload ||
+				filterArray.find(
 					(item) =>
 						item[0] === action.payload[0] &&
 						item[1] === action.payload[1]
 				)
 			)
-				return [...state];
-			return [...state, action.payload];
+				return [...filterArray];
+			return [...filterArray, action.payload];
 		case 'remove':
-			return state.filter(
-				(item) =>
-					item[0] !== action.payload[0] ||
-					item[1] !== action.payload[1]
-			);
+			return [
+				...filterArray.filter(
+					(item) =>
+						item[0] !== action.payload[0] ||
+						item[1] !== action.payload[1]
+				),
+			];
 		case 'sort':
 			return [
-				...state.filter((item) => item[0] !== action.payload[0]),
+				...filterArray.filter((item) => item[0] !== action.payload[0]),
 				action.payload,
 			];
 		case 'clear':
@@ -75,6 +79,11 @@ const Shop = () => {
 			<Loading />
 		</div>
 	);
+	const [page, setPage] = useState({
+		nextPage: null,
+		previousPage: null,
+	});
+	const [showNavButtons, setShowNavButtons] = useState(false);
 
 	const [searchParams, setSearchParams] = useSearchParams();
 	const location = useLocation();
@@ -84,9 +93,16 @@ const Shop = () => {
 
 	useEffect(() => {
 		setSearchParams(activeFilters);
+		window.scrollTo(0, 0);
 	}, [activeFilters, setSearchParams]);
 
 	useEffect(() => {
+		setShowNavButtons(false);
+		setRenderShop(
+			<div className='col-span-3'>
+				<Loading />
+			</div>
+		);
 		const fetchProducts = setTimeout(() => {
 			axios
 				.get(
@@ -95,16 +111,22 @@ const Shop = () => {
 					}`
 				)
 				.then((response) => {
-					if (!response.data.length)
+					if (!response.data.count)
 						setRenderShop(
 							<div className='col-span-3'>
 								<NoData />
 							</div>
 						);
-					else
+					else {
 						setRenderShop(
-							<RenderCards shopArray={response.data} />
+							<RenderCards shopArray={response.data.results} />
 						);
+						setPage({
+							nextPage: response.data.next,
+							previousPage: response.data.previous,
+						});
+						setShowNavButtons(true);
+					}
 				})
 				.catch((error) =>
 					setRenderShop(
@@ -126,6 +148,27 @@ const Shop = () => {
 
 	const sortCLickHandler = () => {
 		setShowSort((previous) => !previous);
+	};
+
+	const setPageHandler = (to) => {
+		let urlArray = [];
+
+		if (to === 'next') urlArray = page.nextPage.split('?');
+		else if (to === 'previous') urlArray = page.previousPage.split('?');
+
+		const searchParam = new URLSearchParams(urlArray[1]);
+		const pageValue = searchParam.get('page');
+
+		if (pageValue)
+			setActiveFilters({
+				type: 'add',
+				payload: ['page', pageValue],
+			});
+		else
+			setActiveFilters({
+				type: 'add',
+				payload: null,
+			});
 	};
 
 	return (
@@ -176,9 +219,34 @@ const Shop = () => {
 						setActiveFilters={setActiveFilters}
 					/>
 				</section>
-				<section className='col-span-4 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8'>
-					{renderShop}
-				</section>
+				<div className='flex flex-col col-span-4 gap-5'>
+					<section className='grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8'>
+						{renderShop}
+					</section>
+
+					{showNavButtons && (
+						<section className='flex justify-between'>
+							{page.previousPage && (
+								<button
+									type='button'
+									onClick={() => setPageHandler('previous')}
+									className='rounded flex border-2 border-silver-pink-100 gap-1 justify-center px-4 py-2 hover:bg-silver-pink-100 active:ring-1 active:ring-silver-pink-200'>
+									<ArrowLeft className='my-auto' size={16} />
+									Previous
+								</button>
+							)}
+							{page.nextPage && (
+								<button
+									type='button'
+									onClick={() => setPageHandler('next')}
+									className='rounded border-2 border-silver-pink-100 ml-auto flex gap-1 justify-center px-4 py-2 hover:bg-silver-pink-100 active:ring-1 active:ring-silver-pink-200'>
+									Next
+									<ArrowRight className='my-auto' size={16} />
+								</button>
+							)}
+						</section>
+					)}
+				</div>
 			</div>
 		</Fragment>
 	);
