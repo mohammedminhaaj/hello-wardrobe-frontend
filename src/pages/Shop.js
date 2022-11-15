@@ -230,7 +230,7 @@ const Shop = () => {
 								<button
 									type='button'
 									onClick={() => setPageHandler('previous')}
-									className='rounded flex border-2 border-silver-pink-100 gap-1 justify-center px-4 py-2 hover:bg-silver-pink-100 active:ring-1 active:ring-silver-pink-200'>
+									className='rounded flex border-2 border-silver-pink-100 gap-1 justify-center px-4 py-2 hover:bg-silver-pink-100 active:ring-1 hover:text-white active:ring-silver-pink-200'>
 									<ArrowLeft className='my-auto' size={16} />
 									Previous
 								</button>
@@ -239,7 +239,7 @@ const Shop = () => {
 								<button
 									type='button'
 									onClick={() => setPageHandler('next')}
-									className='rounded border-2 border-silver-pink-100 ml-auto flex gap-1 justify-center px-4 py-2 hover:bg-silver-pink-100 active:ring-1 active:ring-silver-pink-200'>
+									className='rounded border-2 border-silver-pink-100 ml-auto flex gap-1 justify-center px-4 py-2 hover:bg-silver-pink-100 hover:text-white active:ring-1 active:ring-silver-pink-200'>
 									Next
 									<ArrowRight className='my-auto' size={16} />
 								</button>

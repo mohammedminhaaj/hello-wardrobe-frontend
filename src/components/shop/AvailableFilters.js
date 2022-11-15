@@ -2,19 +2,15 @@ import { Fragment } from 'react';
 import FilterComponent from './FilterComponent';
 
 const AvailableFilters = (props) => {
-	const filterLabels = [
-		...new Set(props.availableFilters.map((item) => item.category)),
-	];
-
-	return filterLabels.map((item, index) => {
+	return props.filterLabels.map((item) => {
 		return (
-			<Fragment key={index}>
+			<Fragment key={item.id}>
 				<FilterComponent
 					activeFilters={props.activeFilters}
 					setActiveFilters={props.setActiveFilters}
-					currentLabel={item}
+					currentLabel={item.name}
 					filterData={props.availableFilters.filter(
-						(value) => value.category === item
+						(value) => value.category.name === item.name
 					)}
 				/>
 				<li>

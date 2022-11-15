@@ -65,6 +65,7 @@ const FilterSection = (props) => {
 			<AvailableFilters
 				activeFilters={props.activeFilters}
 				setActiveFilters={props.setActiveFilters}
+				filterLabels={filterData.filter_labels}
 				availableFilters={filterData.filter_details}
 			/>
 			<li className='hidden md:block'>

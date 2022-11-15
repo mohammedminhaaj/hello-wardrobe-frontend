@@ -7,7 +7,7 @@ const FilterItem = (props) => {
 		if (
 			props.activeFilters.find(
 				(item) =>
-					item[0] === props.filterItem.category &&
+					item[0] === props.filterItem.category.name &&
 					item[1] === props.filterItem.name
 			)
 		)
@@ -16,7 +16,10 @@ const FilterItem = (props) => {
 	}
 
 	const changeHandler = (event) => {
-		const queryObj = [props.filterItem.category, props.filterItem.name];
+		const queryObj = [
+			props.filterItem.category.name,
+			props.filterItem.name,
+		];
 		if (event.target.checked) {
 			props.setActiveFilters({ type: 'add', payload: queryObj });
 		} else {
