@@ -26,7 +26,7 @@ const RenderCards = (props) => {
 			<Card
 				key={item.id}
 				title={item.name}
-				linkTo='#'
+				linkTo={item.url_name}
 				price={item.price}
 				imageMeta={{
 					src: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
@@ -93,7 +93,6 @@ const Shop = () => {
 
 	useEffect(() => {
 		setSearchParams(activeFilters);
-		window.scrollTo(0, 0);
 	}, [activeFilters, setSearchParams]);
 
 	useEffect(() => {
@@ -136,6 +135,7 @@ const Shop = () => {
 					)
 				);
 		}, 500);
+		window.scrollTo(0, 0);
 
 		return () => {
 			clearTimeout(fetchProducts);

@@ -1,9 +1,12 @@
+import { Fragment } from 'react';
 import { CheckCircle, XCircle } from 'react-feather';
+import Backdrop from '../ui/Backdrop';
 import FilterSection from './FilterSection';
 const FilterSidebar = (props) => {
 	return (
-		<div className='fixed top-0 left-0 right-0 bottom-0 z-30 w-full h-auto backdrop-blur-sm'>
-			<aside className='fixed right-0 w-64 h-full p-5 bg-isabelline-100 rounded'>
+		<Fragment>
+			<Backdrop onClose={props.cancelHandler} />
+			<aside className='fixed z-40 right-0 w-64 h-full p-5 bg-isabelline-100 rounded'>
 				<h2 className='font-bold text-xl'>Filters</h2>
 				<hr className='my-5 border-t border-t-space-cadet-300' />
 				<div className='overflow-y-auto max-h-[65vh]'>
@@ -13,14 +16,7 @@ const FilterSidebar = (props) => {
 					/>
 				</div>
 				<div className='fixed bottom-0 w-[216px] mb-5'>
-					<div className='flex flex-row-reverse gap-3'>
-						<button
-							type='button'
-							onClick={props.cancelHandler}
-							className='primary-button'>
-							<CheckCircle size={16} className='my-auto' />
-							Done
-						</button>
+					<div className='flex justify-around gap-3'>
 						<button
 							type='button'
 							onClick={() => {
@@ -30,10 +26,17 @@ const FilterSidebar = (props) => {
 							<XCircle size={16} className='my-auto' />
 							Clear
 						</button>
+						<button
+							type='button'
+							onClick={props.cancelHandler}
+							className='primary-button'>
+							<CheckCircle size={16} className='my-auto' />
+							Done
+						</button>
 					</div>
 				</div>
 			</aside>
-		</div>
+		</Fragment>
 	);
 };
 
