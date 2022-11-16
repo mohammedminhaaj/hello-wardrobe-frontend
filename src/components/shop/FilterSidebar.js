@@ -8,14 +8,14 @@ const FilterSidebar = (props) => {
 			<Backdrop onClose={props.cancelHandler} />
 			<aside className='fixed z-40 right-0 w-64 h-full p-5 bg-isabelline-100 rounded'>
 				<h2 className='font-bold text-xl'>Filters</h2>
-				<hr className='my-5 border-t border-t-space-cadet-300' />
+				<hr className='my-5 border-t-h-gray-100' />
 				<div className='overflow-y-auto max-h-[65vh]'>
 					<FilterSection
 						activeFilters={props.activeFilters}
 						setActiveFilters={props.setActiveFilters}
 					/>
 				</div>
-				<div className='fixed bottom-0 w-[216px] mb-5'>
+				<div className='md:hidden fixed bottom-0 w-[216px] mb-5'>
 					<div className='flex justify-around gap-3'>
 						<button
 							type='button'

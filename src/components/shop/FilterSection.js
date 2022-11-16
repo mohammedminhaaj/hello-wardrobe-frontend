@@ -51,7 +51,7 @@ const FilterSection = (props) => {
 				categoryData={filterData.primary_category_details}
 			/>
 			<li>
-				<hr />
+				<hr className='border-t-h-gray-100 md:border-t-inherit' />
 			</li>
 			<FilterComponent
 				activeFilters={props.activeFilters}
@@ -60,7 +60,7 @@ const FilterSection = (props) => {
 				filterData={filterData.size_details}
 			/>
 			<li>
-				<hr />
+				<hr className='border-t-h-gray-100 md:border-t-inherit' />
 			</li>
 			<AvailableFilters
 				activeFilters={props.activeFilters}

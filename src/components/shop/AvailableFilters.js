@@ -14,7 +14,7 @@ const AvailableFilters = (props) => {
 					)}
 				/>
 				<li>
-					<hr />
+					<hr className='border-t-h-gray-100 md:border-t-inherit' />
 				</li>
 			</Fragment>
 		);

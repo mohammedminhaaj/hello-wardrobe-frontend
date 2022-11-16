@@ -5,6 +5,7 @@ import Main from './layouts/Main';
 import Header from './layouts/Header';
 import CartModal from './components/ui/CartModal';
 import { useSelector } from 'react-redux';
+import Toast from './components/ui/Toast';
 
 function App() {
 	const cartIsVisible = useSelector((state) => state.cart.showCart);
@@ -15,6 +16,7 @@ function App() {
 					<CartModal />,
 					document.getElementById('overlays')
 				)}
+			{createPortal(<Toast />, document.getElementById('overlays'))}
 			<Header />
 			<Main />
 			<Footer />
