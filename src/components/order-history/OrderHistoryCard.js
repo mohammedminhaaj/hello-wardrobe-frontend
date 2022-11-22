@@ -15,7 +15,12 @@ const OrderHistoryCard = () => {
 					</div>
 					<div>
 						<p className='font-medium'>Total Amount</p>
-						<p className='font-thin'>₹450</p>
+						<p className='font-thin'>
+							{parseFloat('450').toLocaleString('en-IN', {
+								style: 'currency',
+								currency: 'INR',
+							})}
+						</p>
 					</div>
 				</div>
 				<p>View Order</p>

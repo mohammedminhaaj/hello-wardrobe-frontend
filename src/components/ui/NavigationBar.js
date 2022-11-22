@@ -1,11 +1,12 @@
 import { Fragment, useState } from 'react';
 import { User, ShoppingBag, Search, Menu } from 'react-feather';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { cartActions } from '../../store/cart-slice';
 
 const NavigationBar = () => {
 	const [showMenu, setShowMenu] = useState(false);
+	const cartItems = useSelector((state) => state.cart.cartItems);
 	const dispatch = useDispatch();
 
 	const menuClickHandler = () => {
@@ -29,11 +30,16 @@ const NavigationBar = () => {
 						<Search className='mr-5 cursor-pointer hover:stroke-space-cadet-300' />
 
 						<User className='cursor-pointer hover:stroke-space-cadet-300' />
-
-						<ShoppingBag
+						<div
 							onClick={shoppingbagClickHandler}
-							className='ml-5 cursor-pointer hover:stroke-space-cadet-300'
-						/>
+							className='ml-5 cursor-pointer group'>
+							<ShoppingBag className='group-hover:stroke-space-cadet-300' />
+							{cartItems.length !== 0 && (
+								<div className='absolute translate-x-3 -translate-y-3 rounded-full bg-h-gray-300 text-white text-xs px-1'>
+									{cartItems.length}
+								</div>
+							)}
+						</div>
 
 						<button
 							onClick={menuClickHandler}

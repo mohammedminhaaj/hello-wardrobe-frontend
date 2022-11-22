@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Card = (props) => {
 	return (
@@ -14,7 +14,10 @@ const Card = (props) => {
 			</div>
 			<h3 className='mt-4 text-sm text-h-gray-300'>{props.title}</h3>
 			<p className='mt-1 text-lg font-medium text-independence-300'>
-				₹{props.price}
+				{parseFloat(props.price).toLocaleString('en-IN', {
+					style: 'currency',
+					currency: 'INR',
+				})}
 			</p>
 		</Link>
 	);

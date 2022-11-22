@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import Footer from './layouts/Footer';
 import Main from './layouts/Main';
 import Header from './layouts/Header';
-import CartModal from './components/ui/CartModal';
+import CartModal from './components/cart/CartModal';
 import { useSelector } from 'react-redux';
 import Toast from './components/ui/Toast';
 

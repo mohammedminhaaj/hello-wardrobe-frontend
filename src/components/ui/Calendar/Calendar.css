@@ -1,0 +1,52 @@
+.react-calendar {
+    @apply w-full text-h-gray-300 md:w-5/6 rounded-2xl p-2 md:p-5 bg-silver-pink-100 border-silver-pink-200 shadow-2xl
+  }
+  
+  .react-calendar,
+  .react-calendar *,
+  .react-calendar *:before,
+  .react-calendar *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .react-calendar button {
+    @apply rounded-full enabled:hover:cursor-pointer
+  }
+
+  .react-calendar__navigation {
+    @apply flex h-10 mb-2 font-bold
+  }
+  .react-calendar__navigation button {
+    @apply min-w-[44px] enabled:hover:bg-silver-pink-200 enabled:focus:bg-silver-pink-200 enabled:active:ring-1 enabled:active:ring-silver-pink-300
+  }
+
+  .react-calendar__month-view__weekdays {
+    @apply text-center uppercase font-bold text-sm cursor-default
+  }
+  .react-calendar__month-view__weekdays__weekday {
+    @apply p-1
+  }
+
+  .react-calendar__month-view__days__day--neighboringMonth {
+    @apply text-silver-pink-300
+  }
+
+  .react-calendar__tile {
+    @apply max-w-full p-2 text-center disabled:text-isabelline-200 enabled:hover:bg-silver-pink-200 enabled:focus:bg-silver-pink-200 enabled:active:ring-1 enabled:active:ring-silver-pink-300
+  }
+
+  .react-calendar__tile--hasActive {
+    @apply bg-silver-pink-300 text-white enabled:hover:bg-silver-pink-200 enabled:focus:bg-silver-pink-300 enabled:active:ring-1 enabled:active:ring-silver-pink-300 
+  }
+
+  .react-calendar__tile--active {
+    @apply bg-silver-pink-300 text-white enabled:hover:bg-silver-pink-200 enabled:focus:bg-silver-pink-300 enabled:active:ring-1 enabled:active:ring-silver-pink-300
+  }
+  
+
+
+abbr[title] {
+    text-decoration: none;
+}
+  
