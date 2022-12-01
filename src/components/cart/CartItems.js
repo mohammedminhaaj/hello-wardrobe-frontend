@@ -14,17 +14,20 @@ const CartItems = (props) => {
 				size: props.cartItem.size,
 			})
 		);
-		toast('Done, we removed the item.');
+		toast('Done, we have removed the item for you.');
 	};
 	return (
 		<Fragment>
 			<div className='flex gap-5 justify-between'>
 				<div className='flex gap-2'>
-					<img
-						className='rounded-lg w-32 h-32 md:h-28 md:w-28'
-						src='https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg'
-						alt='Olive drab green insulated bottle with flared screw lid and flat top.'
-					/>
+					<figure>
+						<img
+							className='rounded-lg w-32 h-32 md:h-28 md:w-28'
+							src='https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg'
+							alt='Olive drab green insulated bottle with flared screw lid and flat top.'
+						/>
+					</figure>
+
 					<div className='text-left'>
 						<p className='font-semibold text-lg'>
 							{props.cartItem.name}

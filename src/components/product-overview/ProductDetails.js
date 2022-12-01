@@ -184,7 +184,7 @@ const ProductDetails = (props) => {
 			</div>
 			<div className='flex flex-col md:flex-row'>
 				<section className='md:order-3 basis-1/3'>
-					<div className='flex gap-3'>
+					<div className='flex'>
 						<p className='text-3xl tracking-tight'>
 							{parseFloat(props.details.price).toLocaleString(
 								'en-IN',
@@ -193,8 +193,8 @@ const ProductDetails = (props) => {
 									currency: 'INR',
 								}
 							)}
-							<p className='text-sm inline'>/day</p>
 						</p>
+						<p className='text-sm mt-auto mr-2 inline'>/day</p>
 						<p className='line-through font-thin my-auto'>
 							{parseFloat(
 								props.details.original_price
@@ -314,12 +314,12 @@ const ProductDetails = (props) => {
 				<hr className='mt-5 md:hidden  fill-isabelline-300' />
 				<article className='mt-5 md:mt-0 md:order-1 basis-2/3 md:mr-5'>
 					<p className='font-thin'>{props.details.description}</p>
-					<div className='mt-5'>
+					<section className='mt-5'>
 						<h3>Highlights</h3>
 						<ProductHighlights
 							highlights={props.details.highlights}
 						/>
-					</div>
+					</section>
 					<div className='mt-5'>
 						<h3>Details</h3>
 						<p className='font-thin'>{props.details.details}</p>

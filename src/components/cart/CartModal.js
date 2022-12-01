@@ -14,7 +14,6 @@ const CartModal = () => {
 	const closeCartHandler = () => {
 		dispatch(cartActions.toggleCart());
 	};
-
 	return (
 		<Fragment>
 			<Backdrop onClose={closeCartHandler} />
@@ -42,7 +41,9 @@ const CartModal = () => {
 						{cartItems.length !== 0 && (
 							<div className='flex justify-between p-6'>
 								<div>
-									<p className='text-lg font-thin'>Subtotal amount:</p>
+									<p className='text-lg font-thin'>
+										Subtotal amount:
+									</p>
 									<p className='text-2xl'>
 										{totalAmount.toLocaleString('en-IN', {
 											style: 'currency',

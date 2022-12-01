@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 const ProductHighlights = (props) => {
 	const highlights = props.highlights.split(';');
 	return (
@@ -11,4 +13,4 @@ const ProductHighlights = (props) => {
 	);
 };
 
-export default ProductHighlights;
+export default memo(ProductHighlights);

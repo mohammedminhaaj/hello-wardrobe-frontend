@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { ChevronRight, Home } from 'react-feather';
 import { Link } from 'react-router-dom';
 
@@ -42,4 +43,4 @@ const Breadcrumb = (props) => {
 	);
 };
 
-export default Breadcrumb;
+export default memo(Breadcrumb);
