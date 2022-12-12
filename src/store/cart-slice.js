@@ -29,7 +29,7 @@ const cartSlice = createSlice({
 	reducers: {
 		addItems(state, action) {
 			state.cartItems.push(action.payload);
-			state.totalAmount = calculateTotal(state.cartItems);
+			state.totalAmount += action.payload.rentDays * action.payload.price;
 			typeof Storage &&
 				localStorage.setItem(
 					'cartContents',
@@ -46,7 +46,7 @@ const cartSlice = createSlice({
 					arrayIndex = index;
 			});
 			state.cartItems.splice(arrayIndex, 1);
-			state.totalAmount = calculateTotal(state.cartItems);
+			state.totalAmount -= action.payload.rentDays * action.payload.price;
 			typeof Storage &&
 				localStorage.setItem(
 					'cartContents',

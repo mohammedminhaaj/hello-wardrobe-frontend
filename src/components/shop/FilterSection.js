@@ -5,12 +5,16 @@ import FilterComponent from './FilterComponent';
 import { XCircle } from 'react-feather';
 import CategoryComponent from './CategoryComponent';
 
+const initialData = {
+	primary_category_details: [],
+	secondary_category_details: [],
+	filter_details: [],
+	size_details: [],
+};
+
 const FilterSection = (props) => {
 	const [filterData, setFilterData] = useState({
-		primary_category_details: [],
-		secondary_category_details: [],
-		filter_details: [],
-		size_details: [],
+		...initialData,
 		message: 'Loading, please wait...',
 	});
 
@@ -20,10 +24,7 @@ const FilterSection = (props) => {
 			.then((response) => setFilterData(response.data))
 			.catch(() =>
 				setFilterData({
-					primary_category_details: [],
-					secondary_category_details: [],
-					filter_details: [],
-					size_details: [],
+					...initialData,
 					message: 'Failed to load filter details',
 				})
 			);

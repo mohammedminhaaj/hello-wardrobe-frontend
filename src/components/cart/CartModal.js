@@ -32,6 +32,7 @@ const CartModal = () => {
 							{!cartItems.length && <NoData />}
 							{cartItems.map((item) => (
 								<CartItems
+									closeCartHandler={closeCartHandler}
 									key={item.url_name + item.size}
 									cartItem={item}
 								/>

@@ -275,14 +275,28 @@ const ProductDetails = (props) => {
 							)}
 					</div>
 					<section className='mt-5 flex flex-row gap-2'>
-						<button
-							onClick={cartClickHandler}
-							type='button'
-							title='Add to bag'
-							className='basis-11/12 primary-button'>
-							<ShoppingBag className='my-auto' size={16} />
-							Add to Bag
-						</button>
+						{props.details.is_active ? (
+							<button
+								onClick={cartClickHandler}
+								type='button'
+								title='Add to bag'
+								className='basis-11/12 primary-button'>
+								<ShoppingBag className='my-auto' size={16} />
+								Add to Bag
+							</button>
+						) : (
+							<button
+								onClick={() =>
+									toast(
+										"We're sorry, the item is currently out of stock"
+									)
+								}
+								type='button'
+								title='Out of stock'
+								className='basis-11/12 primary-button'>
+								Out of Stock
+							</button>
+						)}
 						{wishlistItems.find(
 							(item) => item.url_name === props.details.url_name
 						) ? (

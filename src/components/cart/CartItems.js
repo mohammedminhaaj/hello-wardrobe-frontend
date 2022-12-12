@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Trash2 } from 'react-feather';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import useToast from '../../hooks/useToast';
 import { cartActions } from '../../store/cart-slice';
 
@@ -12,6 +13,8 @@ const CartItems = (props) => {
 			cartActions.removeItems({
 				url_name: props.cartItem.url_name,
 				size: props.cartItem.size,
+				price: props.cartItem.price,
+				rentDays: props.cartItem.rentDays,
 			})
 		);
 		toast('Done, we have removed the item for you.');
@@ -20,7 +23,7 @@ const CartItems = (props) => {
 		<Fragment>
 			<div className='flex gap-5 justify-between'>
 				<div className='flex gap-2'>
-					<figure>
+					<figure className='min-w-[128px]'>
 						<img
 							className='rounded-lg w-32 h-32 md:h-28 md:w-28'
 							src='https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg'
@@ -28,10 +31,13 @@ const CartItems = (props) => {
 						/>
 					</figure>
 
-					<div className='text-left'>
-						<p className='font-semibold text-lg'>
+					<div className='text-left shrink'>
+						<Link
+							onClick={props.closeCartHandler}
+							to={`/shop/${props.cartItem.url_name}`}
+							className='font-semibold text-lg'>
 							{props.cartItem.name}
-						</p>
+						</Link>
 						<p className='text-sm'>Size: {props.cartItem.size}</p>
 						<p className='text-sm'>
 							{props.cartItem.startDate ===
@@ -63,7 +69,7 @@ const CartItems = (props) => {
 					onClick={removeCartItemHandler}
 					type='button'
 					title='Remove item'
-					className='my-auto'>
+					className='my-auto shrink'>
 					<Trash2 className='my-auto' />
 				</button>
 			</div>

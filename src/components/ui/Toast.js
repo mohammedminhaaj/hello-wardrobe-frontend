@@ -21,6 +21,7 @@ const Toast = () => {
 									)
 								}
 								className='my-auto cursor-pointer'
+								size={16}
 							/>
 						</div>
 					))}
