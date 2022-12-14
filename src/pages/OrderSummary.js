@@ -1,4 +1,4 @@
-import { ReactComponent as OrderPlaced } from '../assets/images/order-placed.svg';
+import { ReactComponent as OrderPlaced } from '../assets/svg/order-placed.svg';
 const OrderSummary = () => {
 	return (
 		<div className='grid grid-cols-1 md:grid-cols-2 gap-5'>

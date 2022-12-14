@@ -1,4 +1,4 @@
-import { ReactComponent as ServerErrorImage } from '../../assets/images/server-down.svg';
+import { ReactComponent as ServerErrorImage } from '../../assets/svg/server-down.svg';
 
 const ServerError = (props) => {
 	return (

@@ -1,4 +1,4 @@
-import { ReactComponent as OrderChecklist } from '../assets/images/order-history.svg';
+import { ReactComponent as OrderChecklist } from '../assets/svg/order-history.svg';
 import OrderHistoryCard from '../components/order-history/OrderHistoryCard';
 
 const OrderHistory = () => {

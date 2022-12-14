@@ -1,4 +1,4 @@
-import { ReactComponent as Empty } from '../../assets/images/no-data.svg';
+import { ReactComponent as Empty } from '../../assets/svg/no-data.svg';
 
 const NoData = () => {
 	return (

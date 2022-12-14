@@ -1,4 +1,4 @@
-import { ReactComponent as NotFound } from '../../assets/images/page-not-found.svg';
+import { ReactComponent as NotFound } from '../../assets/svg/page-not-found.svg';
 
 const PageNotFound = () => {
 	return (

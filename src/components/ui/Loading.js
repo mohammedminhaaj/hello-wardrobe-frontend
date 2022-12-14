@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Loader } from 'react-feather';
-import { ReactComponent as LoadingImage } from '../../assets/images/loading.svg';
+import { ReactComponent as LoadingImage } from '../../assets/svg/loading.svg';
 
 const loadingTextList = [
 	'Loading',
