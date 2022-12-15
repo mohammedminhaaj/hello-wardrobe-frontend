@@ -17,6 +17,7 @@ const VerifyOtp = (props) => {
 	const [buttonDisabled, setButtonDisabled] = useState(false);
 	const [attempts, setAttempts] = useState(0);
 	const [allowResend, setAllowResend] = useState(true);
+	const [showLoader, setShowLoader] = useState(false);
 	const toast = useToast();
 
 	const validationContext = {
@@ -24,15 +25,20 @@ const VerifyOtp = (props) => {
 	};
 
 	const resendClickHandler = () => {
+		setShowLoader(true);
 		axios
 			.post('/api/auth/send-otp/', { mobileNumber: props.mobileNumber })
-			.then(() => {
-				toast('OTP resent successfully');
+			.then((response) => {
+				response.data.attemptsExceeded
+					? toast(response.data.details)
+					: toast('OTP resent successfully');
 				setAttempts((previous) => previous + 1);
 				if (attempts >= 1) setAllowResend(false);
+				setShowLoader(false);
 			})
 			.catch(() => {
 				toast('An error occurred while sending the OTP');
+				setShowLoader(false);
 			});
 	};
 
@@ -84,7 +90,13 @@ const VerifyOtp = (props) => {
 							onClick={resendClickHandler}
 							type='button'
 							disabled={!allowResend}
-							className='ml-auto hover:underline hover:font-normal active:font-normal disabled:font-thin disabled:no-underline disabled:text-gray-400'>
+							className='ml-auto hover:underline hover:font-normal active:font-normal disabled:font-thin disabled:no-underline disabled:text-gray-400 flex justify-center gap-1'>
+							{showLoader && (
+								<Loader
+									size={16}
+									className='animate-spin my-auto'
+								/>
+							)}
 							Resend OTP?
 						</button>
 					</div>

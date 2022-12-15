@@ -38,12 +38,18 @@ const SendOtp = (props) => {
 		setButtonDisabled(true);
 		axios
 			.post('/api/auth/send-otp/', data)
-			.then(() => {
-				toast('OTP sent successfully');
-				props.setVerifyScreen({
-					show: true,
-					number: data.mobileNumber,
-				});
+			.then((response) => {
+				if (response.data.attemptsExceeded) {
+					toast(response.data.details);
+					setButtonValue('Send OTP');
+					setButtonDisabled(false);
+				} else {
+					toast('OTP sent successfully');
+					props.setVerifyScreen({
+						show: true,
+						number: data.mobileNumber,
+					});
+				}
 			})
 			.catch(() => {
 				toast('An error occurred while sending the OTP');

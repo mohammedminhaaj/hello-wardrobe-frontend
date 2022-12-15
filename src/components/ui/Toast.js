@@ -7,7 +7,7 @@ const Toast = () => {
 	const dispatch = useDispatch();
 	return (
 		<section className='flex justify-center'>
-			<div className='fixed w-5/6 md:w-1/5 top-16 md:top-20 z-50 text-white font-thin'>
+			<div className='fixed w-5/6 md:w-2/5 top-16 md:top-20 z-50 text-white font-thin'>
 				<div className='flex flex-col gap-2 flex-nowrap'>
 					{messages.map((item, index) => (
 						<div
