@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Calendar, CheckCircle, Heart, ShoppingBag } from 'react-feather';
+import { Calendar, Check, Heart, ShoppingBag } from 'react-feather';
 import { batch, useDispatch, useSelector } from 'react-redux';
 import useToast from '../../hooks/useToast';
 import { cartActions, generateCartDict } from '../../store/cart-slice';
@@ -453,8 +453,8 @@ const ProductDetails = (props) => {
 								}}
 								type='button'
 								title='Added to wishlist'
-								className='basis-1/12 hover:border-h-gray-200 hover:text-h-gray-200 active:ring-h-gray-300 active:ring-1 border-h-gray-100 text-h-gray-100 border-2 rounded-full px-4 py-2'>
-								<CheckCircle className='my-auto' size={16} />
+								className='basis-1/12 hover:border-h-gray-200 hover:text-h-gray-200 active:ring-h-gray-300 active:ring-1 border-h-gray-100 text-h-gray-100 border-2 rounded-3xl px-4 py-2'>
+								<Check className='m-auto' size={16} />
 							</button>
 						) : (
 							<button

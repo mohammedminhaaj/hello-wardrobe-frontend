@@ -1,11 +1,7 @@
 import SortMenuItem from './SortMenuItem';
 
 const SortMenu = (props) => {
-	const sortItems = [
-		{ id: 1, name: 'Latest', sort: '-created_on' },
-		{ id: 2, name: 'Lowest Price', sort: 'price' },
-		{ id: 3, name: 'Highest Price', sort: '-price' },
-	];
+	const { sortData: sortItems } = props;
 	return (
 		<ul className='space-y-2'>
 			{sortItems.map((item) => {

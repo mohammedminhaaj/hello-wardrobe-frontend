@@ -26,6 +26,7 @@ const initialFilterData = {
 	secondary_category_details: [],
 	filter_details: [],
 	size_details: [],
+	sort_menu: [],
 };
 
 const RenderCards = (props) => {
@@ -224,6 +225,7 @@ const Shop = () => {
 							!showSort ? 'hidden' : ''
 						} text-white w-36 md:w-32 absolute -translate-x-24 md:-translate-x-20 translate-y-8 shadow-2xl py-2 px-4 z-10 rounded bg-h-gray-200`}>
 						<SortMenu
+							sortData={filterData?.sort_menu}
 							setActiveFilters={setActiveFilters}
 							closeSortHandler={sortCLickHandler}
 						/>
