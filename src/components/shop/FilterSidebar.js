@@ -11,6 +11,7 @@ const FilterSidebar = (props) => {
 				<hr className='my-5 border-t-h-gray-100' />
 				<div className='overflow-y-auto max-h-[65vh]'>
 					<FilterSection
+						filterData={props.filterData}
 						activeFilters={props.activeFilters}
 						setActiveFilters={props.setActiveFilters}
 					/>

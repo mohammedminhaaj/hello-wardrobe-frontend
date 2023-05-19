@@ -6,7 +6,7 @@ const CategoryItem = (props) => {
 		props.activeFilters.find(
 			(item) =>
 				item[0] === props.categoryItem.category &&
-				item[1] === props.categoryItem.name
+				item[1] === props.categoryItem.display_name
 		)
 			? true
 			: false
@@ -15,7 +15,7 @@ const CategoryItem = (props) => {
 	const { categoryItem, setActiveFilters, activeFilters } = props;
 
 	useEffect(() => {
-		const queryObj = [categoryItem.category, categoryItem.name];
+		const queryObj = [categoryItem.category, categoryItem.display_name];
 		isClicked
 			? setActiveFilters({ type: 'add', payload: queryObj })
 			: setActiveFilters({ type: 'remove', payload: queryObj });
@@ -25,7 +25,7 @@ const CategoryItem = (props) => {
 		activeFilters.find(
 			(item) =>
 				item[0] === categoryItem.category &&
-				item[1] === categoryItem.name
+				item[1] === categoryItem.display_name
 		)
 			? setIsClicked(true)
 			: setIsClicked(false);
@@ -43,7 +43,7 @@ const CategoryItem = (props) => {
 					isClicked ? 'font-semibold text-h-gray-200' : ''
 				} capitalize cursor-pointer flex gap-1`}>
 				{isClicked ? <Check size={16} className='my-auto' /> : ''}
-				{props.categoryItem.name}
+				{props.categoryItem.display_name}
 			</p>
 		</li>
 	);

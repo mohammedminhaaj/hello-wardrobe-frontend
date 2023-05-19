@@ -1,38 +1,14 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import AvailableFilters from './AvailableFilters';
 import FilterComponent from './FilterComponent';
 import { XCircle } from 'react-feather';
 import CategoryComponent from './CategoryComponent';
 
-const initialData = {
-	primary_category_details: [],
-	secondary_category_details: [],
-	filter_details: [],
-	size_details: [],
-};
-
 const FilterSection = (props) => {
-	const [filterData, setFilterData] = useState({
-		...initialData,
-		message: 'Loading, please wait...',
-	});
-
-	useEffect(() => {
-		axios
-			.get('/api/product/filter-details/')
-			.then((response) => setFilterData(response.data))
-			.catch(() =>
-				setFilterData({
-					...initialData,
-					message: 'Failed to load filter details',
-				})
-			);
-	}, []);
-
 	const clearClickHandler = () => {
 		props.setActiveFilters({ type: 'clear' });
 	};
+
+	const filterData = props.filterData;
 
 	return !filterData.filter_details.length ||
 		!filterData.size_details.length ||

@@ -4,7 +4,7 @@ import { ArrowDown, ArrowRight, ArrowLeft, Filter } from 'react-feather';
 import FilterSection from '../components/shop/FilterSection';
 import FilterSidebar from '../components/shop/FilterSidebar';
 import Breadcrumb from '../components/ui/Breadcrumb';
-import Loading from '../components/ui/Loading';
+import Loading from '../components/ui/Loader/Loading';
 import Card from '../components/shop/Card';
 
 import axios from 'axios';
@@ -12,6 +12,7 @@ import ServerError from '../components/ui/ServerError';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import NoData from '../components/ui/NoData';
 import SortMenu from '../components/shop/SortMenu';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const breadcrumbs = [
 	{
@@ -20,21 +21,36 @@ const breadcrumbs = [
 	},
 ];
 
+const initialFilterData = {
+	primary_category_details: [],
+	secondary_category_details: [],
+	filter_details: [],
+	size_details: [],
+};
+
 const RenderCards = (props) => {
-	return props.shopArray.map((item) => {
-		return (
-			<Card
-				key={item.id}
-				title={item.name}
-				linkTo={item.url_name}
-				price={item.price}
-				imageMeta={{
-					src: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
-					alt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
-				}}
-			/>
-		);
-	});
+	return (
+		<AnimatePresence>
+			{props.shopArray.map((item, index) => (
+				<motion.div
+					key={item.id}
+					initial={{ opacity: 0, translateY: -50 }}
+					animate={{ opacity: 1, translateY: 0 }}
+					transition={{ duration: 0.5, delay: index * 0.2 }}
+					exit={{ opacity: 0, translateY: -50 }}>
+					<Card
+						title={item.name}
+						linkTo={item.url_name}
+						price={item.price}
+						imageMeta={{
+							src: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
+							alt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
+						}}
+					/>
+				</motion.div>
+			))}
+		</AnimatePresence>
+	);
 };
 
 const filterReducer = (state, action) => {
@@ -91,6 +107,11 @@ const Shop = () => {
 		...searchParams,
 	]);
 
+	const [filterData, setFilterData] = useState({
+		...initialFilterData,
+		message: 'Loading, please wait...',
+	});
+
 	useEffect(() => {
 		setSearchParams(activeFilters);
 	}, [activeFilters, setSearchParams]);
@@ -141,6 +162,18 @@ const Shop = () => {
 			clearTimeout(fetchProducts);
 		};
 	}, [searchParams, location.search]);
+
+	useEffect(() => {
+		axios
+			.get('/api/product/filter-details/')
+			.then((response) => setFilterData(response.data?.data))
+			.catch(() =>
+				setFilterData({
+					...initialFilterData,
+					message: 'Failed to load filter details',
+				})
+			);
+	}, []);
 
 	const filterClickHandler = () => {
 		setShowFilter((previous) => !previous);
@@ -203,6 +236,7 @@ const Shop = () => {
 					{showFilter &&
 						createPortal(
 							<FilterSidebar
+								filterData={filterData}
 								activeFilters={activeFilters}
 								setActiveFilters={setActiveFilters}
 								cancelHandler={filterClickHandler}
@@ -215,6 +249,7 @@ const Shop = () => {
 			<div className='mt-5 grid grid-flow-col md:grid-cols-5 md:gap-10'>
 				<section className='col-span-1 hidden md:block font-normal'>
 					<FilterSection
+						filterData={filterData}
 						activeFilters={activeFilters}
 						setActiveFilters={setActiveFilters}
 					/>

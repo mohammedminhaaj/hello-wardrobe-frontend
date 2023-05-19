@@ -8,9 +8,9 @@ const AvailableFilters = (props) => {
 				<FilterComponent
 					activeFilters={props.activeFilters}
 					setActiveFilters={props.setActiveFilters}
-					currentLabel={item.name}
+					currentLabel={item.display_name}
 					filterData={props.availableFilters.filter(
-						(value) => value.category.name === item.name
+						(value) => value.category.display_name === item.display_name
 					)}
 				/>
 				<li>

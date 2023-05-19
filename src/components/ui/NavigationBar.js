@@ -28,8 +28,16 @@ const NavigationBar = () => {
 					</Link>
 					<div className='flex md:order-2 items-center'>
 						<Search className='mr-5 cursor-pointer hover:stroke-space-cadet-300' />
+						<NavLink
+							to='/profile'
+							className={(navData) => {
+								return navData.isActive
+									? 'cursor-pointer text-space-cadet-300'
+									: 'cursor-pointer hover:text-space-cadet-300';
+							}}>
+							<User />
+						</NavLink>
 
-						<User className='cursor-pointer hover:stroke-space-cadet-300' />
 						<div
 							onClick={shoppingbagClickHandler}
 							className='ml-5 cursor-pointer group'>

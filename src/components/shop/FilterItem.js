@@ -7,8 +7,8 @@ const FilterItem = (props) => {
 		if (
 			props.activeFilters.find(
 				(item) =>
-					item[0] === props.filterItem.category.name &&
-					item[1] === props.filterItem.name
+					item[0] === props.filterItem.category.display_name &&
+					item[1] === props.filterItem.display_name
 			)
 		)
 			filterCheckbox.current.checked = true;
@@ -17,8 +17,8 @@ const FilterItem = (props) => {
 
 	const changeHandler = (event) => {
 		const queryObj = [
-			props.filterItem.category.name,
-			props.filterItem.name,
+			props.filterItem.category.display_name,
+			props.filterItem.display_name,
 		];
 		if (event.target.checked) {
 			props.setActiveFilters({ type: 'add', payload: queryObj });
@@ -31,15 +31,15 @@ const FilterItem = (props) => {
 		<div className='block'>
 			<input
 				onChange={changeHandler}
-				id={`${props.filterItem.name}_${props.filterItem.id}`}
+				id={`${props.filterItem.display_name}_${props.filterItem.id}`}
 				type='checkbox'
 				className='accent-h-gray-100 cursor-pointer'
 				ref={filterCheckbox}
 			/>
 			<label
-				htmlFor={`${props.filterItem.name}_${props.filterItem.id}`}
+				htmlFor={`${props.filterItem.display_name}_${props.filterItem.id}`}
 				className='ml-2 capitalize cursor-pointer'>
-				{props.filterItem.name}
+				{props.filterItem.display_name}
 			</label>
 		</div>
 	);

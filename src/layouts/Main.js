@@ -6,6 +6,7 @@ import Shop from '../pages/Shop';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import PageNotFound from '../components/ui/PageNotFound';
 import { useSelector } from 'react-redux';
+import Profile from '../pages/Profile';
 
 const Main = () => {
 	const cartItems = useSelector((state) => state.cart.cartItems);
@@ -15,6 +16,7 @@ const Main = () => {
 			<div className='main-container'>
 				<Routes>
 					<Route path='/' element={<Navigate to='/shop' />} />
+					<Route path='/profile' element={<Profile />} />
 					<Route path='/shop' element={<Shop />} />
 					<Route path='/shop/:productName' element={<Overview />} />
 					<Route path='/order-summary' element={<OrderSummary />} />

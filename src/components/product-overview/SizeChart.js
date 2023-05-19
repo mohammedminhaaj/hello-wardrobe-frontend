@@ -1,7 +1,13 @@
 const SizeChart = (props) => {
 	const sizechangeHandler = (event) => {
 		props.onSelect((previous) => {
-			return { ...previous, size: event.target.value };
+			return {
+				...previous,
+				size: event.target.value,
+				dateArray: [],
+				deliverAt: null,
+				returnBy: null,
+			};
 		});
 	};
 
@@ -13,16 +19,16 @@ const SizeChart = (props) => {
 						<li key={item.id}>
 							<input
 								onChange={sizechangeHandler}
-								id={`size-${item.name}`}
+								id={`size-${item.display_name}`}
 								type='radio'
 								name='product-size'
-								defaultValue={item.name}
+								defaultValue={item.display_name}
 								className='sr-only peer'
 							/>
 							<label
-								htmlFor={`size-${item.name}`}
+								htmlFor={`size-${item.display_name}`}
 								className='hover:bg-silver-pink-200 focus:outline-silver-pink-300 active:ring-1 active:ring-silver-pink-300 rounded-full py-1 px-3 cursor-pointer peer-checked:text-isabelline-100 peer-checked:bg-silver-pink-300'>
-								{item.name}
+								{item.display_name}
 							</label>
 						</li>
 					);

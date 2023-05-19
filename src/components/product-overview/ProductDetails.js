@@ -1,16 +1,22 @@
 import { Fragment, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Calendar, CheckCircle, Heart, ShoppingBag } from 'react-feather';
-import { useDispatch, useSelector } from 'react-redux';
+import { batch, useDispatch, useSelector } from 'react-redux';
 import useToast from '../../hooks/useToast';
-import { cartActions } from '../../store/cart-slice';
-import { wishlistActions } from '../../store/wishlist-slice';
+import { cartActions, generateCartDict } from '../../store/cart-slice';
+import {
+	generateWishlistDict,
+	wishlistActions,
+} from '../../store/wishlist-slice';
 import Breadcrumb from '../ui/Breadcrumb';
 import ProductHighlights from './ProductHighlights';
 import ProductInWishlist from './ProductInWishlist';
 import SelectDateModal from './SelectDateModal';
 import SizeChart from './SizeChart';
 import SizeGuideModal from './SizeGuideModal';
+import ErrorMessage from '../ui/ErrorMessage';
+import { protectedInstance } from '../../utils/Common';
+import { authActions } from '../../store/auth-slice';
 
 const ProductDetails = (props) => {
 	const [image, setImage] = useState(
@@ -22,16 +28,33 @@ const ProductDetails = (props) => {
 		url_name: props.details.url_name,
 		name: props.details.name,
 		price: props.details.price,
+		deliverAt: null,
+		returnBy: null,
 		size: null,
-		sizeMessage: 'Please select a size',
 		dateArray: [],
-		dateMessage: 'Please select a date',
-		dateMessageIsVisible: false,
 	});
-	const [showMessage, setShowMessage] = useState(false);
+	const [showErrorMessage, setShowErrorMessage] = useState({
+		size: {
+			isVisible: false,
+			message: 'Please select a size',
+		},
+		dateArray: {
+			isVisible: false,
+			message: 'Please select a date',
+		},
+		deliverAt: {
+			isVisible: false,
+			message: 'Please select a delivery time',
+		},
+		returnBy: {
+			isVisible: false,
+			message: 'Please select a return time',
+		},
+	});
 	const wishlistItems = useSelector((state) => state.wishlist.wishlistItems);
 	const cartItems = useSelector((state) => state.cart.cartItems);
 	const dispatch = useDispatch();
+	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 	const toast = useToast();
 
 	const imageClickHandler = (event) => {
@@ -44,47 +67,122 @@ const ProductDetails = (props) => {
 
 	const selectDateClickHandler = () => {
 		if (!cartObject.size) {
-			setCartObject((previous) => {
-				return { ...previous, dateMessageIsVisible: false };
+			setShowErrorMessage((prev) => {
+				return {
+					...prev,
+					size: {
+						isVisible: true,
+						message: prev.size.message,
+					},
+				};
 			});
-			setShowMessage(true);
 		} else {
-			setShowMessage(false);
+			setShowErrorMessage((prev) => {
+				return {
+					...prev,
+					size: {
+						isVisible: false,
+						message: prev.size.message,
+					},
+				};
+			});
 			setShowSelectDate((previous) => !previous);
 		}
 	};
-
 	const cartClickHandler = () => {
-		if (!cartObject.size || !cartObject.dateArray.length) {
-			setCartObject((previous) => {
-				return { ...previous, dateMessageIsVisible: true };
-			});
-			setShowMessage(true);
+		if (
+			!cartObject.size ||
+			!cartObject.dateArray.length ||
+			!cartObject.deliverAt ||
+			!cartObject.returnBy
+		) {
+			const updatedErrors = {};
+			for (let field of ['size', 'dateArray', 'deliverAt', 'returnBy']) {
+				const isVisible =
+					!cartObject[field] || !cartObject[field].length;
+				const message = showErrorMessage[field]?.message;
+
+				updatedErrors[field] = {
+					isVisible,
+					message,
+				};
+			}
+			setShowErrorMessage((prev) => ({
+				...prev,
+				...updatedErrors,
+			}));
 		} else {
-			setShowMessage(false);
-			const { url_name, name, price, size, dateArray } = cartObject;
+			const {
+				url_name,
+				name,
+				price,
+				size,
+				dateArray,
+				deliverAt,
+				returnBy,
+			} = cartObject;
 
 			if (
 				!cartItems.find(
 					(item) => item.url_name === url_name && item.size === size
 				)
 			) {
+				let cartData = {
+					url_name,
+					name,
+					price,
+					size,
+					deliverAt,
+					returnBy,
+					startDate: dateArray[0].toDateString(),
+					endDate: dateArray[1].toDateString(),
+					rentDays: Math.floor(
+						(dateArray[1].getTime() - dateArray[0].getTime()) /
+							(1000 * 3600 * 24) +
+							1
+					),
+				};
 				dispatch(
-					cartActions.addItems({
-						url_name,
-						name,
-						price,
-						size,
-						startDate: dateArray[0].toDateString(),
-						endDate: dateArray[1].toDateString(),
-						rentDays: Math.floor(
-							(dateArray[1].getTime() - dateArray[0].getTime()) /
-								(1000 * 3600 * 24) +
-								1
-						),
+					cartActions.addItem({
+						cartItem: cartData,
+						isAuthenticated: isAuthenticated,
 					})
 				);
 				toast('Hurray! This item has been added to your shopping bag');
+				isAuthenticated &&
+					protectedInstance
+						.post('/api/cart-wishlist/add-to-cart/', {
+							...generateCartDict(cartData),
+						})
+						.catch((error) => {
+							if (
+								error.response.status === 403 ||
+								error.response.data?.error?.code === 400
+							) {
+								toast(
+									'Looks like your session is expired. Could you please try logging in again?'
+								);
+								batch(() => {
+									dispatch(
+										cartActions.setCartItems({
+											cartItems: [cartData],
+											isAuthenticated: false,
+										})
+									);
+									dispatch(
+										authActions.setIsAuthenticated(false)
+									);
+								});
+							} else toast(error.response.data?.message);
+						});
+				setCartObject((prev) => {
+					return {
+						...prev,
+						dateArray: [],
+						deliverAt: null,
+						returnBy: null,
+					};
+				});
 			} else
 				toast(
 					'Hmmm, looks like this item with the same size is already present in your shopping bag'
@@ -93,13 +191,41 @@ const ProductDetails = (props) => {
 	};
 
 	const wishlistClickHandler = () => {
+		let wishlistData = {
+			url_name: props.details.url_name,
+			name: props.details.name,
+		};
 		dispatch(
-			wishlistActions.addItems({
-				url_name: props.details.url_name,
-				name: props.details.name,
+			wishlistActions.addItem({
+				wishlistItem: wishlistData,
+				isAuthenticated: isAuthenticated,
 			})
 		);
 		toast('Great! This item has been added to your wishlist');
+		isAuthenticated &&
+			protectedInstance
+				.post('/api/cart-wishlist/add-to-wishlist/', {
+					...generateWishlistDict(wishlistData),
+				})
+				.catch((error) => {
+					if (
+						error.response.status === 403 ||
+						error.response.data?.error?.code === 400
+					) {
+						toast(
+							'Looks like your session is expired. Could you please try logging in again?'
+						);
+						batch(() => {
+							dispatch(
+								wishlistActions.setWishlistItems({
+									wishlistItems: [wishlistData],
+									isAuthenticated: false,
+								})
+							);
+							dispatch(authActions.setIsAuthenticated(false));
+						});
+					} else toast(error.response.data?.message);
+				});
 	};
 
 	const breadcrumbs = [
@@ -226,8 +352,10 @@ const ProductDetails = (props) => {
 						availableSizes={props.details.size}
 						onSelect={setCartObject}
 					/>
-					{showMessage && !cartObject.size && (
-						<p className='text-red-500'>{cartObject.sizeMessage}</p>
+					{showErrorMessage.size.isVisible && !cartObject.size && (
+						<ErrorMessage
+							errorMessage={showErrorMessage.size.message}
+						/>
 					)}
 					<div className='mt-5'>
 						<button
@@ -253,29 +381,46 @@ const ProductDetails = (props) => {
 								cartObject.dateArray[1].toLocaleDateString() ? (
 									<span>
 										Selected Date:{' '}
-										{cartObject.dateArray[0].toLocaleDateString()}
+										{cartObject.dateArray[0].toDateString()}
 									</span>
 								) : (
 									<span>
-										Selected dates:{' '}
-										{cartObject.dateArray[0].toLocaleDateString()}{' '}
+										Selected Dates:{' '}
+										{cartObject.dateArray[0].toDateString()}{' '}
 										-{' '}
-										{cartObject.dateArray[1].toLocaleDateString()}
+										{cartObject.dateArray[1].toDateString()}
 									</span>
 								)}
 							</p>
 						)}
 
-						{showMessage &&
-							!cartObject.dateArray.length &&
-							cartObject.dateMessageIsVisible && (
-								<p className='text-red-500'>
-									{cartObject.dateMessage}
-								</p>
+						{showErrorMessage.dateArray.isVisible &&
+							!cartObject.dateArray.length && (
+								<ErrorMessage
+									errorMessage={
+										showErrorMessage.dateArray.message
+									}
+								/>
+							)}
+						{showErrorMessage.deliverAt.isVisible &&
+							!cartObject.deliverAt && (
+								<ErrorMessage
+									errorMessage={
+										showErrorMessage.deliverAt.message
+									}
+								/>
+							)}
+						{showErrorMessage.returnBy.isVisible &&
+							!cartObject.returnBy && (
+								<ErrorMessage
+									errorMessage={
+										showErrorMessage.returnBy.message
+									}
+								/>
 							)}
 					</div>
 					<section className='mt-5 flex flex-row gap-2'>
-						{props.details.is_active ? (
+						{!props.details.deleted_at ? (
 							<button
 								onClick={cartClickHandler}
 								type='button'

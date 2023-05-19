@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductDetails from '../components/product-overview/ProductDetails';
-import Loading from '../components/ui/Loading';
+import Loading from '../components/ui/Loader/Loading';
 import ServerError from '../components/ui/ServerError';
 import axios from 'axios';
 
@@ -12,12 +12,16 @@ const Overview = () => {
 		axios
 			.get(`/api/product/${params.productName}/`)
 			.then((response) => {
-				setProductDetails(<ProductDetails details={response.data} />);
+				setProductDetails(
+					<ProductDetails details={response.data?.data} />
+				);
 			})
 			.catch((error) =>
 				setProductDetails(
 					<div className='col-span-3'>
-						<ServerError error={error.message} />
+						<ServerError
+							error={error.response.data?.error?.message}
+						/>
 					</div>
 				)
 			);

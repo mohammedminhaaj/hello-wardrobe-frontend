@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
-import { Loader } from 'react-feather';
-import { ReactComponent as LoadingImage } from '../../assets/svg/loading.svg';
+import LoaderIcon from './LoaderIcon';
 
 const loadingTextList = [
 	'Loading',
@@ -15,10 +14,8 @@ const loadingTextList = [
 const Loading = () => {
 	return (
 		<Fragment>
-			<div className='text-center'>
-				<LoadingImage className='w-64 h-64 m-auto' />
-			</div>
-			<div className='flex text-space-cadet-300 font-medium justify-center align-middle gap-2'>
+			<LoaderIcon />
+			<div className='mt-3 flex text-space-cadet-300 font-medium justify-center align-middle gap-2'>
 				<h2>
 					{
 						loadingTextList[
@@ -27,7 +24,6 @@ const Loading = () => {
 					}
 					, please wait{' '}
 				</h2>
-				<Loader className='animate-spin' />
 			</div>
 		</Fragment>
 	);

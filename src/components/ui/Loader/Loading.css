@@ -1,0 +1,42 @@
+.loader-icon {
+  box-sizing: border-box;
+  position: relative;
+  animation: spin 1s linear infinite;
+}
+.loader-icon:after, .loader-icon:before {
+  content: "";
+  width: calc(50% - 1px);
+  height: calc(50% - 1px);
+  position: absolute;
+  border-radius: 50%;
+
+  animation: spin 1s linear infinite;
+  transform-origin: 0px 100%;
+}
+
+.loader-icon:after, .loader-icon:before {
+  background: #a87a71;
+}
+
+.loader-icon.loader-icon-secondary:after, .loader-icon.loader-icon-secondary:before {
+  background: #e6d5cb;
+}
+
+.loader-icon:before {
+  transform-origin: 0 50%;
+}
+
+.loader-icon:before {
+  background: #c9ada7;
+}
+
+.loader-icon.loader-icon-secondary:before {
+  background: #F2E9E4;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+    
