@@ -2,6 +2,22 @@ import AvailableFilters from './AvailableFilters';
 import FilterComponent from './FilterComponent';
 import { XCircle } from 'react-feather';
 import CategoryComponent from './CategoryComponent';
+import { motion } from 'framer-motion';
+
+const filterContainer = {
+	hidden: { opacity: 0 },
+	show: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.1,
+		},
+	},
+};
+
+export const filterItems = {
+	hidden: { opacity: 0, x: -20 },
+	show: { opacity: 1, x: 0 },
+};
 
 const FilterSection = (props) => {
 	const clearClickHandler = () => {
@@ -16,7 +32,11 @@ const FilterSection = (props) => {
 		!filterData.secondary_category_details.length ? (
 		<p>{filterData.message}</p>
 	) : (
-		<ul className='space-y-3'>
+		<motion.ul
+			initial='hidden'
+			animate='show'
+			variants={filterContainer}
+			className='space-y-3'>
 			<CategoryComponent
 				activeFilters={props.activeFilters}
 				setActiveFilters={props.setActiveFilters}
@@ -45,16 +65,18 @@ const FilterSection = (props) => {
 				filterLabels={filterData.filter_labels}
 				availableFilters={filterData.filter_details}
 			/>
-			<li className='hidden md:block'>
-				<button
+			<motion.li variants={filterItems} className='hidden md:block'>
+				<motion.button
+					whileHover={{scale:1.05}}
+					whileTap={{scale: 0.95}}
 					onClick={clearClickHandler}
 					type='button'
 					className='primary-button w-full'>
 					<XCircle size={16} className='my-auto' />
 					Clear Filters
-				</button>
-			</li>
-		</ul>
+				</motion.button>
+			</motion.li>
+		</motion.ul>
 	);
 };
 

@@ -7,6 +7,7 @@ import { cartActions } from '../../store/cart-slice';
 import { protectedInstance } from '../../utils/Common';
 import { authActions } from '../../store/auth-slice';
 import LoaderIcon from '../ui/Loader/LoaderIcon';
+import { motion } from 'framer-motion';
 
 const performDeleteCartAction = (
 	dispatch,
@@ -95,85 +96,87 @@ const CartItems = (props) => {
 		}
 	};
 	return (
-		<Fragment>
-			<div className='flex gap-5 justify-between'>
-				<div className='flex gap-2'>
-					<figure className='shrink'>
-						<img
-							className='rounded-lg max-w-40 max-h-40 md:max-w-44 md:max-h-44'
-							src='https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg'
-							alt='Olive drab green insulated bottle with flared screw lid and flat top.'
-						/>
-					</figure>
+		<motion.li
+			initial={{ y: 50, opacity: 0 }}
+			animate={{ y: 0, opacity: 1 }}
+			exit={{ x: '-100vw', opacity: 0 }}
+			transition={{ duration: 0.5, delay: 0.2 }}
+			className='flex gap-5 justify-between my-2 first:my-0 pb-2'>
+			<div className='flex gap-2'>
+				<figure className='shrink'>
+					<img
+						className='rounded-lg max-w-40 max-h-40 md:max-w-44 md:max-h-44'
+						src='https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg'
+						alt='Olive drab green insulated bottle with flared screw lid and flat top.'
+					/>
+				</figure>
 
-					<div className='text-left shrink'>
-						<Link
-							onClick={props.closeCartHandler}
-							to={`/shop/${props.cartItem.url_name}`}
-							className='font-semibold text-lg'>
-							{props.cartItem.name}
-						</Link>
-						<div className='text-xs md:text-sm font-light'>
-							<p>
-								<span className='font-normal'>Size:</span>{' '}
-								{props.cartItem.size}
-							</p>
-							<p>
-								{props.cartItem.startDate ===
-								props.cartItem.endDate ? (
-									<Fragment>
-										<span className='font-normal'>
-											Selected Date:{' '}
-										</span>
-										{props.cartItem.startDate}
-									</Fragment>
-								) : (
-									<Fragment>
-										<span className='font-normal'>
-											Selected Dates:{' '}
-										</span>
-										{props.cartItem.startDate} -{' '}
-										{props.cartItem.endDate}
-									</Fragment>
-								)}
-							</p>
-							<p>
-								<span className='font-normal'>
-									Deliver At:{' '}
-								</span>
-								{props.cartItem.deliverAt}
-							</p>
-							<p>
-								<span className='font-normal'>Return By: </span>
-								{props.cartItem.returnBy}
-							</p>
-							<p>
-								<span className='font-normal'>Rent for: </span>
-								{props.cartItem.rentDays} day(s)
-							</p>
-						</div>
-
-						<p className='font-bold text-xl'>
-							{(
-								props.cartItem.price * props.cartItem.rentDays
-							).toLocaleString('en-IN', {
-								style: 'currency',
-								currency: 'INR',
-							})}
+				<div className='text-left shrink'>
+					<Link
+						onClick={props.closeCartHandler}
+						to={`/shop/${props.cartItem.url_name}`}
+						className='font-semibold text-lg'>
+						{props.cartItem.name}
+					</Link>
+					<div className='text-xs md:text-sm font-light'>
+						<p>
+							<span className='font-normal'>Size:</span>{' '}
+							{props.cartItem.size}
+						</p>
+						<p>
+							{props.cartItem.startDate ===
+							props.cartItem.endDate ? (
+								<Fragment>
+									<span className='font-normal'>
+										Selected Date:{' '}
+									</span>
+									{props.cartItem.startDate}
+								</Fragment>
+							) : (
+								<Fragment>
+									<span className='font-normal'>
+										Selected Dates:{' '}
+									</span>
+									{props.cartItem.startDate} -{' '}
+									{props.cartItem.endDate}
+								</Fragment>
+							)}
+						</p>
+						<p>
+							<span className='font-normal'>Deliver At: </span>
+							{props.cartItem.deliverAt}
+						</p>
+						<p>
+							<span className='font-normal'>Return By: </span>
+							{props.cartItem.returnBy}
+						</p>
+						<p>
+							<span className='font-normal'>Rent for: </span>
+							{props.cartItem.rentDays} day(s)
 						</p>
 					</div>
+
+					<p className='font-bold text-xl'>
+						{(
+							props.cartItem.price * props.cartItem.rentDays
+						).toLocaleString('en-IN', {
+							style: 'currency',
+							currency: 'INR',
+						})}
+					</p>
 				</div>
-				<button
-					onClick={removeCartItemHandler}
-					type='button'
-					disabled={buttonState.disabled}
-					title='Remove item'
-					className='my-auto shrink'>
-					{buttonState.text}
-				</button>
 			</div>
-			<hr className='my-2 last:hidden border-t-h-gray-100' />
-		</Fragment>
+			<motion.button
+				onClick={removeCartItemHandler}
+				type='button'
+				whileHover={{ scale: 0.95 }}
+				whileTap={{ scale: 0.8 }}
+				disabled={buttonState.disabled}
+				title='Remove item'
+				className='my-auto shrink'>
+				{buttonState.text}
+			</motion.button>
+		</motion.li>
 	);
 };
 

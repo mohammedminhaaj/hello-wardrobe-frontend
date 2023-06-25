@@ -1,5 +1,4 @@
-import { Fragment, useEffect, useReducer, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { useEffect, useReducer, useState } from 'react';
 import { ArrowDown, ArrowRight, ArrowLeft, Filter } from 'react-feather';
 import FilterSection from '../components/shop/FilterSection';
 import FilterSidebar from '../components/shop/FilterSidebar';
@@ -13,6 +12,7 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 import NoData from '../components/ui/NoData';
 import SortMenu from '../components/shop/SortMenu';
 import { AnimatePresence, motion } from 'framer-motion';
+import { pageVariant } from '../utils/Common';
 
 const breadcrumbs = [
 	{
@@ -29,31 +29,24 @@ const initialFilterData = {
 	sort_menu: [],
 };
 
-const RenderCards = (props) => {
-	return (
-		<AnimatePresence>
-			{props.shopArray.map((item, index) => (
-				<motion.div
-					key={item.id}
-					initial={{ opacity: 0, translateY: -50 }}
-					animate={{ opacity: 1, translateY: 0 }}
-					transition={{ duration: 0.5, delay: index * 0.2 }}
-					exit={{ opacity: 0, translateY: -50 }}>
-					<Card
-						title={item.name}
-						linkTo={item.url_name}
-						price={item.price}
-						imageMeta={{
-							src: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
-							alt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
-						}}
-					/>
-				</motion.div>
-			))}
-		</AnimatePresence>
-	);
-};
-
+const RenderCards = (props) =>
+	props.shopArray.map((item, index) => (
+		<motion.div
+			key={item.id}
+			initial={{ opacity: 0, y: -50 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.5, delay: index * 0.2 }}>
+			<Card
+				title={item.name}
+				linkTo={item.url_name}
+				price={item.price}
+				imageMeta={{
+					src: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
+					alt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
+				}}
+			/>
+		</motion.div>
+	));
 const filterReducer = (state, action) => {
 	const filterArray = state.filter((item) => item[0] !== 'page');
 	switch (action.type) {
@@ -206,45 +199,71 @@ const Shop = () => {
 	};
 
 	return (
-		<Fragment>
+		<motion.section
+			initial='pageHidden'
+			animate='pageVisible'
+			exit='pageExit'
+			variants={pageVariant}>
 			<h2 className='sr-only'>Shop</h2>
 			<Breadcrumb breadcrumbs={breadcrumbs} />
 			<div className='flex justify-between mt-5 mb-5'>
-				<h1 className='text-2xl font-bold'>Shop</h1>
+				<motion.h1
+					initial={{ scale: 0 }}
+					animate={{ scale: 1 }}
+					transition={{ duration: 0.5, type: 'spring', bounce: 0.5 }}
+					className='text-2xl font-bold'>
+					Shop
+				</motion.h1>
 				<section className='flex gap-5'>
-					<div
+					<motion.div
+						whileHover={{ y: -3 }}
+						initial={{ opacity: 0, y: -20 }}
+						animate={{ opacity: 1, y: 0 }}
 						onClick={sortCLickHandler}
 						className={`${
 							showSort ? 'font-semibold text-h-gray-200' : ''
 						} flex gap-1 my-auto cursor-pointer`}>
 						<p>Sort</p>
 						<ArrowDown size={16} className='my-auto' />
-					</div>
-					<div
-						className={`${
-							!showSort ? 'hidden' : ''
-						} text-white w-36 md:w-32 absolute -translate-x-24 md:-translate-x-20 translate-y-8 shadow-2xl py-2 px-4 z-10 rounded bg-h-gray-200`}>
-						<SortMenu
-							sortData={filterData?.sort_menu}
-							setActiveFilters={setActiveFilters}
-							closeSortHandler={sortCLickHandler}
+					</motion.div>
+					<AnimatePresence>
+						{showSort && (
+							<motion.div
+								key='sort-menu'
+								initial={{ x: -40, y: -30, scale: 0 }}
+								animate={{ x: -80, y: 30, scale: 1 }}
+								exit={{ x: -40, y: -30, scale: 0 }}
+								className=' text-white w-36 md:w-32 absolute shadow-2xl py-2 px-4 z-10 rounded bg-h-gray-200'>
+								<SortMenu
+									sortData={filterData?.sort_menu}
+									setActiveFilters={setActiveFilters}
+									closeSortHandler={sortCLickHandler}
+								/>
+							</motion.div>
+						)}
+					</AnimatePresence>
+
+					<motion.div
+						whileHover={{ y: -3 }}
+						initial={{ opacity: 0, y: -20 }}
+						animate={{ opacity: 1, y: 0 }}
+						className='md:hidden my-auto cursor-pointer hover:stroke-independence-300'>
+						<Filter
+							color={showFilter ? '#5f6487' : '#22223b'}
+							onClick={filterClickHandler}
 						/>
-					</div>
-					<Filter
-						color={showFilter ? '#5f6487' : '#22223b'}
-						onClick={filterClickHandler}
-						className='md:hidden my-auto cursor-pointer hover:stroke-independence-300'
-					/>
-					{showFilter &&
-						createPortal(
+					</motion.div>
+					<AnimatePresence>
+						{showFilter && (
 							<FilterSidebar
+								key='filter-sidebar'
 								filterData={filterData}
 								activeFilters={activeFilters}
 								setActiveFilters={setActiveFilters}
 								cancelHandler={filterClickHandler}
-							/>,
-							document.getElementById('overlays')
+							/>
 						)}
+					</AnimatePresence>
 				</section>
 			</div>
 			<hr />
@@ -285,7 +304,7 @@ const Shop = () => {
 					)}
 				</div>
 			</div>
-		</Fragment>
+		</motion.section>
 	);
 };
 

@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Check } from 'react-feather';
+import { AnimatePresence, motion } from 'framer-motion';
+
+const items = {
+	hidden: { opacity: 0, x: -20 },
+	show: { opacity: 1, x: 0 },
+	hover: { scale: 1.15, originX: 0 },
+};
 
 const CategoryItem = (props) => {
 	const [isClicked, setIsClicked] = useState(
@@ -36,16 +43,32 @@ const CategoryItem = (props) => {
 	};
 
 	return (
-		<li>
+		<motion.li whileHover='hover' variants={items}>
 			<p
 				onClick={categoryClickHandler}
 				className={`${
 					isClicked ? 'font-semibold text-h-gray-200' : ''
 				} capitalize cursor-pointer flex gap-1`}>
-				{isClicked ? <Check size={16} className='my-auto' /> : ''}
+				<AnimatePresence mode='popLayout'>
+					{isClicked && (
+						<motion.span
+							key='checked'
+							initial={{ opacity: 0, x: -20 }}
+							animate={{ opacity: 1, x: 0 }}
+							exit={{ opacity: 0, x: -20 }}
+							transition={{
+								type: 'tween',
+								duration: 0.1,
+							}}
+							className='my-auto'>
+							<Check size={16} />
+						</motion.span>
+					)}
+				</AnimatePresence>
+
 				{props.categoryItem.display_name}
 			</p>
-		</li>
+		</motion.li>
 	);
 };
 

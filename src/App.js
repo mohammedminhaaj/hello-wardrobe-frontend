@@ -1,5 +1,4 @@
 import { Fragment, useEffect } from 'react';
-import { createPortal } from 'react-dom';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Footer from './layouts/Footer';
 import Main from './layouts/Main';
@@ -19,7 +18,6 @@ import { commonActions } from './store/common-slice';
 import Loading from './components/ui/Loader/Loading';
 
 function App() {
-	const cartIsVisible = useSelector((state) => state.cart.showCart);
 	const appLoaded = useSelector((state) => state.common.appLoaded);
 	const { isAuthenticated, loginReferrer } = useSelector(
 		(state) => state.auth
@@ -46,12 +44,8 @@ function App() {
 
 	return appLoaded ? (
 		<Fragment>
-			{cartIsVisible &&
-				createPortal(
-					<CartModal />,
-					document.getElementById('overlays')
-				)}
-			{createPortal(<Toast />, document.getElementById('overlays'))}
+			<CartModal />
+			<Toast />
 			<Routes>
 				<Route
 					path='/login'

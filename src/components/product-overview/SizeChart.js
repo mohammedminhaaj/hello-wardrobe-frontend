@@ -9,6 +9,10 @@ const SizeChart = (props) => {
 				returnBy: null,
 			};
 		});
+		props.setShowErrorMessage((prev) => {
+			for (let key in prev) prev[key].isVisible = false;
+			return prev;
+		});
 	};
 
 	return (

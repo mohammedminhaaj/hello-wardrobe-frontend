@@ -63,3 +63,17 @@ export const getCartWishlistData = () => {
 		},
 	};
 };
+
+export const pageVariant = {
+	pageHidden: { opacity: 0 },
+	pageVisible: {
+		opacity: 1,
+		transition: {
+			type: 'tween',
+			duration: 1,
+		},
+	},
+	pageExit: {
+		opacity: 0,
+	},
+};

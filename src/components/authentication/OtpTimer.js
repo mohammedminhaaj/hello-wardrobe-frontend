@@ -1,21 +1,13 @@
 import { useEffect, useState } from 'react';
 
 const OtpTimer = (props) => {
-	const [seconds, setSeconds] = useState(10);
-	const [resend, setResend] = useState(false);
+	const [seconds, setSeconds] = useState(180);
 	const { setAllowResend } = props;
-
-	useEffect(() => {
-		setAllowResend((prev) => {
-			return { ...prev, state: true };
-		});
-	}, [resend, setAllowResend]);
 
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setSeconds((previous) => {
 				if (previous === 1) {
-					setResend((prev) => !prev);
 					clearInterval(interval);
 					return 0;
 				}
@@ -26,7 +18,13 @@ const OtpTimer = (props) => {
 		return () => {
 			clearInterval(interval);
 		};
-	}, [seconds]);
+	}, []);
+
+	useEffect(() => {
+		if (seconds === 0) {
+			setAllowResend((prev) => ({ ...prev, state: true }));
+		}
+	}, [seconds, setAllowResend]);
 
 	return <p>{seconds}s</p>;
 };

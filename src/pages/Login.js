@@ -7,13 +7,8 @@ const Login = () => {
 	const [layout, setLayout] = useState(<Loading />);
 
 	useEffect(() => {
-		setLayout(
-			<CredentialLogin
-				setLayout={setLayout}
-			/>
-		);
+		setLayout(<CredentialLogin setLayout={setLayout} />);
 	}, []);
-
 	return <AuthLayout>{layout}</AuthLayout>;
 };
 

@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ArrowLeft, Check } from 'react-feather';
 import axios from 'axios';
@@ -12,12 +12,26 @@ import { handleError } from '../../utils/ErrorHandler';
 import LoginSuccess from '../../utils/LoginSuccess';
 import { getCartWishlistData } from '../../utils/Common';
 import ErrorMessage from '../ui/ErrorMessage';
+import { motion } from 'framer-motion';
+import { authContainer, authItems } from './AuthLayout';
+
+const validationContext = {
+	required: 'Please enter a valid OTP',
+	minLength: {
+		value: 6,
+		message: 'Please enter a valid OTP',
+	},
+	maxLength: {
+		value: 6,
+		message: 'Please enter a valid OTP',
+	},
+};
 
 const VerifyOtp = (props) => {
 	const {
 		register,
 		handleSubmit,
-		reset,
+		resetField,
 		setError,
 		formState: { errors },
 	} = useForm();
@@ -39,18 +53,6 @@ const VerifyOtp = (props) => {
 
 	const toast = useToast();
 	const dispatch = useDispatch();
-
-	const validationContext = {
-		required: 'Please enter a valid OTP',
-		minLength: {
-			value: 6,
-			message: 'Please enter a valid OTP',
-		},
-		maxLength: {
-			value: 6,
-			message: 'Please enter a valid OTP',
-		},
-	};
 
 	const resendClickHandler = () => {
 		setAllowResend((prev) => {
@@ -96,7 +98,6 @@ const VerifyOtp = (props) => {
 			})
 			.catch((error) => {
 				let errorContext = error.response.data?.error;
-				reset();
 
 				handleError(errorContext, toast, setError, ['mobile_number']);
 
@@ -109,20 +110,26 @@ const VerifyOtp = (props) => {
 					),
 					disabled: false,
 				});
+				resetField('otp');
 			});
 	};
 
 	return (
-		<Fragment>
-			<MessageSent className='m-auto w-48 h-48 md:w-56 md:h-56' />
-			<h2>
+		<motion.div initial='hidden' animate='show' variants={authContainer}>
+			<motion.figure variants={authItems}>
+				<MessageSent className='m-auto w-48 h-48 md:w-56 md:h-56' />
+			</motion.figure>
+
+			<motion.h2 variants={authItems}>
 				Please enter the one-time password sent to{' '}
 				<span className='block font-semibold'>
 					(+91) {props.number}
 				</span>
-			</h2>
+			</motion.h2>
 			<form onSubmit={handleSubmit(submitHandler)}>
-				<input
+				<motion.input
+					whileFocus={{ scaleX: 1.05 }}
+					variants={authItems}
 					placeholder='OTP'
 					type='text'
 					name='otp'
@@ -132,42 +139,56 @@ const VerifyOtp = (props) => {
 				{errors?.otp && (
 					<ErrorMessage errorMessage={errors.otp.message} />
 				)}
-				<div className='flex justify-center'>
-					<div className='w-full md:w-4/5 flex justify-between font-thin text-sm'>
+				<div tabIndex='-1' className='flex justify-center'>
+					<motion.div
+						variants={authItems}
+						tabIndex='-1'
+						className='w-full md:w-4/5 flex justify-between font-thin text-sm'>
 						{!allowResend.state && (
 							<OtpTimer setAllowResend={setAllowResend} />
 						)}
-						<button
+						<motion.button
+							whileHover={{ scale: 1.1 }}
+							whileTap={{ scale: 0.95 }}
+							whileFocus={{ scale: 1.1 }}
 							onClick={resendClickHandler}
 							type='button'
 							disabled={!allowResend.state}
 							className='ml-auto hover:underline hover:font-normal active:font-normal disabled:font-thin disabled:no-underline disabled:text-gray-400 flex justify-center gap-1'>
 							{allowResend.loader && <LoaderIcon size={12} />}
 							Resend OTP?
-						</button>
-					</div>
+						</motion.button>
+					</motion.div>
 				</div>
 
-				<button
+				<motion.button
+					whileHover={{ scale: 1.05 }}
+					whileTap={{ scale: 0.95 }}
+					whileFocus={{ scale: 1.05 }}
+					variants={authItems}
 					title='Verify OTP'
 					disabled={buttonState.disabled}
 					type='submit'
 					className='rounded text-white bg-independence-100 px-4 py-2 hover:bg-independence-200 active:ring-1 active:ring-independence-300 disabled:ring-0 disabled:hover:bg-independence-100 w-full md:w-4/5 mt-2'>
 					{buttonState.text}
-				</button>
+				</motion.button>
 			</form>
-			<button
+			<motion.button
+				whileHover={{ scale: 1.05 }}
+				whileTap={{ scale: 0.95 }}
+				whileFocus={{ scale: 1.05 }}
+				variants={authItems}
 				onClick={() => {
 					props.setLayout(<OtpLogin setLayout={props.setLayout} />);
 				}}
 				title='Go Back'
-				className='w-full md:w-4/5 mt-2 bg-transparent border-h-gray-100 border-2 hover:bg-h-gray-100 hover:text-white active:ring-1 active:ring-h-gray-300 disabled:ring-0 text-h-gray-300 py-2 px-4 rounded'>
+				className='w-full md:w-4/5 mt-2 bg-transparent border-h-gray-100 border-2 hover:bg-h-gray-100 hover:text-white active:ring-1 active:ring-h-gray-300 focus:outline-1 focus:outline-h-gray-300 text-h-gray-300 py-2 px-4 rounded'>
 				<p className='flex justify-center gap-1'>
 					<ArrowLeft size={18} className='mr-1 my-auto' />
 					Back
 				</p>
-			</button>
-		</Fragment>
+			</motion.button>
+		</motion.div>
 	);
 };
 

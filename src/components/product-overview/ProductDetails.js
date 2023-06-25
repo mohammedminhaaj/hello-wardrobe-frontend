@@ -1,5 +1,4 @@
 import { Fragment, useState } from 'react';
-import { createPortal } from 'react-dom';
 import { Calendar, Check, Heart, ShoppingBag } from 'react-feather';
 import { batch, useDispatch, useSelector } from 'react-redux';
 import useToast from '../../hooks/useToast';
@@ -17,6 +16,30 @@ import SizeGuideModal from './SizeGuideModal';
 import ErrorMessage from '../ui/ErrorMessage';
 import { protectedInstance } from '../../utils/Common';
 import { authActions } from '../../store/auth-slice';
+import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+
+const imageContainer = {
+	hidden: {
+		opacity: 0,
+	},
+	visible: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.3,
+		},
+	},
+};
+
+const imageItems = {
+	hidden: {
+		opacity: 0,
+		scale: 0,
+	},
+	visible: {
+		opacity: 1,
+		scale: 1,
+	},
+};
 
 const ProductDetails = (props) => {
 	const [image, setImage] = useState(
@@ -57,8 +80,13 @@ const ProductDetails = (props) => {
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 	const toast = useToast();
 
+	const control = useAnimation();
+
 	const imageClickHandler = (event) => {
-		setImage(event.target.attributes['src'].value);
+		control.start({ opacity: 0.5 }).then(() => {
+			control.start({ opacity: 1 });
+			setImage(event.target.attributes['src'].value);
+		});
 	};
 
 	const sizeguideClickHandler = () => {
@@ -183,6 +211,10 @@ const ProductDetails = (props) => {
 						returnBy: null,
 					};
 				});
+				setShowErrorMessage((prev) => {
+					for (let key in prev) prev[key].isVisible = false;
+					return prev;
+				});
 			} else
 				toast(
 					'Hmmm, looks like this item with the same size is already present in your shopping bag'
@@ -244,65 +276,86 @@ const ProductDetails = (props) => {
 		<Fragment>
 			<h2 className='sr-only'>Overview</h2>
 			<Breadcrumb breadcrumbs={breadcrumbs} />
-			<section className='md:hidden mt-5'>
-				<figure>
-					<img
+			<motion.section
+				initial='hidden'
+				animate='visible'
+				variants={imageContainer}
+				className='md:hidden mt-5'>
+				<motion.figure variants={imageItems}>
+					<motion.img
+						initial={{ opacity: 1 }}
+						animate={control}
 						src={image}
 						alt='Model wearing plain white basic tee.'
 						className='h-full w-full object-cover object-center rounded-2xl'
 					/>
-				</figure>
-				<div className='grid grid-cols-3 gap-3 py-3'>
-					<figure>
+				</motion.figure>
+				<motion.div
+					layout
+					transition={{ layout: { duration: 0.2 } }}
+					className='grid grid-cols-3 gap-3 py-3'>
+					<motion.figure variants={imageItems}>
 						<img
 							onClick={imageClickHandler}
 							src='https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg'
 							alt='Model wearing plain white basic tee.'
 							className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
 						/>
-					</figure>
-					<figure>
+					</motion.figure>
+					<motion.figure variants={imageItems}>
 						<img
 							onClick={imageClickHandler}
 							src='https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg'
 							alt='Two each of gray, white, and black shirts laying flat.'
 							className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
 						/>
-					</figure>
-					<figure>
+					</motion.figure>
+					<motion.figure variants={imageItems}>
 						<img
 							onClick={imageClickHandler}
 							src='https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg'
 							alt='Model wearing plain black basic tee.'
 							className='h-full w-full object-cover object-center rounded-2xl active:ring-1 active:ring-slate-700'
 						/>
-					</figure>
-				</div>
-			</section>
+					</motion.figure>
+				</motion.div>
+			</motion.section>
 
 			<div className='hidden md:block mt-5 h-3/4'>
 				<section className='grid grid-cols-3 gap-6'>
-					<figure>
+					<motion.figure
+						initial={{ opacity: 0, y: -50 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.5 }}
+						whileHover={{ y: 10 }}>
 						<img
 							src='https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg'
 							alt='Two each of gray, white, and black shirts laying flat.'
 							className='h-full w-full object-cover object-center rounded-2xl hover:opacity-90 mt-10'
 						/>
-					</figure>
-					<figure>
+					</motion.figure>
+					<motion.figure
+						initial={{ opacity: 0, y: 50 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.5 }}
+						whileHover={{ y: -10 }}>
 						<img
 							src='https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg'
 							alt='Model wearing plain white basic tee.'
 							className='h-full w-full object-cover object-center rounded-2xl hover:opacity-90'
 						/>
-					</figure>
-					<figure>
+					</motion.figure>
+					<motion.figure
+						initial={{ opacity: 0, y: -50 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.5 }}
+						whileHover={{ y: 10 }}>
 						<img
 							src='https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg'
 							alt='Model wearing plain black basic tee.'
 							className='h-full w-full object-cover object-center rounded-2xl hover:opacity-90 mt-20'
 						/>
-					</figure>
+					</motion.figure>
 				</section>
 			</div>
 			<div className='mt-5 md:mt-20'>
@@ -340,17 +393,19 @@ const ProductDetails = (props) => {
 							className='text-h-gray-100 hover:text-h-gray-300'>
 							Size guide
 						</button>
-						{showSizeGuide &&
-							createPortal(
+						<AnimatePresence>
+							{showSizeGuide && (
 								<SizeGuideModal
+									key='size-guide-modal'
 									onClose={sizeguideClickHandler}
-								/>,
-								document.getElementById('overlays')
+								/>
 							)}
+						</AnimatePresence>
 					</div>
 					<SizeChart
 						availableSizes={props.details.size}
 						onSelect={setCartObject}
+						setShowErrorMessage={setShowErrorMessage}
 					/>
 					{showErrorMessage.size.isVisible && !cartObject.size && (
 						<ErrorMessage
@@ -366,15 +421,17 @@ const ProductDetails = (props) => {
 							Select Date
 							<Calendar size={16} className='my-auto' />
 						</button>
-						{showSelectDate &&
-							createPortal(
+						<AnimatePresence>
+							{showSelectDate && (
 								<SelectDateModal
+									key='select-date-modal'
 									cartObject={cartObject}
 									setCartObject={setCartObject}
 									onClose={selectDateClickHandler}
-								/>,
-								document.getElementById('overlays')
+								/>
 							)}
+						</AnimatePresence>
+
 						{cartObject.dateArray.length !== 0 && (
 							<p className='font-thin text-sm'>
 								{cartObject.dateArray[0].toLocaleDateString() ===
@@ -421,16 +478,20 @@ const ProductDetails = (props) => {
 					</div>
 					<section className='mt-5 flex flex-row gap-2'>
 						{!props.details.deleted_at ? (
-							<button
+							<motion.button
+								whileHover={{ scale: 1.05 }}
+								whileTap={{ scale: 0.95 }}
 								onClick={cartClickHandler}
 								type='button'
 								title='Add to bag'
 								className='basis-11/12 primary-button'>
 								<ShoppingBag className='my-auto' size={16} />
 								Add to Bag
-							</button>
+							</motion.button>
 						) : (
-							<button
+							<motion.button
+								whileHover={{ scale: 1.05 }}
+								whileTap={{ scale: 0.95 }}
 								onClick={() =>
 									toast(
 										"We're sorry, the item is currently out of stock"
@@ -440,12 +501,14 @@ const ProductDetails = (props) => {
 								title='Out of stock'
 								className='basis-11/12 primary-button'>
 								Out of Stock
-							</button>
+							</motion.button>
 						)}
 						{wishlistItems.find(
 							(item) => item.url_name === props.details.url_name
 						) ? (
-							<button
+							<motion.button
+								whileHover={{ scale: 1.05 }}
+								whileTap={{ scale: 0.95 }}
 								onClick={() => {
 									toast(
 										"Hmmm, looks like you've already added this item to your wishlist"
@@ -455,9 +518,11 @@ const ProductDetails = (props) => {
 								title='Added to wishlist'
 								className='basis-1/12 hover:border-h-gray-200 hover:text-h-gray-200 active:ring-h-gray-300 active:ring-1 border-h-gray-100 text-h-gray-100 border-2 rounded-3xl px-4 py-2'>
 								<Check className='m-auto' size={16} />
-							</button>
+							</motion.button>
 						) : (
-							<button
+							<motion.button
+								whileHover={{ scale: 1.05 }}
+								whileTap={{ scale: 0.95 }}
 								onClick={wishlistClickHandler}
 								type='button'
 								title='Add to wishlist'
@@ -466,7 +531,7 @@ const ProductDetails = (props) => {
 									className='my-auto group-hover:fill-white'
 									size={16}
 								/>
-							</button>
+							</motion.button>
 						)}
 					</section>
 				</section>

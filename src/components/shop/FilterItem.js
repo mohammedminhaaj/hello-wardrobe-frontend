@@ -1,19 +1,21 @@
-import { useRef } from 'react';
-
+import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 const FilterItem = (props) => {
 	const filterCheckbox = useRef();
 
-	if (filterCheckbox.current) {
-		if (
-			props.activeFilters.find(
-				(item) =>
-					item[0] === props.filterItem.category.display_name &&
-					item[1] === props.filterItem.display_name
+	useEffect(() => {
+		if (filterCheckbox.current) {
+			if (
+				props.activeFilters.find(
+					(item) =>
+						item[0] === props.filterItem.category.display_name &&
+						item[1] === props.filterItem.display_name
+				)
 			)
-		)
-			filterCheckbox.current.checked = true;
-		else filterCheckbox.current.checked = false;
-	}
+				filterCheckbox.current.checked = true;
+			else filterCheckbox.current.checked = false;
+		}
+	});
 
 	const changeHandler = (event) => {
 		const queryObj = [
@@ -28,7 +30,7 @@ const FilterItem = (props) => {
 	};
 
 	return (
-		<div className='block'>
+		<motion.li whileHover={{ scale: 1.15, originX: 0 }}>
 			<input
 				onChange={changeHandler}
 				id={`${props.filterItem.display_name}_${props.filterItem.id}`}
@@ -41,7 +43,7 @@ const FilterItem = (props) => {
 				className='ml-2 capitalize cursor-pointer'>
 				{props.filterItem.display_name}
 			</label>
-		</div>
+		</motion.li>
 	);
 };
 

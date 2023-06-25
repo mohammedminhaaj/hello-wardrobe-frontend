@@ -1,7 +1,14 @@
 import { ReactComponent as OrderPlaced } from '../assets/svg/order-placed.svg';
+import { motion } from 'framer-motion';
+import { pageVariant } from '../utils/Common';
 const OrderSummary = () => {
 	return (
-		<div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+		<motion.section
+			initial='pageHidden'
+			animate='pageVisible'
+			exit='pageExit'
+			variants={pageVariant}
+			className='grid grid-cols-1 md:grid-cols-2 gap-5'>
 			<OrderPlaced className='w-64 h-64 m-auto' />
 			<section className='p-5 space-y-3'>
 				<article className='space-y-3'>
@@ -34,7 +41,7 @@ const OrderSummary = () => {
 					</button>
 				</div>
 			</section>
-		</div>
+		</motion.section>
 	);
 };
 

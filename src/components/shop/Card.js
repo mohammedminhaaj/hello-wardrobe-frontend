@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const Card = (props) => {
 	return (
 		<Link to={props.linkTo} className='group'>
 			<div className='aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-isabelline-100 xl:aspect-w-7 xl:aspect-h-8'>
 				<figure>
-					<img
+					<motion.img
+						whileHover={{ scale: 1.1 }}
 						src={props.imageMeta.src}
 						alt={props.imageMeta.alt}
-						className='h-full w-full object-cover object-center group-hover:opacity-75'
+						className='h-full w-full object-cover object-center'
 					/>
 				</figure>
 			</div>

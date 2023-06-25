@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { ReactComponent as OtpLoginImage } from '../../assets/svg/otp-login.svg';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
@@ -10,6 +9,24 @@ import VerifyOtp from './VerifyOtp';
 import LoaderIcon from '../ui/Loader/LoaderIcon';
 import { handleError } from '../../utils/ErrorHandler';
 import ErrorMessage from '../ui/ErrorMessage';
+import { motion } from 'framer-motion';
+import { authContainer, authItems } from './AuthLayout';
+
+const validationContext = {
+	required: 'Mobile number field cannot be empty',
+	minLength: {
+		value: 10,
+		message: 'Please enter a valid mobile number',
+	},
+	maxLength: {
+		value: 10,
+		message: 'Please enter a valid mobile number',
+	},
+	pattern: {
+		value: /^[6-9]\d{9}$/,
+		message: 'Please enter a valid mobile number',
+	},
+};
 
 const OtpLogin = (props) => {
 	const {
@@ -25,22 +42,6 @@ const OtpLogin = (props) => {
 	});
 
 	const toast = useToast();
-
-	const validationContext = {
-		required: 'Mobile number field cannot be empty',
-		minLength: {
-			value: 10,
-			message: 'Please enter a valid mobile number',
-		},
-		maxLength: {
-			value: 10,
-			message: 'Please enter a valid mobile number',
-		},
-		pattern: {
-			value: /^[6-9]\d{9}$/,
-			message: 'Please enter a valid mobile number',
-		},
-	};
 
 	const submitHandler = (data) => {
 		setButtonState({
@@ -71,12 +72,20 @@ const OtpLogin = (props) => {
 	};
 
 	return (
-		<Fragment>
-			<OtpLoginImage className='m-auto w-48 h-48 md:w-56 md:h-56' />
-			<h1 className='text-3xl font-semibold'>Login with OTP</h1>
-			<h2 className='font-light'>Please enter your mobile number</h2>
+		<motion.div initial='hidden' animate='show' variants={authContainer}>
+			<motion.figure variants={authItems}>
+				<OtpLoginImage className='m-auto w-48 h-48 md:w-56 md:h-56' />
+			</motion.figure>
+			<motion.h1 variants={authItems} className='text-3xl font-semibold'>
+				Login with OTP
+			</motion.h1>
+			<motion.h2 variants={authItems} className='font-light'>
+				Please enter your mobile number
+			</motion.h2>
 			<form onSubmit={handleSubmit(submitHandler)}>
-				<input
+				<motion.input
+					whileFocus={{ scaleX: 1.05 }}
+					variants={authItems}
 					placeholder='Mobile Number'
 					type='text'
 					name='mobile_number'
@@ -86,28 +95,36 @@ const OtpLogin = (props) => {
 				{errors?.mobile_number && (
 					<ErrorMessage errorMessage={errors.mobile_number.message} />
 				)}
-				<button
+				<motion.button
+					whileHover={{ scale: 1.05 }}
+					whileTap={{ scale: 0.95 }}
+					whileFocus={{ scale: 1.05 }}
+					variants={authItems}
 					title='Send OTP'
 					disabled={buttonState.disabled}
 					type='submit'
 					className='rounded text-white bg-independence-100 px-4 py-2 hover:bg-independence-200 active:ring-1 active:ring-independence-300 disabled:ring-0 disabled:hover:bg-independence-100 w-full md:w-4/5 mt-2'>
 					{buttonState.text}
-				</button>
+				</motion.button>
 			</form>
-			<button
+			<motion.button
+				whileHover={{ scale: 1.05 }}
+				whileTap={{ scale: 0.95 }}
+				whileFocus={{ scale: 1.05 }}
+				variants={authItems}
 				onClick={() => {
 					props.setLayout(
 						<CredentialLogin setLayout={props.setLayout} />
 					);
 				}}
 				title='Go Back'
-				className='w-full md:w-4/5 mt-2 bg-transparent border-h-gray-100 border-2 hover:bg-h-gray-100 hover:text-white active:ring-1 active:ring-h-gray-300 disabled:ring-0 text-h-gray-300 py-2 px-4 rounded'>
+				className='w-full md:w-4/5 mt-2 bg-transparent border-h-gray-100 border-2 hover:bg-h-gray-100 hover:text-white active:ring-1 active:ring-h-gray-300 focus:outline-1 focus:outline-h-gray-300 text-h-gray-300 py-2 px-4 rounded'>
 				<p className='flex justify-center gap-1'>
 					<ArrowLeft size={18} className='mr-1 my-auto' />
 					Back
 				</p>
-			</button>
-		</Fragment>
+			</motion.button>
+		</motion.div>
 	);
 };
 

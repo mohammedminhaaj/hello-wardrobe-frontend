@@ -4,6 +4,8 @@ import CartSummary from '../components/checkout-form/CartSummary';
 import ContactDetailsForm from '../components/checkout-form/ContactDetailsForm';
 import PaymentForm from '../components/checkout-form/PaymentForm';
 import DeliveryLocationForm from '../components/checkout-form/DeliveryLocationForm';
+import { motion } from 'framer-motion';
+import { pageVariant } from '../utils/Common';
 
 const CheckoutForm = () => {
 	const [showSummary, setShowSummary] = useState(false);
@@ -35,7 +37,12 @@ const CheckoutForm = () => {
 	};
 
 	return (
-		<section className='grid grid-cols-1 md:grid-cols-3 gap-y-5 md:gap-x-6'>
+		<motion.section
+			initial='pageHidden'
+			animate='pageVisible'
+			exit='pageExit'
+			variants={pageVariant}
+			className='grid grid-cols-1 md:grid-cols-3 gap-y-5 md:gap-x-6'>
 			<div className='md:order-2'>
 				<button
 					type='button'
@@ -48,10 +55,7 @@ const CheckoutForm = () => {
 						<ChevronDown size={16} className='my-auto' />
 					)}
 				</button>
-				<div
-					className={` ${
-						showSummary ? '' : 'hidden'
-					} md:block`}>
+				<div className={` ${showSummary ? '' : 'hidden'} md:block`}>
 					<CartSummary />
 				</div>
 			</div>
@@ -150,7 +154,7 @@ const CheckoutForm = () => {
 					{RenderCheckoutForm(checkoutForm)}
 				</section>
 			</div>
-		</section>
+		</motion.section>
 	);
 };
 
